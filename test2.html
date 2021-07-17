@@ -1,0 +1,36 @@
+<html lang="en-GB">
+<head>
+<script>
+     window.utterances = [];
+    window.addEventListener('load', function() {	
+        var utterance = new SpeechSynthesisUtterance( 'hello' );
+utterances.push(utterance);
+utterance.onboundary = function(event) {
+  console.log('Boundary Event Fired');
+}
+utterance.onend = function(event) {
+  console.log('End Event Fired');
+}
+
+
+document.getElementById('playbtn').onclick = function(){
+    window.speechSynthesis.cancel();
+    speechSynthesis.speak( utterance );
+
+}
+	});
+
+
+</script>
+
+</head>
+<body>
+    <div id="wordsdiv">This is some words wow!</div>
+    <textarea id="textarea" style="width:80%;height:200px;">This is a text area.  It is used as a simple test to check whether these words are highlighted as they are spoken using the web speech synthesis API (utterance).</textarea><br>
+    <input type="button" id="playbtn" value="Click to speak text and show word in span !"/><br>
+    Speaking word : <span id="word" style="color:blue; font-weight:500;"></span><br><br>
+    <div id="panel" style="min-width:300px;word-wrap:wrap;display:inline-block;">
+    
+    </div>
+</body>
+</html>
