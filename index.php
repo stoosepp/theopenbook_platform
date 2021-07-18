@@ -40,7 +40,10 @@ if ($topLevelPages){
 	foreach($topLevelPages as $topLevelPage){
 	
 		echo '<a href="'.get_permalink($topLevelPage).'">';
-		echo '<li><div class="book-cover">';
+		echo '<li><div class="book-cover"><div class="book-gradient"></div>';
+		echo '<div class="book-title"><h2>'.$topLevelPage->post_title.'</h2>';
+		$post_author_id = get_post_field( 'post_author', $topLevelPage);
+		echo '<h3>'.get_the_author_meta('display_name', $post_author_id).'</h3></div>';
 		$featured_img_url = get_the_post_thumbnail_url($topLevelPage);
 		if ($featured_img_url){
 			echo '<img src="'.esc_url($featured_img_url).'" rel="lightbox">'; 
@@ -49,7 +52,7 @@ if ($topLevelPages){
 		else{
 			echo '<img src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 
 		}
-		echo '<div class="book-title"><h2>'.$topLevelPage->post_title.'</h2></div>';
+		
 		echo '</div></li>';
 		echo '</a>';
 	}

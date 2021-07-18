@@ -12,7 +12,7 @@ window.onload = function() {
 
 function loadCheckboxes(){
     var list = document.querySelectorAll(`[type*="checkbox"]`);
-    console.log("There are " + list.length + ' checkboxes to check');
+    //console.log("There are " + list.length + ' checkboxes to check');
     console.log(localStorage);
     list.forEach( el => {
         var checked = JSON.parse(localStorage.getItem(el.id));
@@ -20,7 +20,6 @@ function loadCheckboxes(){
         if (checked){
             var checkBox = document.getElementById(el.id);
             checkBox.checked = checked;
-            
             if (el.id == 'tufte'){
                 updateCSS(el,checked,true);
             }
@@ -30,58 +29,35 @@ function loadCheckboxes(){
             else if (el.id == 'darkmode'){
                 updateCSS(el,checked,true);
             }
-            else{
-                setColorForCheckbox(el,true)
-            }
-        }
-        else{
-           // console.log('Not Checked');
-           setColorForCheckbox(el,false)
-         
         }
        
     });
 } 
 
-function setColorForCheckbox(thisCheckbox, isChecked){
-    var thisLabel  = document.querySelector('label[for="' + thisCheckbox.id + '"]');
-    console.log('Chapter Checkbox:' + thisCheckbox.id + ' is ' + isChecked);
-    if (thisLabel){
-     
-     if (isChecked == true){
-        thisLabel.style.color = "#00AC18";
-     }
-     else if ((isChecked == false) || (isChecked == null)){
-        thisLabel.style.color = "lightgray";
-     }
-    }
-}
 
 function saveCheckbox(thisCheckbox){
     //console.log('ID is: ' + thisCheckbox.id);  
     if (thisCheckbox.checked == true){
         localStorage.setItem(thisCheckbox.id, true);
-        console.log('Saved ' + thisCheckbox.id,thisCheckbox.checked);
+        console.log('Saved ' + thisCheckbox.id,true);
     } 
     else{
         localStorage.setItem(thisCheckbox.id, false);
-        console.log('Saved ' + thisCheckbox.id,thisCheckbox.checked);
+        console.log('Saved ' + thisCheckbox.id,false);
     }
 
     if ((thisCheckbox.id == 'tufte') || (thisCheckbox.id == 'accessible') || (thisCheckbox.id == 'darkmode'))
     {
         updateCSS(thisCheckbox, thisCheckbox.checked, true);   
     }
-    else{
-        setColorForCheckbox(thisCheckbox,thisCheckbox.checked);
-    }
+   
     
 }
 
 async function updateCSS(forToggle, isChecked,onPageLoad)
 {
     var bookURL = bookSSURL.templateUrl;
-    console.log("Updating CSS for Toggle:" + forToggle.id);
+    //console.log("Updating CSS for Toggle:" + forToggle.id);
     var body = document.body
     if ((forToggle.id != 'darkmode') && (onPageLoad == false)){
         body.classList.toggle('fade');
@@ -100,11 +76,10 @@ async function updateCSS(forToggle, isChecked,onPageLoad)
     else if ((isChecked == false) || (isChecked == null)){
         console.log('Removing ' + forToggle.id);
         var link = document.getElementById(forToggle.id);
-        console.log(link);
-        if (link){
+        
+        if (link) {
             document.head.removeChild(link);
         }
-        
     }
     if ((forToggle.id != 'darkmode') && (onPageLoad == false)){
         body.classList.toggle('fade');
@@ -120,13 +95,13 @@ setTimeout(() => {
 }
 
 function resetStorage(){
-    console.log('Clearing local storage, including display settings.');
+    //console.log('Clearing local storage, including display settings.');
     localStorage.clear();
     location.reload();
 }
 
 function updateArticleMargin(){
-    console.log("Updating margin with no H2 tags");
+   // console.log("Updating margin with no H2 tags");
     var articleBody = document.getElementsByClassName('article-body');
     //console.log(articleBody);
     articleBody[0].style.marginRight = '0px';
@@ -176,13 +151,13 @@ function setCurrentPageLink(){
     var navLinks = document.getElementsByTagName("a");
     //console.log('There are ' + navLinks.length + ' Nav links');
     //naturally you could use something other than the <nav> element
-    console.log("There are " + navLinks.length + ' links to check');
+    //console.log("There are " + navLinks.length + ' links to check');
     var i=0;
     var currentPage = url[url.length - 1];
     for(i;i<navLinks.length;i++){
         var lb = navLinks[i].href;//.split("/");
         var theParent = navLinks[i].parentElement.parentElement;
-        console.log(theParent);
+        //console.log(theParent);
         //console.log(lb);
         if (lb == url){
 
@@ -225,6 +200,23 @@ function setupSmoothScroll(){
         headerBar.classList.toggle('headerbar-padding');
     });
 }
+
+window.matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', event => {
+        var darkCheckBox = document.getElementById('darkmode');  
+        console.log('Checkbox is ' + darkCheckBox.checked);     
+        if (event.matches) {
+            //dark mode
+            console.log('Entering Dark Mode');
+            darkCheckBox.checked = true;
+   
+        } else {
+            //light mode
+            console.log('Entering Light Mode');
+            darkCheckBox.checked = false;
+        }
+        saveCheckbox(darkCheckBox);
+})
 
 
 

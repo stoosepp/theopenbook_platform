@@ -270,3 +270,4 @@ function wwp_custom_query_vars_filter($vars) {
 }
 add_filter( 'query_vars', 'wwp_custom_query_vars_filter' );
 
+/* ADD SETTINGS TO THEME */
