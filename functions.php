@@ -225,11 +225,11 @@ function auto_id_headings( $content ) {
 
 	
 function getTopLevelPages(){
-	$query_args = array(
-		'post_type'   => 'page',
-		'post_status' => 'publish',
-		'parent'      => 0,
-	);
+	$query_args = array('parent' => 0, // required
+	'post_type' => 'page', // required
+	'sort_order'   => 'ASC',
+	'sort_column'  => 'menu_order',
+);
 	return get_pages( $query_args );
 }
 

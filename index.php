@@ -37,7 +37,7 @@ get_header();?>
 $topLevelPages = getTopLevelPages();
 echo '<ul class="book-list">';
 if ($topLevelPages){
-	foreach($topLevelPages as $topLevelPage){
+	foreach($topLevelPages as $key=>$topLevelPage){
 	
 		echo '<a href="'.get_permalink($topLevelPage).'">';
 		echo '<li><div class="book-cover"><div class="book-gradient"></div>';
@@ -50,7 +50,14 @@ if ($topLevelPages){
             the_post_thumbnail('thumbnail');
 		}
 		else{
-			echo '<img src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 
+			//if ($key != 0){
+				$hueRotate = $key/count($topLevelPages);
+				echo '<img style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 
+			// }
+			// else{
+			// 	echo '<img src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 
+			// }
+			
 		}
 		
 		echo '</div></li>';
