@@ -50,6 +50,7 @@ aside {
 
 ul.book-list {
   display: flex;
+  flex-wrap:wrap;
   justify-content:center;
   list-style-type: none;;
    margin-left:auto;
