@@ -2,3 +2,41 @@ body {
     background-color: rgb(39, 39, 39);
     color: white;
   }
+  .header-bar, nav.aside-nav{
+    background-color: rgb(39, 39, 39);
+  }
+.header-margin-link a {
+    color:white;
+}
+.header-margin-link a:hover {
+  color:gray;
+}
+.active-header {
+  border-left-color: #eee !important;
+}
+.active-header a{
+  color: #eee !important;
+}
+.bt-menu-trigger span:after,
+.bt-menu-trigger span:before,
+.bt-menu-trigger span{
+  background-color: white;
+}
+ul.toc-section li > input[type="checkbox"] {
+  opacity:1;
+}
+
+ul.toc-section li > a {
+  color: white;
+}
+
+ul.toc-subsection li > a {
+  color:lightgray;
+}
+
+#toc-list a:hover{
+  color:gray !important;
+}
+.current-link {
+  color: gray !important;
+}

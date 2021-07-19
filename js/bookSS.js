@@ -201,6 +201,7 @@ function setupSmoothScroll(){
     });
 }
 
+/*
 window.matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', event => {
         var darkCheckBox = document.getElementById('darkmode');  
@@ -217,6 +218,6 @@ window.matchMedia('(prefers-color-scheme: dark)')
         }
         saveCheckbox(darkCheckBox);
 })
-
+*/
 
 

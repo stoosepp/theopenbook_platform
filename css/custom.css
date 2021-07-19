@@ -9,6 +9,9 @@
   src: url(../fonts/Metropolis-SemiBold.woff);
 }
 
+@media (prefers-color-scheme:dark){
+  @import "darkmode.css";
+}
 
 body {
   opacity: 1;
@@ -18,8 +21,6 @@ body {
 body.fade {
   opacity: 0;
 }
-
-
 
 p {
   font-family: public sans, helvetica neue, sans-serif;
@@ -285,6 +286,7 @@ main {
   width:16em;
   padding:1em;
   position: fixed;
+  top:0px;
   border-right: 0.5px #eee solid;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -418,20 +420,21 @@ ul.toc-subsection li > a{
 
 /* ARTICLE BODY*/
 .article-body{
-  /* margin-top:50px; */
+  margin-top:50px;
   padding: 1em;
   margin-right:12em;
 }
-
-
+.article-body h2{
+  height: 60px;
+  margin-top: -60px;
+}
 
 /* Sidebar Header Nav */
 a.heading-anchor-link{
   display: block;
   position: relative;
   visibility: hidden;
-  height: 60px;
-  margin-top: -60px;
+  
 }
 ul.page-sidebar-list {
   list-style-type: none;
@@ -567,8 +570,6 @@ li.header-gradient {
   -ms-user-select: none;
   user-select: none;
   animation-delay: 1s;
-  -webkit-transition: background-color 0.5s;
-  transition: background-color 0.5s;
 }
 
 .bt-menu-trigger span:after,
