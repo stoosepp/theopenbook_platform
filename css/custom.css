@@ -57,9 +57,7 @@ ul.book-list {
    margin-right:auto;
 }
 ul.book-list li{
-  
   padding:1em;
-  
 }
 
 .book-cover{
@@ -101,6 +99,7 @@ ul.book-list li{
   width:100%;
   opacity:0.7;
 }
+
 
 .book-title{
 width:100%;

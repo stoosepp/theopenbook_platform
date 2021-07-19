@@ -8,23 +8,30 @@
  * 
  */
 
-$bookRoot = getRootForPage($post);
+$bookRoot = getRootForPage($post);//Get the book for the current page
+$isRoot = false;
+
 //$childPages = new stdClass();
 if ( is_page() && $post->post_parent ) {
     //echo 'This is a subpage';
 } else {
     //echo 'This is NOT a subpage';
     $pages = get_pages('child_of='.$post->ID.'&sort_column=post_date&sort_order=asc&parent='.$post->ID);
-    if ( $pages ) {
+    if ( count($pages) != 0 ) {
         $first_page = current( $pages );
         //echo '<h4>First Child: '.get_the_title($first_page).'</h4>';
         $bookRoot = getRootForPage($first_page);
         //echo 'Getting first childs subpages';
     }
+    else{
+        echo '<ul class="toc-section"><li style="font-size:0.75em; color:red;">This is the root page for a book. Add some sub pages, so this Table of Contents is populated.</li></ul>';
+        $isRoot = true;
+    }
    
 }
+
 $childPages = getKids($bookRoot);
-if ( $childPages) {
+if (( $childPages) && $isRoot == false){
     echo '<ul class="toc-section">';
     foreach ( $childPages as $child ) {
         //echo '<li><a href='.get_permalink($child).'>'.$child->post_title.'</a></li>';
@@ -35,8 +42,6 @@ if ( $childPages) {
             $postParentID = wp_get_post_parent_id($post);
             $postParent = get_post($postParentID);
             if ( ($child->ID == $postParentID) || ($child->ID == $post->ID)){
-                //echo '<li>PARENT OF THIS PAGE IS <a href='.get_permalink($postParent).'>'.$postParent->post_title.'</a></li>';
-                //echo '<li><a href='.get_permalink($grandChild).'>'.$grandChild->post_title.'</a></li>';
                 echo '<li><a href='.get_permalink($grandChild).'>'.$grandChild->post_title.'</a><input type="checkbox" id="'.$grandChild->ID.'"  onclick="saveCheckbox(document.getElementById('.$grandChild->ID.'));"></li>';
             }
             //Check to see if you're at Root of this book
