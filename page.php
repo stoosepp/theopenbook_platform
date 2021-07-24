@@ -16,19 +16,30 @@
 <main id="primary" class="site-main">
 	<!--SIDEBAR -->
 	 <nav class="left-toc">
-	 
 		 <?php 
 		 if ( is_page() ) {
 			echo '<div id="toc-list">';
+			echo '<a id="home-icon" href="'.get_home_url().'"><i class="fal fa-home"></i></a>'; 
 			
 			$bookRoot = getRootForPage($post);
-			
-			
-			echo '<h1><a id="home-icon" href="'.get_home_url().'"><span class="dashicons dashicons-admin-home"></span></a><a href='.get_permalink($bookRoot).'>'.get_the_title($bookRoot).'</a></h1>';//Book Title
+			//PUT PHOTO HERE
+			$featured_img_url = get_the_post_thumbnail_url($bookRoot);
+			echo '<div class="book-image">';
+			if ($featured_img_url){
+				echo '<img  src="'.esc_url($featured_img_url).'" rel="lightbox">'; 
+			}
+			else{
+				$topLevelPages = getTopLevelPages();
+					$hueRotate = $key/count($topLevelPages);
+					echo '<img  style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 	
+			}
+			echo '</div>';
+			//BOOK TITLE
+			echo '<h1> <a href='.get_permalink($bookRoot).'>'.get_the_title($bookRoot).'</a></h1>';//Book Title
 			?>
 			<form id="search-form" action="/" method="get">
 			<!-- <label for="search">Search in <?php echo home_url( '/' ); ?></label> -->
-			<span class="dashicons dashicons-search"></span>
+			<i class="fal fa-search"></i>
 			<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
 			</form><?php
 			get_template_part( 'template-parts/content-toc', get_post_type() );
@@ -36,49 +47,43 @@
 		}
 		 ?>
 		 <!-- Rounded switch -->
-
-
-	 </nav>
-
+	</nav>
 	 <!--ARTICLE -->
 	 <div class="article">
 
 	<!--ARTICLE TITLE / HEADER -->
 	<?php get_template_part( 'template-parts/content-breadcrumbs', get_post_type() );?>
-	
-	
 	<!--ARTICLE BODY -->
 	<div class="article-body">
-	<?php
-		if ( have_posts() ) :
-			if ( is_home() && ! is_front_page() ) :
-				?>
-				<?php
+		<?php
+			if ( have_posts() ) :
+				if ( is_home() && ! is_front_page() ) :
+					?>
+					<?php
+				endif;
+				/* Start the Loop */
+				while ( have_posts() ) :
+					the_post();
+					/*
+					* Include the Post-Type-specific template for the content.
+					* If you want to override this in a child theme, then include a file
+					* called content-___.php (where ___ is the Post Type name) and that will be used instead.
+					*/
+					get_template_part( 'template-parts/content', get_post_type() );
+
+				endwhile;
+				the_posts_navigation();
+			else :
+				get_template_part( 'template-parts/content', 'none' );
+
 			endif;
-
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
-
-			endwhile;
-			the_posts_navigation();
-		else :
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		get_footer();
-		?>
-</div>	
+			get_footer();
+			?>
+		</div>	
 		<!--HEADING TOC AND SIDENOTES -->
 		<?php get_template_part( 'template-parts/content-headernav', get_post_type() ); ?>
 	
-		</div>
-	</main><!-- #main -->
+	</div>
+</main><!-- #main -->
 
 

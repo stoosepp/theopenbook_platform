@@ -47,17 +47,11 @@ if ($topLevelPages){
 		$featured_img_url = get_the_post_thumbnail_url($topLevelPage);
 		if ($featured_img_url){
 			echo '<img src="'.esc_url($featured_img_url).'" rel="lightbox">'; 
-            the_post_thumbnail('thumbnail');
+            //the_post_thumbnail('thumbnail');
 		}
 		else{
-			//if ($key != 0){
 				$hueRotate = $key/count($topLevelPages);
-				echo '<img style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 
-			// }
-			// else{
-			// 	echo '<img src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 
-			// }
-			
+				echo '<img style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 	
 		}
 		
 		echo '</div></li>';

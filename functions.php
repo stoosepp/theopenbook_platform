@@ -214,8 +214,8 @@ function getTextBetweenTags($pageHTML, $tagname){
 function auto_id_headings( $content ) {
     $content = preg_replace_callback( '/(\<h[1-6](.*?))\>(.*)(<\/h[1-6]>)/i', function( $matches ) {
     if ( ! stripos( $matches[0], 'id=' ) ) :
-    $heading_link = '<a href="#' . sanitize_title( $matches[3] ) . '" class="heading-anchor-link"><i class="fas fa-link"></i></a>';
-    $matches[0] = $matches[1] . $matches[2] . ' id="' . sanitize_title( $matches[3] ) . '">' . $heading_link . $matches[3] . $matches[4];
+    $heading_link = '<a href="#' . sanitize_title( $matches[3] ) . '" class="heading-anchor-link"></a>';
+    $matches[0] = $matches[1] . $matches[2] . ' id="' . sanitize_title( $matches[3] ) . '"><!--<i class="fas fa-link"></i>-->' . $heading_link . $matches[3] . $matches[4];
     endif;
     return $matches[0];
     }, $content );
@@ -271,3 +271,30 @@ function wwp_custom_query_vars_filter($vars) {
 add_filter( 'query_vars', 'wwp_custom_query_vars_filter' );
 
 /* ADD SETTINGS TO THEME */
+
+/*
+function book_post_type(){
+	$args = array (
+		'labels' =>array(
+			'name' => 'Books',
+			'singular_name' => 'Book',
+		),
+		'hierachical' =>true,
+		'menu_icon' => 'dashicons-book-alt',
+		'public' => true,
+		'has_archive' => true,
+		//'show_in_rest' => true,
+		'supports' => array('title','editor','thumbnail'),
+		'rewrite' => array('slug'=>'books'),
+	);
+
+	register_post_type('books',$args);
+}
+add_action('init','book_post_type');
+
+
+function delete_post_type(){
+    unregister_post_type( 'pages' );
+}
+add_action('init','delete_post_type');
+*/

@@ -13,21 +13,32 @@
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
+
 <title><?php wp_title(); ?></title>
 
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-	<?php wp_register_script( 'bookSS', get_template_directory_uri() . '/js/bookSS.js' );
-wp_enqueue_script( 'bookSS' );
-$translation_array = array( 'templateUrl' => get_stylesheet_directory_uri() );
-//after wp_enqueue_script
+	<?php 
+	if ( is_front_page() ) :
+		wp_enqueue_style( 'style', getcustomStylesheet('homepage') );
+	else :
+		
+	endif;?>
+	<link rel="stylesheet" id="bookSS-css" href="<?php echo get_template_directory_uri();?>/css/bookSS.css" media="all">
+	<link rel="stylesheet" id="bookSS-csss" href="<?php echo get_template_directory_uri();?>/css/default.css" media="all">
+	<link rel="stylesheet" id="bookSS-csss" href="<?php echo get_template_directory_uri();?>/css/fontawesome-all.css" media="all">
+	<?php //wp_enqueue_style( 'style', getcustomStylesheet('bookSS') );
+	wp_register_script( 'bookSS', get_template_directory_uri() . '/js/bookSS.js' );
+	wp_enqueue_script( 'bookSS' );
 
-	wp_enqueue_style( 'style', getcustomStylesheet('custom') ); 
-	wp_enqueue_style( 'style-swith', getcustomStylesheet('toggleswitch') ); 
+	//Pass template URL over to the JS file
+	$translation_array = array( 'templateUrl' => get_stylesheet_directory_uri() );
+	wp_enqueue_style( 'style-switch', getcustomStylesheet('toggleswitch') ); 
 	wp_enqueue_script( 'js-file', get_template_directory_uri() . '/js/bookSS.js'); 
 	wp_localize_script( 'bookSS', 'bookSSURL', $translation_array );
+	//wp_enqueue_style( 'style', getcustomStylesheet('bookSS') );//Load Custom Style Sheet
 	?>
 	<?php 
 		$chromeless = sanitize_text_field( get_query_var( 'chromeless' ) );
@@ -43,10 +54,6 @@ $translation_array = array( 'templateUrl' => get_stylesheet_directory_uri() );
 		}
 	?>
 	<?php wp_head(); ?>
-	<script>
-	
-
-</script>
 </head>
 
 <body <?php body_class(); ?>>

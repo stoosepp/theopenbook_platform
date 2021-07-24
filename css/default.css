@@ -1,0 +1,38 @@
+@font-face {
+    font-family: public sans;
+    src: url(../fonts/PublicSans-VariableFont_wght.ttf);
+  }
+  @font-face {
+    font-family: Metropolis;
+    src: url(../fonts/Metropolis-SemiBold.woff);
+  }
+
+  p {
+    font-family: public sans, helvetica neue, sans-serif;
+  }
+  
+  h1,
+  h2,
+  h3 {
+    font-family: Metropolis, helvetica neue, sans-serif;
+    transition: font-family .2s ease-in-out;
+  }
+  
+  .header-bar, .header-toc, nav.aside-nav, #toc-list{
+    background-color:white;
+  }
+
+  .header-bar, nav.aside-nav, #toc-list, input#search, #toc-list a {
+    color:black;
+  }
+  .bt-menu-trigger span {
+    background-color: black;
+  }
+  .bt-menu-trigger span:after,
+.bt-menu-trigger span:before {
+
+  background-color: black;
+}
+.article-body{
+  padding: 1em;
+}

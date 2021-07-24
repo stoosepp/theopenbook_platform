@@ -1,10 +1,4 @@
 window.onload = function() {
-   
-}
-window.onload =function() {
-    
-}
-window.onload = function() {
    loadCheckboxes();
    setCurrentPageLink();
    setupSmoothScroll();
@@ -13,7 +7,6 @@ window.onload = function() {
 function loadCheckboxes(){
     var list = document.querySelectorAll(`[type*="checkbox"]`);
     //console.log("There are " + list.length + ' checkboxes to check');
-    console.log(localStorage);
     list.forEach( el => {
         var checked = JSON.parse(localStorage.getItem(el.id));
         console.log(el.id + ' is checked: ' + checked);
@@ -29,14 +22,41 @@ function loadCheckboxes(){
             else if (el.id == 'darkmode'){
                 updateCSS(el,checked,true);
             }
+            else if (el.id == 'hamburger-hidden'){
+                console.log('Setting up side menu');
+                //hide and show menu stuff
+                leftTOC = document.getElementsByClassName('left-toc')[0];
+                leftTOC.classList.add('disable-css-transitions');
+                leftTOC.classList.add('hidden-toc');
+                //leftTOC.classList.remove('disable-css-transitions');
+
+                article = document.getElementsByClassName('article')[0];
+                article.classList.add('disable-css-transitions');
+                article.classList.add('hidden-toc2');
+                //article.classList.remove('disable-css-transitions');
+
+                headerBar = document.getElementsByClassName('header-bar')[0];
+                headerBar.classList.add('disable-css-transitions');
+                headerBar.classList.add('headerbar-padding');
+                //headerBar.classList.remove('disable-css-transitions');
+
+
+                menuTrigger = document.getElementsByClassName('bt-menu-trigger')[0];
+                menuTrigger.getElementsByTagName('span')[0].classList.add('disable-css-transitions');
+                menuTrigger.classList.remove('bt-menu-open');
+                //menuTrigger.classList.remove('disable-css-transitions');
+            }
+            
         }
-       
     });
+    document.body.style.visibility = 'visible';
+  document.body.style.opacity = 1;
 } 
 
 
+
 function saveCheckbox(thisCheckbox){
-    //console.log('ID is: ' + thisCheckbox.id);  
+    console.log('ID is: ' + thisCheckbox.id);  
     if (thisCheckbox.checked == true){
         localStorage.setItem(thisCheckbox.id, true);
         console.log('Saved ' + thisCheckbox.id,true);
@@ -50,14 +70,11 @@ function saveCheckbox(thisCheckbox){
     {
         updateCSS(thisCheckbox, thisCheckbox.checked, true);   
     }
-   
-    
 }
 
-async function updateCSS(forToggle, isChecked,onPageLoad)
+async function updateCSS(forToggle, isChecked, onPageLoad)
 {
     var bookURL = bookSSURL.templateUrl;
-    //console.log("Updating CSS for Toggle:" + forToggle.id);
     var body = document.body
     if ((forToggle.id != 'darkmode') && (onPageLoad == false)){
         body.classList.toggle('fade');
@@ -65,7 +82,6 @@ async function updateCSS(forToggle, isChecked,onPageLoad)
     }
     if  (isChecked == true)//(document.getElementById(forToggle.id).checked) 
     {
-       // console.log('Theme URL is ' + bookURL);
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.id = forToggle.id;
@@ -81,10 +97,17 @@ async function updateCSS(forToggle, isChecked,onPageLoad)
             document.head.removeChild(link);
         }
     }
+    else if (forToggle == null){
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = bookURL + '/css/default.css';
+        document.head.append(link);
+    }
     if ((forToggle.id != 'darkmode') && (onPageLoad == false)){
         body.classList.toggle('fade');
-    }
+    } 
 }		
+
 
 function delay(delayInms) {
 return new Promise(resolve => {
@@ -115,7 +138,7 @@ function setSidebarActive(){//this sets it up
         var currentSection = sections[i]; 
         var val = currentSection.getAttribute('href');//get the target for the link
         var refElement = document.querySelector(val);
-        scrollPosArray.push(refElement.offsetTop-50);
+        scrollPosArray.push(refElement.offsetTop-45);
         //console.log(val + " is at " + refElement.offsetTop);
     }
     if (sections.length > 0) {
@@ -146,12 +169,7 @@ function setSidebarActive(){//this sets it up
 
 function setCurrentPageLink(){
     var url = window.location.protocol + '//' + window.location.host + window.location.pathname;
-    //console.log(url);
-    //var url = "http://example.com/products.html".split("/"); //replace string with location.href
     var navLinks = document.getElementsByTagName("a");
-    //console.log('There are ' + navLinks.length + ' Nav links');
-    //naturally you could use something other than the <nav> element
-    //console.log("There are " + navLinks.length + ' links to check');
     var i=0;
     var currentPage = url[url.length - 1];
     for(i;i<navLinks.length;i++){
@@ -174,17 +192,13 @@ function setCurrentPageLink(){
 
 
 //PROGRESS SLIDER
-function updateProgress(num1, num2){
-    var percent = ( num1 / num2 * 100) 
-    var percentRounded = percent.toFixed(1) + '%';
-    //console.log("Scrolling to " + percentRounded);
-    document.getElementById('progress').style.width = percentRounded;
-    }
+
 
 window.addEventListener('scroll', function(){
-    var top = window.scrollY;
-    var height = document.body.getBoundingClientRect().height - window.innerHeight;
-    updateProgress(top, height);
+    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  var scrolled = (winScroll / height) * 100;
+  document.getElementById("progress").style.width = scrolled + "%";
 });
 
 function setupSmoothScroll(){

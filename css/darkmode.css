@@ -2,10 +2,10 @@ body {
     background-color: rgb(39, 39, 39);
     color: white;
   }
-  .header-bar, nav.aside-nav{
+  .header-bar, nav.aside-nav, #toc-list, input#search {
     background-color: rgb(39, 39, 39);
   }
-.header-margin-link a {
+.header-margin-link a, #toc-list a {
     color:white;
 }
 .header-margin-link a:hover {
