@@ -22,7 +22,7 @@
     background-color:white;
   }
 
-  .header-bar, nav.aside-nav, #toc-list, input#search, #toc-list a {
+  .header-bar, nav.aside-nav, input#search {
     color:black;
   }
   .bt-menu-trigger span {
@@ -34,5 +34,5 @@
   background-color: black;
 }
 .article-body{
-  padding: 1em;
+  padding: 2em;
 }

@@ -41,7 +41,7 @@
 
 /* Tufte CSS styles */
 
-@media only screen and (max-width: 510px){
+@media only screen and (max-width: 999px){
     .article-body   {
         padding-left:1em;
         padding-right:1em;
@@ -49,7 +49,7 @@
    
   
   }
-  @media only screen and (min-width: 768px){
+  @media only screen and (min-width: 1000px){
     .article-body   {
         padding-left:10em;
         padding-right:10em;
@@ -71,12 +71,17 @@ body,h1,h2,h3,h4,h5,h6, p{
     font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
 
+#header-right > a > i
+{
+    line-height:1.5em;
+}
+
 h1 {
     font-weight: 400;
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
     margin-bottom: 1.5rem;
     font-size: 3.2rem;
-    line-height: 1;
+    /* line-height: 1; */
 }
 
 h2 {
@@ -175,7 +180,7 @@ blockquote {
 }
 
 blockquote p {
-    width: 55%;
+    /* width: 55%; */
     margin-right: 40px;
 }
 

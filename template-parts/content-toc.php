@@ -32,9 +32,9 @@ if ( is_page() && $post->post_parent ) {
 
 $childPages = getKids($bookRoot);
 if (( $childPages) && $isRoot == false){
-    echo '<ul class="toc-section">';
+   // echo '<ul class="toc-section">';
     foreach ( $childPages as $child ) {
-        //echo '<li><a href='.get_permalink($child).'>'.$child->post_title.'</a></li>';
+        echo '<ul class="toc-section">';
         echo '<li><a href='.get_permalink($child).'>'.$child->post_title.'</a><input type="checkbox" id="'.$child->ID.'" onclick="saveCheckbox(document.getElementById('.$child->ID.'));"></li>';
         $grandChildren = getKids($child->ID);
         foreach ($grandChildren as $grandChild){
@@ -58,7 +58,8 @@ if (( $childPages) && $isRoot == false){
             }
             echo '</ul>';
         }
+        echo '</ul>';
     }
-    echo '</ul>';
+    //echo '</ul>';
 }
 ?>

@@ -8,16 +8,13 @@
  */?>
 
 <aside>
-			<nav class="aside-nav">
+			
 			
 			<?php 
 			$content = apply_filters( 'the_content', get_the_content());
-			if ( strpos( $content, 'h2' ) == FALSE) {
-				//echo 'There are NO H2 tags';
-				echo '<script>updateArticleMargin();</script>';
-			}
-			else{
+			if ( strpos( $content, 'h2' ) == TRUE) {
 				//echo 'There are H2 tags';
+				?><nav class="aside-nav"><?php
 				if ($content){
 					$headers = getTextBetweenTags($content,'h2');
 					if (count($headers) > 0){
@@ -34,7 +31,8 @@
 				else{
 					//No content - fix the right margin
 				}
+			?></nav><?php
 			}
 		?>	
-		</nav>
+		
 	</aside>

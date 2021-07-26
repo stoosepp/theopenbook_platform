@@ -19,18 +19,19 @@
             </div>
             
             <!--NEXT PREVIOUS BUTTONS -->
-                <?php $bookRoot = getRootForPage($post);
+                <?php 
+                $bookRoot = getRootForPage($post);
                 $root = get_post($bookRoot);     
-            if ( is_page() && ($post != $bookRoot)) {
-                //Not root
-                $postParentID = wp_get_post_parent_id($post);
-                $postParent = get_post($postParentID);
-                if ($postParent->post_title != $root->post_title){
-                    echo '<a href='.get_permalink($postParent).'>'.$postParent->post_title.'</a>';
-                    echo '<span class="dashicons dashicons-arrow-right-alt2"></span>';
-                }
-                echo '<a href='.get_permalink($post).'>'.$post->post_title.'</a>';
-            } 
+                if ( is_page() && ($post != $root)) {
+                    //Not root
+                    $postParentID = wp_get_post_parent_id($post);
+                    $postParent = get_post($postParentID);
+                    if ($postParent->post_title != $root->post_title){
+                        echo '<a href='.get_permalink($postParent).'>'.$postParent->post_title.'</a>';
+                        echo '<i class="fas fa-chevron-right"></i>';
+                    }
+                    echo '<a href='.get_permalink($post).'>'.$post->post_title.'</a>';
+                } 
             else if ($post == $bookRoot){
             echo 'Welcome!'; 
             }
@@ -38,27 +39,64 @@
             ?>
         </div>
         <div id="header-right">
-            <a href="#"><span class="dashicons dashicons-arrow-left-alt2"></span></a>  
-                <?php 
-                    $prev_link = get_previous_posts_link(__('&laquo; Older Entries'));
-                    $next_link = get_next_posts_link(__('Newer Entries &raquo;'));
-                    // as suggested in comments
-                    if ($prev_link || $next_link) {
-                    echo '<ul class="navigation">';
-                    if ($prev_link){
-                    // echo '<li>'.$prev_link .'</li>';
-                        echo '<a href="'.$prev_link .'"><span class="dashicons dashicons-arrow-left-alt2"></span></a>';
+            <div id="header-options">
+            <!--<i class="fal fa-comment-smile"></i>
+            <i class="fal fa-thumbs-up"></i>
+            <i class="fal fa-thumbs-down"></i>
+            <i class="fal fa-download"></i>-->
+            <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fal fa-compress-wide"></i></a>
+            <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fal fa-expand-wide"></i></a>
+            <a id="print" href="#" onclick="window.print();"><i class="fal fa-print"></i></a>
+             </div>
+
+        <?php
+        //GET ALL LINKS IN LEFT HAND MENU
+        $bookRoot = getRootForPage($post);//Get the book for the current page
+        $isRoot = false;
+        $childPages = getKids($bookRoot);
+        $allPages = array();
+        if (( $childPages) && $isRoot == false){
+            foreach ( $childPages as $child ) {
+               array_push($allPages,$child);
+                $grandChildren = getKids($child->ID);
+                foreach ($grandChildren as $grandChild){
+                    $postParentID = wp_get_post_parent_id($post);
+                    $postParent = get_post($postParentID);
+                    if ( ($child->ID == $postParentID) || ($child->ID == $post->ID)){
+                        array_push($allPages,$grandChild);
                     }
-                    if ($next_link){
-                        //echo '<li>'.$next_link .'</li>';
-                        echo '<a href="'.$next_link.'"><span class="dashicons dashicons-arrow-right-alt2"></span></a>';
-                    }
-                    echo '</ul>';
+                    //Check to see if you're at Root of this book
+                    $pages = get_pages('child_of='.$post->ID.'&sort_column=post_date&sort_order=asc&parent='.$post->ID);
+                    if ( $pages ) {
+                        $first_page = current( $pages );
+                        if ($first_page == $child){
+                            array_push($allPages,$grandChild);
+                        }
+                    } 
+                }
             }
-                ?>
-                
-                
-        
+        }
+        $allPagesCount = count($allPages)-1;
+        foreach ($allPages as $key=>$pageLink){
+            if ($pageLink == $post){
+                if ($key > 0){
+                    $prev_link = get_permalink($allPages[$key-1]);
+                    echo '<a class="next-prev" href="'.$prev_link.'"><i class="fas fa-chevron-left"></i></a>';
+                }
+                else{
+                    echo '<i class="fas fa-chevron-left disabled-arrow next-prev"></i>';
+                }
+                if ($key < $allPagesCount){
+                    $next_link = get_permalink($allPages[$key+1]);
+                    echo '<a class="next-prev" href="'.$next_link.'"><i class="fas fa-chevron-right"></i></a>';
+                }
+                else{
+                    echo '<i class="fas fa-chevron-right disabled-arrow next-prev"></i>';
+                }
+            }
+
+        }
+        ?>
         </div>
     </div>
     <div class="progress-container">

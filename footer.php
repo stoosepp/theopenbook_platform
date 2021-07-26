@@ -15,7 +15,10 @@
 		<div class="site-info"><p>
 			<?php if ( is_page() ) {
 				?>
-			This page created by <?php echo get_the_author_meta('display_name', $author_id); 
+				
+			This page created by <?php 
+			$author_id = get_the_author_meta( 'ID' );
+			echo get_the_author_meta('display_name', $author_id); 
 
 			$u_time = get_the_time('U'); 
 			$u_modified_time = get_the_modified_time('U'); 

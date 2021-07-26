@@ -7,7 +7,7 @@
  * 
  */?>
  <div class="toggles">
-				<p>Book Font
+				<p>Book Theme
 			<label class="switch">
 				<input type="checkbox" id="tufte" onclick="saveCheckbox(document.getElementById('tufte'));">
 				<span class="slider round"></span>
