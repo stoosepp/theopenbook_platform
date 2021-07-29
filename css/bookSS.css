@@ -7,7 +7,7 @@
   }
   .article-body{
     margin-right:0px;
-    margin-top: 34px;
+    
   }
   .left-toc {
     transition: margin 0.5s;
@@ -95,7 +95,7 @@
     margin-left:16em;
     transition: margin 0.5s;
     /* position:absolute; */
-    margin-top:50px;
+    /* margin-top:50px; */
   }
   .article-body{
     margin-right:12em;
@@ -342,7 +342,6 @@ color: gray;
   background-color: #0071bc;
 }
 
-
 .book-image{
   width:100%;
     padding-bottom:100%;
@@ -350,7 +349,6 @@ color: gray;
     position:relative;
   
   }
-
 
 .book-image img{
   position:absolute;
@@ -502,11 +500,6 @@ ul.toc-subsection li > a{
 
 }
 
-
-/* .article-body h2{
-  height: 60px;
-  margin-top: -60px;
-} */
 
 /* Sidebar Header Nav */
 .entry-content h2{

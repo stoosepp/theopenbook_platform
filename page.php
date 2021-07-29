@@ -19,7 +19,7 @@
 		 <?php 
 		 if ( is_page() ) {
 			echo '<div id="toc-list">';
-			echo '<a id="home-icon" href="'.get_home_url().'"><i class="fal fa-home"></i></a>'; 
+			echo '<a id="home-icon" href="'.get_home_url().'"><i class="fas fa-home"></i></a>'; 
 			
 			$bookRoot = getRootForPage($post);
 			//PUT PHOTO HERE
@@ -39,7 +39,7 @@
 			?>
 			<form id="search-form" action="/" method="get">
 			<!-- <label for="search">Search in <?php echo home_url( '/' ); ?></label> -->
-			<i class="fal fa-search"></i>
+			<i class="far fa-search"></i>
 			<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
 			</form><?php
 			get_template_part( 'template-parts/content-toc', get_post_type() );

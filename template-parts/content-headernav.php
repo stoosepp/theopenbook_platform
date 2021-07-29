@@ -18,7 +18,7 @@
 				if ($content){
 					$headers = getTextBetweenTags($content,'h2');
 					if (count($headers) > 0){
-						echo '<p style="padding-left:10px; margin:0px;"><i class="fal fa-list"></i>  Contents</p>
+						echo '<p style="padding-left:10px; margin:0px;"><i class="fas fa-list"></i>  Contents</p>
 						<ul class="page-sidebar-list">';
 						foreach($headers as &$header){
 							$headername = sanitize_title($header);

@@ -29,7 +29,7 @@
 	<!-- <link rel="stylesheet" id="print-css" href="<?php echo get_template_directory_uri();?>/css/print.css"  media="print"/> -->
 	<link rel="stylesheet" id="bookSS-css" href="<?php echo get_template_directory_uri();?>/css/bookSS.css" media="all">
 	<link rel="stylesheet" id="default-css" href="<?php echo get_template_directory_uri();?>/css/default.css" media="all">
-	<link rel="stylesheet" id="fontawesome-css" href="<?php echo get_template_directory_uri();?>/css/fontawesome-all.css" media="all">
+	<link rel="stylesheet" id="fontawesome-css" href="<?php echo get_template_directory_uri();?>/css/all.css" media="all">
 	<?php //wp_enqueue_style( 'style', getcustomStylesheet('bookSS') );
 	wp_register_script( 'bookSS', get_template_directory_uri() . '/js/bookSS.js' );
 	wp_enqueue_script( 'bookSS' );

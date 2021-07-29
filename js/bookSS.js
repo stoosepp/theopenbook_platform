@@ -251,7 +251,7 @@ window.matchMedia('(prefers-color-scheme: dark)')
 var elem = document.documentElement;
 function toggleFullscreen(el) {
     console.log(el);
-if (el.firstChild.classList.contains('fa-expand-wide') == true){
+if (el.firstChild.classList.contains('fa-expand') == true){
     
      //Open
      if (elem.requestFullscreen) {
@@ -262,7 +262,7 @@ if (el.firstChild.classList.contains('fa-expand-wide') == true){
         elem.msRequestFullscreen();
       }
       //console.log('Opening Full Screen');
-    $collapse = document.getElementsByClassName('fa-compress-wide')[0];
+    $collapse = document.getElementsByClassName('fa-compress')[0];
     $collapse.parentElement.classList.remove('hidden');
     el.classList.add('hidden');
 }
@@ -277,7 +277,7 @@ else{
         document.msExitFullscreen();
       }
      // console.log('Closing Full Screen');
-    $expand = document.getElementsByClassName('fa-expand-wide')[0];
+    $expand = document.getElementsByClassName('fa-expand')[0];
     $expand.parentElement.classList.remove('hidden');
     el.classList.add('hidden');
 

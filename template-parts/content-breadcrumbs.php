@@ -40,13 +40,13 @@
         </div>
         <div id="header-right">
             <div id="header-options">
-            <!--<i class="fal fa-comment-smile"></i>
-            <i class="fal fa-thumbs-up"></i>
-            <i class="fal fa-thumbs-down"></i>
-            <i class="fal fa-download"></i>-->
-            <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fal fa-compress-wide"></i></a>
-            <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fal fa-expand-wide"></i></a>
-            <a id="print" href="#" onclick="window.print();"><i class="fal fa-print"></i></a>
+            <!--<i class="fas fa-comment-smile"></i>
+            <i class="far fa-thumbs-up"></i>
+            <i class="far fa-thumbs-down"></i>
+            <i class="far fa-download"></i>-->
+            <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>
+            <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-expand"></i></a>
+            <a id="print" href="#" onclick="window.print();"><i class="fas fa-print"></i></a>
              </div>
 
         <?php

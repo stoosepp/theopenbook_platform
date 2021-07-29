@@ -189,9 +189,12 @@ function ww_load_dashicons(){
 }
 add_action('wp_enqueue_scripts', 'ww_load_dashicons');
 
+
 /* ---------------- CUSTOM STUFF---------------- */
 
 //include 'customposts.php';
+include 'filterbybook.php';
+//include 'list-table-example.php';
 
 function getCustomStylesheet($stylename){
 	$themedirectory = get_template_directory_uri();
@@ -238,7 +241,7 @@ function getTopLevelPages(){
 }
 
 
-function getRootForPage($post){
+function getRootForPage($post){//gets book for the current page.
 	$bookRoot = new stdClass();
 	$thisPage = get_post($post->ID);	
 	if ($thisPage->post_parent)	{
@@ -256,6 +259,7 @@ function getKids($forPage){
 	$args = array(
 		'posts_per_page' => 0,
 		'order'          => 'ASC',
+		'orderby'		=>'menu_order',
 		'post_parent'    => $forPage,
 		'post_status'    => null,
 		'post_type'      => 'page',
