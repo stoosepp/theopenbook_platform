@@ -106,12 +106,11 @@ add_action( 'save_post', 'saveLicense' );
 /* --------------- ADD CUSTOM COLUMNS TO PARTS --------------- */
 add_filter( 'manage_page_posts_columns', 'addColumnsToParts' );
 function addColumnsToParts($columns) {
-    unset( $columns['author'] );//Gets rid of this Column! YIKES!
+    //unset( $columns['author'] );//Gets rid of this Column! YIKES!
     unset( $columns['comments'] );//Gets rid of this Column! YIKES!
     $new = array();
   foreach($columns as $key => $title) {
     if ($key=='date') {// Put the Thumbnail column before the Author column
-      $new['book_id'] = 'Book';
       $new['order'] = 'Order';
       $new['license'] = 'License';
     }
@@ -128,17 +127,7 @@ function addColumnsToParts($columns) {
         $allBooks = getTopLevelPages();
         $thePage = get_post($post_id);
             switch ( $column ) {
-                case 'book_id' :
-                    if (in_array($thePage, $allBooks)) {
-                        //consolePrint($thePage->post_title.' is a root book.');
-                        echo 'This is a Book';
-                    }
-                    else{
-                        $bookID = get_post_meta( $post_id , 'pageBook' , true ); 
-                        echo get_post_field( 'post_title', $bookID).' (id:'.$bookID.')';
-                    }
-                    break;
-                  case 'order' :
+                 case 'order' :
                     $thisOrder = get_post($post_id);
                     echo $thisOrder->menu_order;
                     break;
