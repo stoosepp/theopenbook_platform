@@ -1,92 +1,6 @@
 <?php
 
-function saveBooktoPage($post_id,$post,$update){
-    if (!isset($_POST["bookSelectMetaBox-nonce"]) || !wp_verify_nonce($_POST["bookSelectMetaBox-nonce"], basename(__FILE__)))
-          return $post_id;
-  
-      if(!current_user_can("edit_post", $post_id))
-          return $post_id;
-  
-      if(defined("DOING_AUTOSAVE") && DOING_AUTOSAVE)
-          return $post_id;
-  
-      $slug = "page";
-      if($slug != $post->post_type)//make sure this is the right post type
-          return $post_id;
-      
-      $bookSelectDropdownValue = "";
-      if(isset($_POST["bookSelector"]))
-      {
-          $meta_box_dropdown_value = $_POST["bookSelector"];
-      }   
-      update_post_meta($post_id, "pageBook", $meta_box_dropdown_value);
-  }
-  add_action("save_post", "saveBooktoPage", 10, 3);
-
   function addPageMetaBox(){
-        add_meta_box(//Must be in the below order
-      'book_select_box',//ID for the Box
-      'Book Select',//Title:what will show in the top of the box
-      'bookSelectMetaBoxCreator',//Callback: Method called that contains what's inside the box
-      'page',//Screen - post types that this appears on
-      'side',//where it appears 
-      'high',//priority of where the box appears (high or low)
-      null//Callback args: provides arguments to callback function
-    );
-  }
-  add_action('add_meta_boxes','addPageMetaBox');
-
-  function bookSelectMetaBoxCreator($post){
-    wp_nonce_field(basename(__FILE__), "bookSelectMetaBox-nonce");//nonce fields are required to protect against CSRF attacks
-    $allBooks = getTopLevelPages();
-    if ($allBooks) {
-        if (in_array($post, $allBooks)) {
-            echo($post->post_title.' is a book, so you cannot select a book.');
-           
-        }
-        else{
-            ?>
-        <table>
-          <tr>
-            <td>
-              <label for="bookSelector">Select Book: </label>
-            </td>
-            <td>
-              <select name="bookSelector" value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>">
-              <?php foreach($allBooks as $thisBook){
-                $bookTitle = get_the_title($thisBook);
-                $thisBookID = $thisBook->ID;
-                  $savedBookID = get_post_meta( $post->ID, 'pageBook', true );
-                  
-                  //consolePrint('Saved Book ID: '.$savedBookID.'  |  The ID of this book: '.$thisBookID);
-                      if ($savedBookID){//If there's something saved
-                        
-                        if ($savedBookID == $thisBookID){
-                          ?><option selected value="<?php echo $thisBookID?>"><?php echo $bookTitle?></option><?php
-                         }
-                         else{
-                          ?><option value="<?php echo $thisBookID?>"><?php echo $bookTitle?></option><?php
-                        }
-                      } 
-                      else{
-                        ?><option value="<?php echo $thisBookID?>"><?php echo $bookTitle?></option><?php
-                      }
-                } ?>
-              </select>
-            </td>
-          </tr>
-        </table><?php
-        } 
-  }
-    else{
-        echo '<p>There are no books. Add one!</p>';
-    }
-    // Don't forget about this, otherwise you will mess up with other data on the page
-    wp_reset_postdata();
-  }
-
-
-  function addPageMetaBox2(){
     add_meta_box(//Must be in the below order
   'license_select_box',//ID for the Box
   'Select a License',//Title:what will show in the top of the box
@@ -97,7 +11,7 @@ function saveBooktoPage($post_id,$post,$update){
   null//Callback args: provides arguments to callback function
 );
 }
-add_action('add_meta_boxes','addPageMetaBox2');
+add_action('add_meta_boxes','addPageMetaBox');
 
 function licenseSelectMetaBoxCreator($post){
     wp_nonce_field( 'licenseSelectMetaBox', 'licenseSelectMetaBox-nonce' );
@@ -206,6 +120,8 @@ function addColumnsToParts($columns) {
   return $new;
 }
 
+
+
 // Add the data to the custom columns for the book post type:
     add_action( 'manage_page_posts_custom_column' , 'custom_page_column', 10, 2 );
     function custom_page_column( $column, $post_id ) {
@@ -214,7 +130,7 @@ function addColumnsToParts($columns) {
             switch ( $column ) {
                 case 'book_id' :
                     if (in_array($thePage, $allBooks)) {
-                        consolePrint($thePage->post_title.' is a root book.');
+                        //consolePrint($thePage->post_title.' is a root book.');
                         echo 'This is a Book';
                     }
                     else{
@@ -245,9 +161,9 @@ function addColumnsToParts($columns) {
             }
     }
 
-    /* --------------- ADD FILTER TO PARTS --------------- */
+    /* --------------- ADD FILTER TO PAGES --------------- */
+   
 add_action( 'restrict_manage_posts', 'filterPageList' );
-
 function filterPageList(){
     $type = 'page';
     if (isset($_GET['post_type'])) {
@@ -286,25 +202,41 @@ function filterPageList(){
         <?php
     }
 }
-add_filter( 'parse_query', 'pageFilter' );
 
-function pageFilter( $query ){
-    global $pagenow;
-    $type = 'page';
-    if (isset($_GET['post_type'])) {
-        $type = $_GET['post_type'];
-    }
-    if ( 'page' == $type && is_admin() 
-        && $pagenow=='edit.php' 
-        && isset($_GET['bookSelector']) 
-        && $_GET['bookSelector'] != ''
-        && $query->is_main_query()
-        ) {
-        $query->query_vars['meta_key'] = 'pageBook';
-        $query->query_vars['meta_value'] = $_GET['bookSelector'];
-    }
+function find_descendants($post_id) {
+  $descendant_ids = array();
+  array_push($descendant_ids, $post_id);//Add the main book to show that
+  $pages = get_pages("child_of=$post_id");
+  foreach ($pages as $page) { 
+    consolePrint('Adding to array: '.$page->page_title);
+    array_push($descendant_ids, $page->ID); }
+  return $descendant_ids;
 }
 
+function SearchFilter($query) {
+  global $pagenow;
+  $type = 'page';
+  if (isset($_GET['post_type'])) {
+      $type = $_GET['post_type'];
+  }
+  if ( 'page' == $type && is_admin() 
+      && $pagenow=='edit.php' 
+      && isset($_GET['bookSelector']) 
+      && $_GET['bookSelector'] != ''
+      && $query->is_main_query()
+      ) {
+  if ($query->is_search) {
+    $selectedBook = $_GET['bookSelector'];
+    //consolePrint('The book:'.$selectedBook);
+      $query->set ( 'post__in', find_descendants($selectedBook) );
+  }
+  }
+  return $query;
+}
+add_filter('pre_get_posts','SearchFilter');
+
+
+//Adds text above title
 add_action( 'load-edit.php', function(){
     $screen = get_current_screen(); 
      // Only edit post screen:
