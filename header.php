@@ -26,28 +26,50 @@
 	else :
 		
 	endif;?>
-	<!-- <link rel="stylesheet" id="print-css" href="<?php echo get_template_directory_uri();?>/css/print.css"  media="print"/> -->
-	<link rel="stylesheet" id="bookSS-css" href="<?php echo get_template_directory_uri();?>/css/bookSS.css" media="all">
-	<link rel="stylesheet" id="default-css" href="<?php echo get_template_directory_uri();?>/css/default.css" media="all">
-	<link rel="stylesheet" id="fontawesome-css" href="<?php echo get_template_directory_uri();?>/css/all.css" media="all">
-	<?php //wp_enqueue_style( 'style', getcustomStylesheet('bookSS') );
-	wp_register_script( 'bookSS', get_template_directory_uri() . '/js/bookSS.js' );
+	<?php wp_register_script( 'bookSS', get_template_directory_uri() . '/js/bookSS.js' );
 	wp_enqueue_script( 'bookSS' );
 
 	//Pass template URL over to the JS file
 	$translation_array = array( 'templateUrl' => get_stylesheet_directory_uri() );
 	wp_enqueue_style( 'style-switch', getcustomStylesheet('toggleswitch') ); 
-	wp_enqueue_script( 'js-file', get_template_directory_uri() . '/js/bookSS.js'); 
 	wp_localize_script( 'bookSS', 'bookSSURL', $translation_array );
-	//wp_enqueue_style( 'style', getcustomStylesheet('bookSS') );//Load Custom Style Sheet
 	?>
+
+	 <!-- <link rel="stylesheet" id="print-css" href="<?php echo get_template_directory_uri();?>/css/print.css"  media="print"/> -->
+	<link rel="stylesheet" id="bookSS-css" href="<?php echo get_template_directory_uri();?>/css/bookSS.css" media="all">
+	<link rel="stylesheet" id="default-css" href="<?php echo get_template_directory_uri();?>/css/default.css" media="all">
+	<link rel="stylesheet" id="fontawesome-css" href="<?php echo get_template_directory_uri();?>/css/all.css" media="all">
+	
+	
 	<?php 
 		$chromeless = sanitize_text_field( get_query_var( 'chromeless' ) );
 		if( strtoupper( $chromeless) === 'TRUE' ){
 		//echo "Loading with Chromeless CSS";
-			//wp_enqueue_style( 'style', getcustomStylesheet('chromeless') );
-			echo '<style>nav.left-toc{
-				display:none !important;} .article-body{margin-top:0px !important;}.article-header{display:none !important;} .article{margin-left:0em !important;}
+			
+			echo '<style>
+			nav.left-toc{
+				display:none; 
+			} 
+			.sidenote{
+				position:relative;
+				float:right;     
+				margin-left: 10px;
+			} 
+			aside{
+				display:none;
+			} 
+			.header-bar{
+				display:none;
+			}
+			.article-body{
+				margin-top:0px; 
+				margin-right:0px; 
+			}
+			.article-header{
+				display:none; 
+			} .article{
+				margin-left:0em;
+			}
 			</style>';
 		}
 		else{
