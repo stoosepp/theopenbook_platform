@@ -33,7 +33,7 @@
                     echo '<a href='.get_permalink($post).'>'.$post->post_title.'</a>';
                 } 
             else if ($post == $bookRoot){
-            echo 'Welcome!'; 
+            //echo 'Welcome!'; 
             }
 
             ?>

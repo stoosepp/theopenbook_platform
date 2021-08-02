@@ -196,6 +196,8 @@ add_action('wp_enqueue_scripts', 'ww_load_dashicons');
 include 'filterbybook.php';
 //include 'list-table-example.php';
 
+add_theme_support( 'align-wide' );
+
 function getCustomStylesheet($stylename){
 	$themedirectory = get_template_directory_uri();
 	return $themedirectory.'/css/'.$stylename.'.css';

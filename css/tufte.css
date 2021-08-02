@@ -59,14 +59,10 @@
     font-size: 15px; 
 }*/
 
-body { 
-    background-color: #fffff8;
+/* body, .header-bar, .header-toc, nav.aside-nav, #toc-list, input#search  {
+    background-color: #fffff8; 
     color: #111;
-    counter-reset: sidenote-counter;
-}
-.header-bar, .header-toc, nav.aside-nav, #toc-list, input#search  {
-    background-color: #fffff8;
-}
+}*/
 body,h1,h2,h3,h4,h5,h6, p{
     font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
@@ -238,10 +234,10 @@ figure.fullwidth figcaption {
 }
 
 /* Links: replicate underline that clears descenders */
-a:link,
+/* a:link,
 a:visited {
     color: inherit;
-}
+} */
 
 .no-tufte-underline:link {
     background: unset;

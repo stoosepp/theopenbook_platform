@@ -1,0 +1,10 @@
+.sidenote {
+    position: relative;
+    float: right;
+    margin-left: 10px;
+    width:14em;
+}
+
+.is-type-video {
+    display:none;
+}

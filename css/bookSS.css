@@ -7,7 +7,12 @@
   }
   .article-body{
     margin-right:0px;
-    
+  }
+ #header-options{
+    display:none;
+  }
+  .next-prev{
+    width:2em !important;
   }
   .left-toc {
     transition: margin 0.5s;
@@ -99,7 +104,9 @@
   }
   .article-body{
     margin-right:12em;
+    margin-top:50px;
   }
+ 
   
   .left-toc {
     transition: margin 0.5s;
@@ -144,6 +151,9 @@
 }
 
 /* ------------------------------ END OF MEDIA QUERIES ------------------------------ */
+
+
+
 .hidden{
   display:none !important;
 }
@@ -158,12 +168,10 @@ body {
  
   margin:0px;
   visibility: hidden;
-    opacity: 0;
+  /*opacity: 0;*/
 }
 
-body.fade {
-  opacity: 0;
-}
+
 
 html,
 body,
@@ -182,9 +190,21 @@ main {
 }
 
 
-  
+h1.entry-title{
+  margin-top:0px;
+}
 .article > h2{
   line-height:3em;
+}
+
+.wp-block-group.has-background {
+  padding: 1.25em 2.375em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.wp-block-group {
+  padding: 1em;
 }
 
 .site-title{
@@ -500,6 +520,116 @@ ul.toc-subsection li > a{
 
 }
 
+/* Background Radio Buttons */
+.container {
+  /*display: block;*/
+  position: relative;
+  padding-left:65px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.container {
+  /*display: block;*/
+  position: relative;
+  padding-left:50px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+div#colorScheme{
+  margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 70%;
+    height:50px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  stroke: #eee;
+  
+  border-radius: 50%;
+     -moz-box-shadow:     0 0 2px gray;
+   -webkit-box-shadow:  0 0 2px gray;
+   box-shadow:          0 0 2px gray;
+}
+
+.white{
+background-color: white;
+}
+
+.sepia{
+background-color: #fffff8;
+}
+
+.dark{
+background-color: rgb(39, 39, 39);
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  /*background-color: #ccc;*/
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  /*background-color: #2196F3;*/
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: -5px;
+	left: -5px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+    background:#ccc;
+    z-index:-1;
+}
 
 /* Sidebar Header Nav */
 .entry-content h2{
@@ -551,8 +681,8 @@ nav.aside-nav {
 
 li.header-margin-link {
   line-height: 1.1em;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   padding-left: 10px;
   border-left-style: solid;
   border-left-width: 3px;
@@ -604,8 +734,10 @@ li.header-margin-link a:hover {
   margin: 0px;
 }
 
-
-
+.is-type-video > iframe{
+  margin-left:auto;
+  margin-right:auto;
+}
 
 /* Toggle TOC button */
 

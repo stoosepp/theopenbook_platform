@@ -1,15 +1,19 @@
+window.addEventListener("DOMContentLoaded", () => {
+    loadColorScheme();
+    loadLocalStorage();
+  });
+
+
 window.onload = function() {
-   loadCheckboxes();
+    
+  
    setCurrentPageLink();
    setupSmoothScroll();
    if (mobileAndTabletCheck == true){
-        $expand = document.getElementsByClassName('fa-expand-wide')[0];
+        $expand = document.getElementsByClassName('fa-expand')[0];
         $expand.parentElement.classList.add('hidden');
-        console.log('This is a mobile or tablet');
    }
-   else{
-        console.log('This is a desktop or laptop');
-   }
+
 }
 window.mobileAndTabletCheck = function() {
     let check = false;
@@ -17,9 +21,11 @@ window.mobileAndTabletCheck = function() {
     return check;
   };
 
-function loadCheckboxes(){
+function loadLocalStorage(){
+    //Load Switches for font and layout
     var list = document.querySelectorAll(`[type*="checkbox"]`);
     //console.log("There are " + list.length + ' checkboxes to check');
+    
     list.forEach( el => {
         var checked = JSON.parse(localStorage.getItem(el.id));
         //console.log(el.id + ' is checked: ' + checked);
@@ -27,13 +33,10 @@ function loadCheckboxes(){
             var checkBox = document.getElementById(el.id);
             checkBox.checked = checked;
             if (el.id == 'tufte'){
-                updateCSS(el,checked,true);
+                updateCSS(el.id,checked);
             }
-            else if (el.id == 'accessible'){
-                updateCSS(el,checked,true);
-            }
-            else if (el.id == 'darkmode'){
-                updateCSS(el,checked,true);
+            else if (el.id == 'opendyslexic'){
+                updateCSS(el.id,checked);
             }
             else if (el.id == 'hamburger-hidden'){
                 //console.log('Setting up side menu');
@@ -53,23 +56,62 @@ function loadCheckboxes(){
                 headerBar.classList.add('headerbar-padding');
                 //headerBar.classList.remove('disable-css-transitions');
 
-
                 menuTrigger = document.getElementsByClassName('bt-menu-trigger')[0];
                 menuTrigger.getElementsByTagName('span')[0].classList.add('disable-css-transitions');
                 menuTrigger.classList.remove('bt-menu-open');
                 //menuTrigger.classList.remove('disable-css-transitions');
             }
-            
         }
     });
     document.body.style.visibility = 'visible';
-  document.body.style.opacity = 1;
+    //document.body.style.opacity = 1;
+   
 } 
 
+function loadColorScheme(){
+    var colorScheme = localStorage.getItem('colorScheme');
+    console.log('Loaded Color Scheme: ' + colorScheme);
+    var radiobtn = document.getElementById(colorScheme + 'Check');
+    radiobtn.checked = true;
+    updateCSS(colorScheme,true);
+}
+
+function changeColorScheme(thisRadioButton){
+    console.log('This is checked ' + thisRadioButton.value);
+    const colorList = ['white','sepia','darkmode'];
+    colorList.forEach(thisColor =>{
+        if (thisColor == thisRadioButton.value){
+            updateCSS(thisColor,true);
+        }
+        else{
+            updateCSS(thisColor,false);
+        }
+    });
+    localStorage.setItem('colorScheme',  thisRadioButton.value);
+}
+
+window.matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', event => {
+        if (event.matches) {//Change to Dark Mode
+            //dark mode
+            console.log('Entering Dark Mode');
+            var darkmode = document.getElementById('darkmodeCheck');
+            darkmode.checked = true;
+           changeColorScheme(darkmode);
+   
+        } else {//Change to Saved Color
+            //light mode
+            console.log('Entering Light Mode');
+            var lightmode = document.getElementById('whiteCheck');
+            lightmode.checked = true;
+            changeColorScheme(lightmode);
+        }
+        
+})
 
 
 function saveCheckbox(thisCheckbox){
-    console.log('ID is: ' + thisCheckbox.id);  
+    //Save regular checkbox 
     if (thisCheckbox.checked == true){
         localStorage.setItem(thisCheckbox.id, true);
         console.log('Saved ' + thisCheckbox.id,true);
@@ -78,47 +120,53 @@ function saveCheckbox(thisCheckbox){
         localStorage.setItem(thisCheckbox.id, false);
         console.log('Saved ' + thisCheckbox.id,false);
     }
-
-    if ((thisCheckbox.id == 'tufte') || (thisCheckbox.id == 'accessible') || (thisCheckbox.id == 'darkmode'))
-    {
-        updateCSS(thisCheckbox, thisCheckbox.checked, true);   
+    //Handle Font changes
+    if (thisCheckbox.id == 'tufte') {
+        var dyslexicCheck = document.getElementById('opendyslexic');
+        if ((thisCheckbox.checked == true) && (dyslexicCheck.checked != false)){
+            updateCSS(dyslexicCheck.id, false);
+            dyslexicCheck.checked = false;
+            saveCheckbox(dyslexicCheck);
+        }
+        updateCSS(thisCheckbox.id, thisCheckbox.checked, true);  
+    }  
+    else if (thisCheckbox.id == 'opendyslexic')
+    {   var tufteCheck = document.getElementById('tufte');
+        if ((thisCheckbox.checked == true) && (tufteCheck.checked != false)){
+            tufteCheck.checked = false;
+            saveCheckbox(tufteCheck);
+            updateCSS(tufteCheck.id, false);
+        }
+        updateCSS(thisCheckbox.id, thisCheckbox.checked);   
     }
 }
 
-async function updateCSS(forToggle, isChecked, onPageLoad)
+async function updateCSS(forID, isChecked)
 {
     var bookURL = bookSSURL.templateUrl;
     var body = document.body
-    if ((forToggle.id != 'darkmode') && (onPageLoad == false)){
-        body.classList.toggle('fade');
-        await delay(500);
-    }
-    if  (isChecked == true)//(document.getElementById(forToggle.id).checked) 
+    if  (isChecked == true)
     {
         var link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.id = forToggle.id;
-        link.href = bookURL + '/css/' + forToggle.id + '.css';
+        link.id = forID + "CSS";
+        link.href = bookURL + '/css/' + forID + '.css';
         console.log('Updating CSS to ' + link.href);
         document.head.append(link);
     } 
     else if ((isChecked == false) || (isChecked == null)){
-        console.log('Removing ' + forToggle.id);
-        var link = document.getElementById(forToggle.id);
-        
+        console.log('Removing ' + forID);
+        var link = document.getElementById(forID + "CSS");
         if (link) {
             document.head.removeChild(link);
         }
     }
-    else if (forToggle == null){
+    else if ((forID == null) || (forID == 'white')){
         var link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = bookURL + '/css/default.css';
         document.head.append(link);
     }
-    if ((forToggle.id != 'darkmode') && (onPageLoad == false)){
-        body.classList.toggle('fade');
-    } 
 }		
 
 
@@ -176,7 +224,7 @@ function setSidebarActive(){//this sets it up
         });
     }
     else{
-        //console.log('There are no headers here ');
+        console.log('There are no headers here ');
         updateArticleMargin();
     }
     
@@ -230,24 +278,9 @@ function setupSmoothScroll(){
     });
 }
 
-/*
-window.matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', event => {
-        var darkCheckBox = document.getElementById('darkmode');  
-        console.log('Checkbox is ' + darkCheckBox.checked);     
-        if (event.matches) {
-            //dark mode
-            console.log('Entering Dark Mode');
-            darkCheckBox.checked = true;
-   
-        } else {
-            //light mode
-            console.log('Entering Light Mode');
-            darkCheckBox.checked = false;
-        }
-        saveCheckbox(darkCheckBox);
-})
-*/
+
+
+
 var elem = document.documentElement;
 function toggleFullscreen(el) {
     console.log(el);

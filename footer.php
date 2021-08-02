@@ -44,18 +44,18 @@
 				$root = get_post($bookRoot);
 				$CCLicense = get_post_meta( $root->ID, 'bookLicense', true );
 				consolePrint('License for '.$root->post_title.' is '.$CCLicense);
-				if ($CCLicense == 'allrightsreserved'){?>
-					<p>All content in this book is All Rights Reserved &copy;<?php the_modified_time('Y'); ?></p>
+				if (($CCLicense == 'allrightsreserved') || ($CCLicense == null)){?>
+					<p>All original content in this book is All Rights Reserved &copy;<?php the_modified_time('Y'); ?></p>
 				<?php
 				}
 				else{
 					$CCimage = '/inc/images/'.$CCLicense.'.png';
 					$CCDescription = '<a href="https://creativecommons.org/licenses/'.$CCLicense.'/4.0/">CC '.strtoupper ($CCLicense).' 4.0 License</a>';
 					?>
-					<p><img src="<?php echo get_template_directory_uri().$CCimage;?>"></p><p>All original content in this book is licenced under the <?php echo $CCDescription ?> unless otherwise noted. </p><p>Embedded videos, credited images / media are not inclusive of this license, so please check with the original creators if you wish to use them.</p><?php
+					<p><img src="<?php echo get_template_directory_uri().$CCimage;?>"></p><p>All original content in this book is licenced under the <?php echo $CCDescription ?> unless otherwise noted. </p><?php
 				}
 				
-			}?>
+			}?><p>Embedded videos, credited images / media are not inclusive of this license, so please check with the original creators if you wish to use them.</p>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

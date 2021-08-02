@@ -6,7 +6,7 @@ body {
     background-color: rgb(39, 39, 39);
     color:white;
   }
-.header-margin-link a, #toc-list a {
+.header-margin-link a {
     color:white;
 }
 .header-margin-link a:hover {
@@ -27,26 +27,22 @@ ul.toc-section li > input[type="checkbox"] {
   opacity:1;
 }
 
-ul.toc-section li > a {
-  color: white;
-}
 
-ul.toc-subsection li > a {
-  color:lightgray;
+#toc-list  a{
+  color:gray;
 }
 
 #toc-list a:hover{
-  color:gray !important;
+  color:light-gray !important;
 }
 .current-link {
-  color: gray !important;
+  color: white !important;
 }
 
 .book-image{
   background-color: white;;
   
   }
-
 
 .book-image img{
  opacity: 0.7;

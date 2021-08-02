@@ -9,27 +9,36 @@
  <div class="toggles">
 				<p>Book Theme
 			<label class="switch">
-				<input type="checkbox" id="tufte" onclick="saveCheckbox(document.getElementById('tufte'));">
+				<input type="checkbox" id="tufte" onclick="saveCheckbox(this);" />
 				<span class="slider round"></span>
 			</label>
 		 </p>
 		 
-				<p>Dyslexia Font
+				<p>Open Dyslexic <a style="color:#ccc;" href="https://opendyslexic.org/" target="_blank"><i class="fa fa-info-circle"></i></a>
 			<label class="switch">
-				<input type="checkbox" id="accessible" onclick="saveCheckbox(document.getElementById('accessible'));">
-				<span class="slider round"></span>
-			</label>
-		 </p>
-				<p>Dark Mode
-			<label class="switch">
-				<input type="checkbox" id="darkmode" onclick="saveCheckbox(document.getElementById('darkmode'));">
+				<input type="checkbox" id="opendyslexic" onclick="saveCheckbox(this);" />
 				<span class="slider round"></span>
 			</label>
 		 </p>
 		 <div>
-			 <a id="myLink" href="#" onclick="resetStorage();">Reset Settings</a>
+			 
 			 </div>
 		 	</div>
-			 
-			<?php echo '</div>';
+			 <!-- BACKGROUND COLOR SELECTOR -->
+			 <div id="colorScheme">
+				<label class="container">
+					<input type="radio" checked="checked" name="radio" id="whiteCheck" onclick="changeColorScheme(this);" value="white" />
+					<span class="checkmark white"></span>
+				</label>
+				<label class="container">
+					<input type="radio" name="radio" id="sepiaCheck" onclick="changeColorScheme(this);" value="sepia" />
+					<span class="checkmark sepia"></span>
+				</label>
+				<label class="container">
+					<input type="radio" name="radio" id="darkmodeCheck" onclick="changeColorScheme(this);" value="darkmode" />
+					<span class="checkmark dark"></span>
+				</label>	
+			</div>	 
+			<a id="myLink" href="#" onclick="resetStorage();">Reset Visuals</a>
+</div>
 

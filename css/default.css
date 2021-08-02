@@ -6,6 +6,9 @@
     font-family: Metropolis;
     src: url(../fonts/Metropolis-SemiBold.woff);
   }
+  body{
+    background-color: inherit;
+      }
 
   p {
     font-family: public sans, helvetica neue, sans-serif;
@@ -18,10 +21,7 @@
     transition: font-family .2s ease-in-out;
   }
   
-  .header-bar, .header-toc, nav.aside-nav, #toc-list{
-    background-color:white;
-  }
-
+  
   .header-bar, nav.aside-nav, input#search {
     color:black;
   }

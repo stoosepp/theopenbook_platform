@@ -164,7 +164,7 @@ function filterPageList(){
         //get all the books
         $allBooks = get_posts([
           'post_type' => 'books',
-          //'post_status' => 'publish',
+          'post_status' => array('publish', 'pending', 'draft', 'auto-draft', 'future'),
           'numberposts' => -1,
           'order'    => 'ASC'
         ]);
@@ -195,9 +195,15 @@ function filterPageList(){
 function find_descendants($post_id) {
   $descendant_ids = array();
   array_push($descendant_ids, $post_id);//Add the main book to show that
-  $pages = get_pages("child_of=$post_id");
+  $args = array(
+        'post_status' => array('draft', 'publish','future'),
+        'child_of' => $post_id,
+        'posts_per_page' => -1,
+      );
+  $pages = get_pages($args);
+
   foreach ($pages as $page) { 
-    consolePrint('Adding to array: '.$page->page_title);
+    consolePrint('Adding to array: '.$page->post_title);
     array_push($descendant_ids, $page->ID); }
   return $descendant_ids;
 }
