@@ -1,12 +1,12 @@
 window.addEventListener("DOMContentLoaded", () => {
-    loadColorScheme();
-    loadLocalStorage();
+    
   });
 
 
 window.onload = function() {
     
-  
+    loadColorScheme();
+    loadLocalStorage();
    setCurrentPageLink();
    setupSmoothScroll();
    if (mobileAndTabletCheck == true){
