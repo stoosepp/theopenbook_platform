@@ -1,18 +1,26 @@
-window.addEventListener("DOMContentLoaded", () => {
+// window.addEventListener("DOMContentLoaded", () => {
     
-  });
+//   });
 
 
 window.onload = function() {
+    var is_root = location.pathname == "/"; //Equals true if we're at the root
     
-    loadColorScheme();
-    loadLocalStorage();
-   setCurrentPageLink();
-   setupSmoothScroll();
-   if (mobileAndTabletCheck == true){
-        $expand = document.getElementsByClassName('fa-expand')[0];
-        $expand.parentElement.classList.add('hidden');
-   }
+    if (is_root != true){
+        loadColorScheme();
+        loadLocalStorage();
+        setCurrentPageLink();
+        setupSmoothScroll();
+       if (mobileAndTabletCheck == true){
+            $expand = document.getElementsByClassName('fa-expand')[0];
+            $expand.parentElement.classList.add('hidden');
+       }
+    }
+    else{
+        document.body.style.visibility = 'visible';
+    //document.body.style.opacity = 1;
+    }
+   
 
 }
 window.mobileAndTabletCheck = function() {
@@ -70,10 +78,13 @@ function loadLocalStorage(){
 
 function loadColorScheme(){
     var colorScheme = localStorage.getItem('colorScheme');
-    console.log('Loaded Color Scheme: ' + colorScheme);
-    var radiobtn = document.getElementById(colorScheme + 'Check');
-    radiobtn.checked = true;
-    updateCSS(colorScheme,true);
+    if (colorScheme){
+        console.log('Loaded Color Scheme: ' + colorScheme);
+        var radiobtn = document.getElementById(colorScheme + 'Check');
+        radiobtn.checked = true;
+        updateCSS(colorScheme,true);
+    }
+    
 }
 
 function changeColorScheme(thisRadioButton){
@@ -185,9 +196,7 @@ function resetStorage(){
 }
 
 function updateArticleMargin(){
-   // console.log("Updating margin with no H2 tags");
     var articleBody = document.getElementsByClassName('article-body');
-    //console.log(articleBody);
     articleBody[0].style.marginRight = '0px';
 
 }
