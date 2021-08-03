@@ -5,7 +5,6 @@
 
 window.onload = function() {
     var is_root = location.pathname == "/"; //Equals true if we're at the root
-    
     if (is_root != true){
         loadColorScheme();
         loadLocalStorage();
@@ -83,6 +82,9 @@ function loadColorScheme(){
         var radiobtn = document.getElementById(colorScheme + 'Check');
         radiobtn.checked = true;
         updateCSS(colorScheme,true);
+    }
+    else{
+        updateCSS('white',true);
     }
     
 }
