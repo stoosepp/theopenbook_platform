@@ -689,9 +689,10 @@ li.header-margin-link {
 }
 
 li.header-margin-link a:hover {
+  color: #0071bc; 
   font-weight: 500px;
 }
-.header-margin-link a {
+.header-margin-link a, .header-margin-link a:visited {
   text-decoration: none;
   color: #5a5a5a;
 }
