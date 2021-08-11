@@ -42,18 +42,28 @@ if ($topLevelPages){
 		echo '<a href="'.get_permalink($topLevelPage).'">';
 		echo '<li><div class="book-cover"><div class="book-gradient"></div>';
 		echo '<div class="book-title"><h2>'.$topLevelPage->post_title.'</h2>';
+		
 		$post_author_id = get_post_field( 'post_author', $topLevelPage);
-		echo '<h3>'.get_the_author_meta('display_name', $post_author_id).'</h3></div>';
+		echo '<div class="book-authorexcerpt"><h3>'.get_the_author_meta('display_name', $post_author_id).'</h3>';
+		echo '<h4>'.$topLevelPage->post_excerpt.'</h4></div>';
 		$featured_img_url = get_the_post_thumbnail_url($topLevelPage);
-		if ($featured_img_url){
+		/*if ($featured_img_url){
 			echo '<img src="'.esc_url($featured_img_url).'" rel="lightbox">'; 
             //the_post_thumbnail('thumbnail');
 		}
 		else{
 				$hueRotate = $key/count($topLevelPages);
 				echo '<img style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 	
+		}*/
+		if ($featured_img_url){
+			echo '<img id="cover-image"src="'.esc_url($featured_img_url).'" rel="lightbox">'; 
+			
+            //the_post_thumbnail('thumbnail');
 		}
-		
+		else{
+				$hueRotate = $key/count($topLevelPages);
+				echo '<img id="cover-image" style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 	
+		}
 		echo '</div></li>';
 		echo '</a>';
 	}

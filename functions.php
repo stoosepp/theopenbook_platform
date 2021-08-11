@@ -197,6 +197,8 @@ include 'filterbybook.php';
 //include 'list-table-example.php';
 
 add_theme_support( 'align-wide' );
+add_post_type_support( 'page', 'excerpt' );
+
 
 function getCustomStylesheet($stylename){
 	$themedirectory = get_template_directory_uri();

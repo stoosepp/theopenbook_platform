@@ -135,7 +135,10 @@ function addColumnsToParts($columns) {
                     if (in_array($thePage, $allBooks)) {
                         $CCLicense = get_post_meta( $post_id, 'bookLicense', true );
                         if ($CCLicense == 'allrightsreserved'){
-                            echo 'All Rights Reserved &copy;'.the_modified_time('Y').'</p>';
+                            echo 'All Rights Reserved &copy; '.the_modified_time('Y').'</p>';
+                        }
+                        else if (!$CCLicense){
+                          echo 'No License Chosen';
                         }
                         else{
                             $CCLink = 'https://creativecommons.org/licenses/'.$CCLicense.'/4.0/';

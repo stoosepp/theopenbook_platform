@@ -32,14 +32,16 @@
 			$themeURI = esc_html( $bookSSTheme->get( 'ThemeURI' ));
 			$themeAuthor =  esc_html( $bookSSTheme->get( 'Author' ));
 			$authorURI =  esc_html( $bookSSTheme->get( 'AuthorURI' ));
-			echo '  |  <a href="'.$themeURI.'" target="_blank">'.$themeName.' Theme</a> developed by '.$themeAuthor.', 2021. </p>';
+			
 
 			
-			if (is_front_page()){
+			if (is_front_page() || is_search()){
 				//Don't show license stuff on home page
+				echo '<a href="'.$themeURI.'" target="_blank">'.$themeName.' Theme</a> developed by '.$themeAuthor.', 2021. </p>';
 			}
 			else{
 				//LOAD THIS FROM BOOK META
+				echo '  |  <a href="'.$themeURI.'" target="_blank">'.$themeName.' Theme</a> developed by '.$themeAuthor.', 2021. </p>';
 				$bookRoot = getRootForPage($post);
 				$root = get_post($bookRoot);
 				$CCLicense = get_post_meta( $root->ID, 'bookLicense', true );
@@ -52,10 +54,12 @@
 					$CCimage = '/inc/images/'.$CCLicense.'.png';
 					$CCDescription = '<a href="https://creativecommons.org/licenses/'.$CCLicense.'/4.0/">CC '.strtoupper ($CCLicense).' 4.0 License</a>';
 					?>
-					<p><img src="<?php echo get_template_directory_uri().$CCimage;?>"></p><p>All original content in this book is licenced under the <?php echo $CCDescription ?> unless otherwise noted. </p><?php
+					<p><img src="<?php echo get_template_directory_uri().$CCimage;?>"></p><p>All original content in this book is licenced under the <?php echo $CCDescription ?> unless otherwise noted. </p>
+					<p>Embedded videos, credited images / media are not inclusive of this license, so please check with the original creators if you wish to use them.</p><?php
 				}
 				
-			}?><p>Embedded videos, credited images / media are not inclusive of this license, so please check with the original creators if you wish to use them.</p>
+				
+			}?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
