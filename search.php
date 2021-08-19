@@ -14,13 +14,12 @@ get_header();
 
 	<nav class="left-toc">
 		 <?php 
-		 
 			echo '<div id="toc-list">';
 			echo '<a id="home-icon" href="'.get_home_url().'"><i class="fas fa-home"></i></a>'; 
 			
-			$bookRoot = getRootForPage($post);
-			//PUT PHOTO HERE
-			$featured_img_url = get_the_post_thumbnail_url($bookRoot);
+			// $bookRoot = getRootForPage($post);
+			// //PUT PHOTO HERE
+			// $featured_img_url = get_the_post_thumbnail_url($bookRoot);
 			echo '<div class="book-image">';
 			
 			echo '<img src="'.get_template_directory_uri().'/images/magnify.jpg" rel="lightbox">'; 	
@@ -34,12 +33,6 @@ get_header();
 	</nav>
 	<div class="article-body">
 		<?php if ( have_posts() ) : ?>
-
-			
-				<h1 class="page-title">
-					
-				</h1>
-		
 
 			<?php
 			/* Start the Loop */

@@ -19,7 +19,6 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-
 	<?php 
 	if ( is_front_page() ) :
 		wp_enqueue_style( 'style', getcustomStylesheet('homepage') );
@@ -45,7 +44,6 @@
 		$chromeless = sanitize_text_field( get_query_var( 'chromeless' ) );
 		if( strtoupper( $chromeless) === 'TRUE' ){
 		//echo "Loading with Chromeless CSS";
-			
 			echo '<style>
 			nav.left-toc{
 				display:none; 

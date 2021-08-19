@@ -3,7 +3,7 @@
     src: url(../fonts/OpenDyslexic-Regular.otf);
   }
 
-body,h1,h2,h3,h4,h5,h6,p
+body,h1,h2,h3,h4,h5,h6,p,span
 {
     font-family: Open-Dyslexic, helvetica neue, sans-serif !important;
 }

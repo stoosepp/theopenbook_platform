@@ -6,6 +6,22 @@
  *
  * 
  */?>
+ <?php
+ 	$bookRoot = getRootForPage($post);
+	 if ($post != $bookRoot){
+		$voteData = getVoteData($post->ID);
+		consolePrint('Up: '.$voteData[0].' Down: '.$voteData[1]);
+		$totalCount = $voteData[0] + $voteData[1];
+		$percentage = $voteData[0]/$totalCount;
+		 ?>
+		 <div class="post-votes">
+			<p>Is this chapter helping you learn?</p>
+			<a href="<?php echo home_url( $wp->request ) ?>?voteUp=true&value=<?php echo get_the_id() ?>"><i class="far fa-thumbs-up"></i></a>
+			<a href="<?php echo home_url( $wp->request ) ?>?voteDown=true&value=<?php echo get_the_id() ?>"><i class="far fa-thumbs-down"></i></a>
+			<p id="vote-results"><?php echo round($percentage,2)*100 ?>% of <?php echo $totalCount ?> voters found this helpful.</p>
+		</div><?php
+	 }
+	?>	
  <div class="toggles">
 				<p>Book Theme
 			<label class="switch">
@@ -14,7 +30,7 @@
 			</label>
 		 </p>
 		 
-				<p>Open Dyslexic <a style="color:#ccc;" href="https://opendyslexic.org/" target="_blank"><i class="fa fa-info-circle"></i></a>
+				<p>Dyslexic Font<a style="color:#ccc;" href="https://opendyslexic.org/" target="_blank"><i class="fa fa-info-circle"></i></a>
 			<label class="switch">
 				<input type="checkbox" id="opendyslexic" onclick="saveCheckbox(this);" />
 				<span class="slider round"></span>
@@ -39,6 +55,6 @@
 					<span class="checkmark dark"></span>
 				</label>	
 			</div>	 
-			<a id="myLink" href="#" onclick="resetStorage();">Reset Visuals</a>
+			<a id="resetLink" href="#" onclick="resetStorage();">Reset Visuals & Completed Items</a>
 </div>
 

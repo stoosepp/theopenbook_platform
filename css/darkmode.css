@@ -56,6 +56,17 @@ ul.toc-section li > input[type="checkbox"] {
 .disabled-arrow {
   color: rgb(77,77,77);
 }
+
 #search-title{
   color:white; 
+ }
+#search-results a{
+  color:gray;
+
+ }
+ .post-votes{
+    background-color: black;
+ }
+ .post-votes a{
+   color:#cecece !important;
  }

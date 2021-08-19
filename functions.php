@@ -192,9 +192,7 @@ add_action('wp_enqueue_scripts', 'ww_load_dashicons');
 
 /* ---------------- CUSTOM STUFF---------------- */
 
-//include 'customposts.php';
 include 'filterbybook.php';
-//include 'list-table-example.php';
 
 add_theme_support( 'align-wide' );
 add_post_type_support( 'page', 'excerpt' );
@@ -203,7 +201,6 @@ add_post_type_support( 'page', 'excerpt' );
 function getCustomStylesheet($stylename){
 	$themedirectory = get_template_directory_uri();
 	return $themedirectory.'/css/'.$stylename.'.css';
-	
 }
 
 function getTextBetweenTags($pageHTML, $tagname){
@@ -234,7 +231,6 @@ function auto_id_headings( $content ) {
     }
 	
 
-	
 function getTopLevelPages(){
 	$query_args = array('parent' => 0, // required
 	'post_type' => 'page', // required
@@ -284,3 +280,76 @@ add_filter( 'query_vars', 'wwp_custom_query_vars_filter' );
 function consolePrint($string){
 	echo '<script>console.log("'.$string.'");</script>';
 }
+
+
+
+function wpse_add_proposed_edits_admin_page()
+{
+    add_menu_page(
+        'Proposed Edits',
+        'Suggested Edits',
+        'activate_plugins',
+        'proposed_edits',
+        'wpse_proposed_edits_page_cb'
+    );
+}
+add_action( 'admin_menu', 'wpse_add_proposed_edits_admin_page' );
+
+function wpse_proposed_edits_page_cb()
+{
+    $proposed_edits_table = new WP_Proposed_Edits_Table();
+    $proposed_edits_table->prepare_items(); 
+    $proposed_edits_table->display(); 
+}
+
+if (isset($_GET['voteUp']) && isset($_GET['value'])){ 
+	return voteUp($_GET['value']); 
+}
+function voteup($post_id) {  
+	update_post_vote('+',$post_id);
+	consolePrint('Vote up!'); 
+}
+
+
+if (isset($_GET['voteDown']) && isset($_GET['value'])){ 
+	return voteDown($_GET['value']);  
+}
+function voteDown($post_id) {  
+	update_post_vote('-',$post_id);
+	consolePrint('Vote Down!');
+ }
+
+function update_post_vote($vote,$post_id){
+	consolePrint('This Vote: '.$vote);
+    //get all saved user data    
+   
+    //update with the new vote
+    add_post_meta($post_id,'updown_votes',$vote);
+	$post_votes = get_post_meta($post_id,'updown_votes',false);
+	consolePrint('Vote Counts:'.count($post_votes));
+	foreach($post_votes as $vote){
+		consolePrint('Vote in Array:'.$vote);
+	}
+}
+
+function getVoteData($post_id){
+	$upvotes = 0;
+	$downvotes = 0;
+	$post_votes = get_post_meta($post_id,'updown_votes',false);
+	if ($post_votes){
+		consolePrint('Vote Counts:'.count($post_votes));
+		foreach($post_votes as $vote){
+			if ($vote == '+'){
+				$upvotes++;
+			}
+			else if ($vote == '-'){
+				$downvotes++;
+			}
+		}
+		return array($upvotes,$downvotes);
+	}
+	else{
+		return null;
+	}
+}
+

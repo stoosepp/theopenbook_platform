@@ -4,8 +4,8 @@
 
 
 window.onload = function() {
-    var is_root = location.pathname == "/"; //Equals true if we're at the root
-    if (is_root != true){
+    var isAtRoot = location.pathname == "/"; //Equals true if we're at the root
+    if ((isAtRoot != true) || (window.location.href.indexOf("/?s=") > -1)){
         loadColorScheme();
         loadLocalStorage();
         setCurrentPageLink();
@@ -19,7 +19,9 @@ window.onload = function() {
         document.body.style.visibility = 'visible';
     //document.body.style.opacity = 1;
     }
-   
+    
+    window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
+ 
 
 }
 window.mobileAndTabletCheck = function() {
@@ -32,7 +34,7 @@ function loadLocalStorage(){
     //Load Switches for font and layout
     var list = document.querySelectorAll(`[type*="checkbox"]`);
     //console.log("There are " + list.length + ' checkboxes to check');
-    
+    console.log('Pulling Localstorage');
     list.forEach( el => {
         var checked = JSON.parse(localStorage.getItem(el.id));
         //console.log(el.id + ' is checked: ' + checked);
@@ -199,7 +201,10 @@ function resetStorage(){
 
 function updateArticleMargin(){
     var articleBody = document.getElementsByClassName('article-body');
-    articleBody[0].style.marginRight = '0px';
+    if (articleBody[0]){
+        articleBody[0].style.marginRight = '0px';
+    }
+    
 
 }
 
@@ -275,6 +280,7 @@ window.addEventListener('scroll', function(){
   document.getElementById("progress").style.width = scrolled + "%";
 });
 
+
 function setupSmoothScroll(){
     setSidebarActive();
     var button = document.querySelector('.bt-menu-trigger');
@@ -290,28 +296,34 @@ function setupSmoothScroll(){
 }
 
 
+function toggleHidden(el){
+    if ((el.firstChild.classList.contains('fa-comment-alt') == true) || (el.firstChild.classList.contains('fa-times') == true)){
+        $feedbackForm = document.getElementsByClassName('custom-feedbackform')[0];
+        $feedbackForm.classList.toggle('hidden');
+    }
 
+    
+}
 
 var elem = document.documentElement;
 function toggleFullscreen(el) {
     console.log(el);
-if (el.firstChild.classList.contains('fa-expand') == true){
-    
-     //Open
-     if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-      }
-      //console.log('Opening Full Screen');
-    $collapse = document.getElementsByClassName('fa-compress')[0];
-    $collapse.parentElement.classList.remove('hidden');
-    el.classList.add('hidden');
-}
-else{
-    
+    if (el.firstChild.classList.contains('fa-expand') == true){
+        
+        //Open
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+        }
+        //console.log('Opening Full Screen');
+        $collapse = document.getElementsByClassName('fa-compress')[0];
+        $collapse.parentElement.classList.remove('hidden');
+        el.classList.add('hidden');
+    }
+    else{
     //Close
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -324,8 +336,5 @@ else{
     $expand = document.getElementsByClassName('fa-expand')[0];
     $expand.parentElement.classList.remove('hidden');
     el.classList.add('hidden');
-
-}
-   
-    
+    }
   }

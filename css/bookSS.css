@@ -192,6 +192,7 @@ main {
 
 h1.entry-title{
   margin-top:0px;
+  margin-bottom:0px;
 }
 .article > h2{
   line-height:3em;
@@ -289,15 +290,15 @@ h1.entry-title{
 
 #header-options i{
   padding-right:15px;
-  color:gray;
+
 }
 
 #header-right a{
 text-decoration: none;
 color: gray;
-
-
 }
+
+
 .next-prev{
   border-left: solid 0.5px #eee;
   text-align: center;
@@ -455,17 +456,15 @@ ul.toc-section {
   list-style-type: none;
   margin-left:0px;
   padding-left: 0px;
-
   text-transform: uppercase;
   line-height: 1.3em;
-  margin-top:10px;
   margin-bottom: 20px;
 }
 
 ul.toc-section li{
   
   margin-bottom: 15px;
-  margin-top: 15px;
+  margin-top: 20px;
   display:flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -504,7 +503,7 @@ ul.toc-subsection li > a{
 
 /* SWITHCES */
 .toggles{
-  margin-top:4em;
+  margin-top:3em;
 }
 .toggles p{
   font-size: 1em;
@@ -517,8 +516,11 @@ ul.toc-subsection li > a{
 
 .toggles .switch{
   float:right;
-  margin-left: 15px;
+  margin-left: 10px;
 
+}
+#resetLink{
+  font-size:0.8em;
 }
 
 /* Background Radio Buttons */
@@ -834,9 +836,7 @@ li.header-margin-link a:hover {
    border-top:0.5px #eee solid;
  }
 
- #search-results{
-  
- }
+
  #search-results a{
   color:rgb(77,77,77);
   text-decoration: none;
@@ -867,3 +867,65 @@ margin-left:16em;
   color:black; 
   font-size:1.5em !important;
  }
+
+ .feedback-prompt{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;;
+  font-size: 2em;
+ }
+ .feedback-prompt a,.post-votes a{
+   color:gray;
+ }
+ .feedback-prompt a:hover,.post-votes a:hover{
+   color:#0071bc;
+ }
+
+ .feedback-prompt i{
+   padding:0.2em;
+ }
+
+ .custom-feedbackform{
+  z-index: 1;
+  width: 50%;
+position:absolute;
+border: 1px solid #eee;
+right:0px;
+background-color: white;
+padding:1em;
+-webkit-box-shadow: 5px 5px 10px 0px rgb(189 189 189 / 75%);
+    -moz-box-shadow: 5px 5px 10px 0px rgba(189,189,189,75%);
+    box-shadow: 5px 5px 10px 0px rgb(189 189 189 / 75%);
+ }
+
+ .custom-feedbackform i{
+   position:absolute;
+   font-size:2em;
+   top:0.5em;
+   right:0.5em;
+   color:gray;
+ }
+
+.post-votes {
+  text-align:center;
+  margin-top:3em;
+  padding:0.5em;
+  background-color:#eee;
+  border-radius:10px;
+}
+.post-votes p{
+  font-size:0.8em;
+  margin-bottom:5px;
+  margin-top:0px;
+}
+.post-votes a{
+  margin-right:0.3em;
+  font-size:2em;
+}
+#vote-results{
+  color:gray;
+  margin-top:5px;
+  margin-bottom:0px;
+}
+
