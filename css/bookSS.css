@@ -7,6 +7,8 @@
   }
   .article-body{
     margin-right:0px;
+    margin-top:50px;
+
   }
  #header-options{
     display:none;
@@ -34,7 +36,6 @@
     z-index:1;
   }
 
-
   .hidden-toc {
     margin-left: -100% !important;
   }
@@ -44,6 +45,9 @@
 
   #header-left a{
    display:none;
+  }
+  #header-left > .TOCToggle{
+    display:inline;
   }
   #header-left > i{
    display:none;
@@ -68,7 +72,9 @@
     width:16em;
     position:absolute;
   }
-
+  .header-bar{
+    padding-right:0em;
+  }
   #toc-list{
     width:16em;
     margin-top:53px;
@@ -79,13 +85,16 @@
     margin-left: -100% !important;
   }
   .sidenote {
-   
     width: 14em;
     position: absolute;
   
   }
   #header-left a{
-    display:none;
+    display:none
+   }
+
+   #header-left > .TOCToggle{
+     display:inline;
    }
    #header-left > i{
     display:none;
@@ -93,9 +102,11 @@
 }
 
 @media only screen and (min-width: 769px){
+
   .header-bar{
-   padding-right:16em; 
+    padding-right:16em;
   }
+ 
   .article {
     margin-left:16em;
     transition: margin 0.5s;
@@ -123,14 +134,16 @@
     margin-left: -16em !important;
   }
   .sidenote {
-   
     width: 14em;
     position: absolute;
   
   }
 }
-.hidden-toc2 {
-  margin-left: 0 !important;
+.article-margin {
+  margin-left: 0px !important;
+}
+.banner-padding {
+  padding-right:0em !important; 
 }
 
 @media (prefers-color-scheme:dark){
@@ -233,9 +246,7 @@ h1.entry-title{
   transition: padding .5s;
 }
 
-.headerbar-padding{
-  padding-right:0em !important;
-}
+
 
 .article-header {
   display:flex;
@@ -298,6 +309,17 @@ text-decoration: none;
 color: gray;
 }
 
+.new-window-link{
+  display:none;
+  float:right;
+  color:rgb(77,77,77);
+  text-decoration:none;
+}
+
+
+.new-window-link:hover{
+  color:#0071bc !important;
+}
 
 .next-prev{
   border-left: solid 0.5px #eee;
@@ -521,6 +543,7 @@ ul.toc-subsection li > a{
 }
 #resetLink{
   font-size:0.8em;
+  text-align: center;
 }
 
 /* Background Radio Buttons */
@@ -601,15 +624,7 @@ background-color: #fffff8;
 background-color: rgb(39, 39, 39);
 }
 
-/* On mouse-over, add a grey background color */
-/*.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}*/
 
-/* When the radio button is checked, add a blue background */
-/*.container input:checked ~ .checkmark {
-  background-color: #2196F3
-};*/
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmark:after {
@@ -732,8 +747,14 @@ li.header-margin-link a:hover {
 }
 
 /* Toggle TOC button */
+#header-left > a > i{
+  font-size:2em;
+  margin-right:15px;
+  margin-left:10px;
+}
 
-.bt-menu-trigger {
+
+/* .bt-menu-trigger {
   font-size: 15px;
   margin-top: 3px;
   margin-left: 16px;
@@ -767,7 +788,7 @@ li.header-margin-link a:hover {
   cursor: pointer;
   width:30px;
   height:30px; 
-}
+} */
 
 #header-left input{
   cursor: pointer;
@@ -775,7 +796,7 @@ li.header-margin-link a:hover {
     width: 30px;
     height: 30px;
 }
-
+/* 
 .bt-menu-trigger span:after,
 .bt-menu-trigger span:before {
   position: absolute;
@@ -783,7 +804,6 @@ li.header-margin-link a:hover {
   width: 100%;
   height: 100%;
   content: "";
-  /* animation-delay: 1s; */
   -webkit-transition: -webkit-transform 0.5s;
   transition: transform 0.5s;
 }
@@ -808,7 +828,7 @@ li.header-margin-link a:hover {
   -webkit-transform: translateY(0.36em) translateX(-0.65em) rotate(45deg)
     scaleX(0.6);
   transform: translateY(0.35em) translateX(-0.65em) rotate(45deg) scaleX(0.6);
-}
+} */
 
 .wp-block-pullquote {
   margin: 0 0 1em;

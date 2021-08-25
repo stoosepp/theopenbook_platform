@@ -6,10 +6,11 @@
 window.onload = function() {
     var isAtRoot = location.pathname == "/"; //Equals true if we're at the root
     if ((isAtRoot != true) || (window.location.href.indexOf("/?s=") > -1)){
+        loadTOCstatus();
         loadColorScheme();
         loadLocalStorage();
         setCurrentPageLink();
-        setupSmoothScroll();
+        setSidebarActive();
        if (mobileAndTabletCheck == true){
             $expand = document.getElementsByClassName('fa-expand')[0];
             $expand.parentElement.classList.add('hidden');
@@ -17,7 +18,7 @@ window.onload = function() {
     }
     else{
         document.body.style.visibility = 'visible';
-    //document.body.style.opacity = 1;
+        //document.body.style.opacity = 1;
     }
     
     window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
@@ -33,11 +34,8 @@ window.mobileAndTabletCheck = function() {
 function loadLocalStorage(){
     //Load Switches for font and layout
     var list = document.querySelectorAll(`[type*="checkbox"]`);
-    //console.log("There are " + list.length + ' checkboxes to check');
-    console.log('Pulling Localstorage');
     list.forEach( el => {
         var checked = JSON.parse(localStorage.getItem(el.id));
-        //console.log(el.id + ' is checked: ' + checked);
         if (checked){
             var checkBox = document.getElementById(el.id);
             checkBox.checked = checked;
@@ -47,35 +45,38 @@ function loadLocalStorage(){
             else if (el.id == 'opendyslexic'){
                 updateCSS(el.id,checked);
             }
-            else if (el.id == 'hamburger-hidden'){
-                //console.log('Setting up side menu');
-                //hide and show menu stuff
-                leftTOC = document.getElementsByClassName('left-toc')[0];
-                leftTOC.classList.add('disable-css-transitions');
-                leftTOC.classList.add('hidden-toc');
-                //leftTOC.classList.remove('disable-css-transitions');
-
-                article = document.getElementsByClassName('article')[0];
-                article.classList.add('disable-css-transitions');
-                article.classList.add('hidden-toc2');
-                //article.classList.remove('disable-css-transitions');
-
-                headerBar = document.getElementsByClassName('header-bar')[0];
-                headerBar.classList.add('disable-css-transitions');
-                headerBar.classList.add('headerbar-padding');
-                //headerBar.classList.remove('disable-css-transitions');
-
-                menuTrigger = document.getElementsByClassName('bt-menu-trigger')[0];
-                menuTrigger.getElementsByTagName('span')[0].classList.add('disable-css-transitions');
-                menuTrigger.classList.remove('bt-menu-open');
-                //menuTrigger.classList.remove('disable-css-transitions');
-            }
         }
     });
     document.body.style.visibility = 'visible';
     //document.body.style.opacity = 1;
-   
 } 
+
+function loadTOCstatus(){
+    var TOCStatus = localStorage.getItem('TOC-hidden');
+    console.log('TOC Hidden: ' + TOCStatus);
+    hamburger = document.getElementsByClassName('fa-bars')[0];
+    leftArrow = document.getElementsByClassName('fa-arrow-left')[0];
+    headerbar = document.getElementsByClassName('header-bar')[0];
+    headerbar.classList.add('disable-css-transitions');
+    TOC = document.getElementsByClassName('left-toc')[0];
+    TOC.classList.add('disable-css-transitions');
+    article = document.getElementsByClassName('article')[0];
+    article.classList.add('disable-css-transitions');
+    if (TOCStatus == 'YES'){
+        console.log('TOC Hidden');
+        article.classList.add('article-margin');
+        headerbar.classList.add('banner-padding');
+        TOC.classList.add('hidden-toc');
+        leftArrow.classList.add('hidden');
+        hamburger.classList.remove('hidden');
+    }
+}
+
+function loadVotedStatus(){
+    var checked = JSON.parse(localStorage.getItem(el.id));
+}
+
+
 
 function loadColorScheme(){
     var colorScheme = localStorage.getItem('colorScheme');
@@ -124,6 +125,9 @@ window.matchMedia('(prefers-color-scheme: dark)')
         
 })
 
+function completeVote(postID){
+    localStorage.setItem('didVote', postID);
+}
 
 function saveCheckbox(thisCheckbox){
     //Save regular checkbox 
@@ -153,6 +157,10 @@ function saveCheckbox(thisCheckbox){
             updateCSS(tufteCheck.id, false);
         }
         updateCSS(thisCheckbox.id, thisCheckbox.checked);   
+    }
+    else if (thisCheckbox.id.contains('votedon')){
+        var pageID = thisCheckbox.id.replace('votedon','');
+        console.log('You voted on PageID: ' + pageID);
     }
 }
 
@@ -226,24 +234,17 @@ function setSidebarActive(){//this sets it up
             for (var x = scrollPosArray.length; x > 0; x--){
                 currentLink.parentElement.classList.remove("active-header");
                 if (scrollPosArray[x] < currentScrollPos && currentScrollPos > scrollPosArray[x-1]){
-                    
-                        //console.log("Currently in: " + sections[x-1]); 
                         sections[x-1].parentElement.classList.add("active-header");
                         currentLink = sections[x-1];
                         break;
                 }
-                else{
-
-                }
             }
-            
         });
     }
     else{
         console.log('There are no headers here ');
         updateArticleMargin();
     }
-    
 }
 
 function setCurrentPageLink(){
@@ -261,18 +262,11 @@ function setCurrentPageLink(){
             if (theParent.classList.contains('toc-subsection') || theParent.classList.contains('toc-section')) {
                 navLinks[i].classList.add('current-link');
             }
-            else{
-                //console.log('Not gonna highlight this');
-            }
-            
         }
     }
 }
 
-
 //PROGRESS SLIDER
-
-
 window.addEventListener('scroll', function(){
     var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
   var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -281,28 +275,36 @@ window.addEventListener('scroll', function(){
 });
 
 
-function setupSmoothScroll(){
-    setSidebarActive();
-    var button = document.querySelector('.bt-menu-trigger');
-    var leftTOC = document.querySelector('.left-toc');
-    var articleBody = document.querySelector('.article');
-    var headerBar = document.querySelector('.header-bar');
-    button.addEventListener('click', function (){
-        button.classList.toggle('bt-menu-open');
-        leftTOC.classList.toggle('hidden-toc');
-        articleBody.classList.toggle('hidden-toc2');
-        headerBar.classList.toggle('headerbar-padding');
-    });
-}
-
-
 function toggleHidden(el){
     if ((el.firstChild.classList.contains('fa-comment-alt') == true) || (el.firstChild.classList.contains('fa-times') == true)){
         $feedbackForm = document.getElementsByClassName('custom-feedbackform')[0];
         $feedbackForm.classList.toggle('hidden');
     }
+    else if ((el.firstChild.classList.contains('fa-arrow-left') == true)|| (el.firstChild.classList.contains('fa-bars') == true)){
 
-    
+        console.log('Toggle TOC');
+        hamburger = document.getElementsByClassName('fa-bars')[0];
+        hamburger.classList.toggle('hidden');
+        leftArrow = document.getElementsByClassName('fa-arrow-left')[0];
+        leftArrow.classList.toggle('hidden');
+        TOC = document.getElementsByClassName('left-toc')[0];
+        TOC.classList.remove('disable-css-transitions')
+       TOC.classList.toggle('hidden-toc');
+       article = document.getElementsByClassName('article')[0];
+       article.classList.remove('disable-css-transitions')
+       article.classList.toggle('article-margin');
+       headerbar = document.getElementsByClassName('header-bar')[0];
+       headerbar.classList.remove('disable-css-transitions')
+       headerbar.classList.toggle('banner-padding');
+       if (leftArrow.classList.contains('hidden')){
+            localStorage.setItem('TOC-hidden', 'YES');
+       }
+       else{
+            localStorage.setItem('TOC-hidden', 'NO');  
+       }
+       console.log('TOC Hidden: ' +localStorage.getItem('TOC-hidden'));
+ 
+    } 
 }
 
 var elem = document.documentElement;

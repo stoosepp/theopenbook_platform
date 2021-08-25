@@ -12,13 +12,8 @@
 <div class="header-bar">
     <div class="article-header">
         <div id="header-left">
-        <div class="bt-menu-trigger bt-menu-open">
-        <span> <!-- This is the animated hamburger menu --></span>
-            <label>
-                <input type="checkbox" id="hamburger-hidden" onclick="saveCheckbox(document.getElementById('hamburger-hidden'));">
-                <span style="display:none;"> <!-- This is the animated hamburger menu --></span>
-            <label>
-            </div>
+            <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-arrow-left"></i></a>
+            <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-bars hidden"></i></a>
             
             <!--NEXT PREVIOUS BUTTONS -->
                 <?php 

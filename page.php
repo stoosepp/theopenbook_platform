@@ -55,6 +55,7 @@
 	<?php get_template_part( 'template-parts/content-breadcrumbs', get_post_type() );?>
 	<!--ARTICLE BODY -->
 	<div class="article-body">
+
 		<?php
 			if ( have_posts() ) :
 				if ( is_home() && ! is_front_page() ) :
@@ -63,6 +64,8 @@
 				endif;
 				/* Start the Loop */
 				while ( have_posts() ) :
+					?><a class="new-window-link" href="<?php echo the_permalink(); ?>" target="_blank">Open in New Window</a><?php
+
 					the_post();
 					/*
 					* Include the Post-Type-specific template for the content.

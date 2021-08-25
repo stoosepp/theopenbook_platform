@@ -15,7 +15,7 @@
 		
 	</header><!-- .entry-header -->
 
-	<?php _s_post_thumbnail(); ?>
+	<?php /*_s_post_thumbnail();*/ ?>
 
 	<div class="entry-content">
 		<?php

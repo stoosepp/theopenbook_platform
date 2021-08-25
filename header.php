@@ -65,8 +65,12 @@
 			}
 			.article-header{
 				display:none; 
-			} .article{
+			} 
+			.article{
 				margin-left:0em;
+			}
+			.new-window-link{
+				display:block;
 			}
 			</style>';
 		}
