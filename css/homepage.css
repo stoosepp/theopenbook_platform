@@ -1,10 +1,24 @@
 /* HOME PAGE */
 
+.content-type-header{
+  font-size: 2em;
+  line-height: 2em;
+  text-align: center;
+  border-bottom: solid 1px #eee;
+  text-transform: capitalize;
+  margin-bottom: 0.5em;
+  letter-spacing:0.5em;
+  font-family: Metropolis, helvetica neue, sans-serif;
+  color:#bbbbbb;
+}
+
 ul.book-list {
     display: flex;
     flex-wrap:wrap;
     justify-content:center;
     list-style-type: none;;
+    margin-left:0px;
+    padding-left:0px;
   
   }
   ul.book-list li{
@@ -125,4 +139,60 @@ ul.book-list {
     height: 100%;
     position: absolute;
     width: 100%;
+  }
+
+  /* -------- DOC STYLE -------- */
+  ul.cat-list{
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction: row;
+    justify-content:center;
+    list-style-type: none;;
+    margin-left:0px;
+    padding-left:0px;
+    
+  }
+  ul.cat-list > li{
+    margin:1em;
+    padding: 1em;
+    margin-top:0px;
+    padding-top:0px;
+    /* background-color: #eee; */
+    /* border:solid 1px #eee;
+    border-radius:5px; */
+  }
+  ul.cat-list h2{
+    text-align:center;
+    margin-top:0px;
+    margin-bottom:0.5em;
+    border-bottom:1px solid rgb(72, 72, 72);
+  }
+
+  ul.doc-list{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    list-style-type: none;;
+    margin-left:0px;
+    padding-left:0px;
+  }
+
+  ul.doc-list li{
+    text-align:center;
+    transition: all 0.25s ease-in-out;
+    padding: 7px;
+    border-radius:5px;
+  }
+  ul.doc-list li:hover{
+    background-color:#eee;
+  }
+
+  ul.doc-list a{
+    text-decoration: none;
+    color: rgb(77,77,77);
+  }
+  ul.doc-list a:hover{
+    /* color:#0071bc; */
+    color:black;
+    
   }

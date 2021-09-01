@@ -42,7 +42,7 @@
 			<i class="far fa-search"></i>
 			<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
 			</form><?php
-			get_template_part( 'template-parts/content-toc', get_post_type() );
+			get_template_part( 'template-parts/content-pagetoc', get_post_type() );
 			get_template_part( 'template-parts/content-switches', get_post_type() );
 		}
 		 ?>

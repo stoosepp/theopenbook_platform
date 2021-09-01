@@ -20,8 +20,20 @@ window.onload = function() {
         document.body.style.visibility = 'visible';
         //document.body.style.opacity = 1;
     }
-    
-    window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
+    if ((window.location.href.includes('voteUp')) || (window.location.href.includes('voteDown')) ){//remove URL parameters when voting
+        window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
+    }
+    if(window.location.href.includes('?s=')){
+        console.log('This is a search results page');
+        const articleBody = document.getElementsByClassName('article-body');
+        if (articleBody[0]) {
+            console.log('YUP it exists');
+            articleBody[0].style.marginRight = '0px';
+            articleBody[0].style.marginTop = '0px';
+            //articleBody[0].style.display = 'none';
+        }
+        //updateArticleMargin();
+    }
  
 
 }
@@ -33,10 +45,13 @@ window.mobileAndTabletCheck = function() {
 
 function loadLocalStorage(){
     //Load Switches for font and layout
+    console.log(allStorage());
     var list = document.querySelectorAll(`[type*="checkbox"]`);
+    var completedChapters = JSON.parse(localStorage.getItem("checkedChapters"));
     list.forEach( el => {
-        var checked = JSON.parse(localStorage.getItem(el.id));
-        if (checked){
+        
+        if ((el.id == 'tufte') || (el.id == 'opendyslexic')){
+            var checked = JSON.parse(localStorage.getItem(el.id));
             var checkBox = document.getElementById(el.id);
             checkBox.checked = checked;
             if (el.id == 'tufte'){
@@ -45,6 +60,15 @@ function loadLocalStorage(){
             else if (el.id == 'opendyslexic'){
                 updateCSS(el.id,checked);
             }
+           
+        }  
+        else if ((completedChapters) && (completedChapters.length > 0)){
+            console.log('Completed Chapters: ' + completedChapters + ', and thisID: ' + el.id);
+            if (completedChapters.includes(el.id)){
+                console.log('It is in there!');
+                var chapterCheckBox = document.getElementById(el.id);
+                chapterCheckBox.checked = true;
+            }
         }
     });
     document.body.style.visibility = 'visible';
@@ -52,18 +76,21 @@ function loadLocalStorage(){
 } 
 
 function loadTOCstatus(){
-    var TOCStatus = localStorage.getItem('TOC-hidden');
-    console.log('TOC Hidden: ' + TOCStatus);
+    var TOCStatus = JSON.parse(localStorage.getItem('TOC-hidden'));
+    //console.log('Loading TOC. Hidden: ' + TOCStatus);
     hamburger = document.getElementsByClassName('fa-bars')[0];
     leftArrow = document.getElementsByClassName('fa-arrow-left')[0];
     headerbar = document.getElementsByClassName('header-bar')[0];
-    headerbar.classList.add('disable-css-transitions');
+    if (headerbar){
+        headerbar.classList.add('disable-css-transitions');
+    }
     TOC = document.getElementsByClassName('left-toc')[0];
     TOC.classList.add('disable-css-transitions');
     article = document.getElementsByClassName('article')[0];
-    article.classList.add('disable-css-transitions');
-    if (TOCStatus == 'YES'){
-        console.log('TOC Hidden');
+    if (article){
+        article.classList.add('disable-css-transitions');
+    }
+    if (TOCStatus == true){
         article.classList.add('article-margin');
         headerbar.classList.add('banner-padding');
         TOC.classList.add('hidden-toc');
@@ -71,11 +98,6 @@ function loadTOCstatus(){
         hamburger.classList.remove('hidden');
     }
 }
-
-function loadVotedStatus(){
-    var checked = JSON.parse(localStorage.getItem(el.id));
-}
-
 
 
 function loadColorScheme(){
@@ -125,42 +147,54 @@ window.matchMedia('(prefers-color-scheme: dark)')
         
 })
 
-function completeVote(postID){
-    localStorage.setItem('didVote', postID);
-}
-
 function saveCheckbox(thisCheckbox){
     //Save regular checkbox 
-    if (thisCheckbox.checked == true){
-        localStorage.setItem(thisCheckbox.id, true);
-        console.log('Saved ' + thisCheckbox.id,true);
-    } 
-    else{
-        localStorage.setItem(thisCheckbox.id, false);
-        console.log('Saved ' + thisCheckbox.id,false);
-    }
-    //Handle Font changes
-    if (thisCheckbox.id == 'tufte') {
-        var dyslexicCheck = document.getElementById('opendyslexic');
-        if ((thisCheckbox.checked == true) && (dyslexicCheck.checked != false)){
-            updateCSS(dyslexicCheck.id, false);
-            dyslexicCheck.checked = false;
-            saveCheckbox(dyslexicCheck);
+    console.log('Saving Checkbox with ID: ' + thisCheckbox.id);
+    if ((thisCheckbox.id == 'opendyslexic') || (thisCheckbox.id == 'tufte')){
+        const dyslexicCheck = document.getElementById('opendyslexic');
+        const tufteCheck = document.getElementById('tufte');
+        if (thisCheckbox.checked){
+            localStorage.setItem(thisCheckbox.id, true);
+        } 
+        else{
+            localStorage.setItem(thisCheckbox.id, false);
         }
-        updateCSS(thisCheckbox.id, thisCheckbox.checked, true);  
-    }  
-    else if (thisCheckbox.id == 'opendyslexic')
-    {   var tufteCheck = document.getElementById('tufte');
-        if ((thisCheckbox.checked == true) && (tufteCheck.checked != false)){
+        updateCSS(thisCheckbox.id, thisCheckbox.checked);  
+        if ((tufteCheck.checked) && (thisCheckbox == dyslexicCheck)){
             tufteCheck.checked = false;
-            saveCheckbox(tufteCheck);
             updateCSS(tufteCheck.id, false);
+            localStorage.setItem(thisCheckbox.id, true);
+            localStorage.setItem(tufteCheck.id, false);
         }
-        updateCSS(thisCheckbox.id, thisCheckbox.checked);   
+        else if ((dyslexicCheck.checked) && (thisCheckbox == tufteCheck)){
+            dyslexicCheck.checked = false;
+            updateCSS(dyslexicCheck.id, false)
+            localStorage.setItem(thisCheckbox.id, true);
+            localStorage.setItem(dyslexicCheck.id, false);
+        }
+        console.log('Book: ' + localStorage.getItem('tufte'));
+        console.log('Dylexic: ' + localStorage.getItem('opendyslexic'));
     }
-    else if (thisCheckbox.id.contains('votedon')){
-        var pageID = thisCheckbox.id.replace('votedon','');
-        console.log('You voted on PageID: ' + pageID);
+    else{
+        var completedChapters = JSON.parse(localStorage.getItem("checkedChapters"));
+        if ((completedChapters) && (completedChapters.length > 0)){
+            if (completedChapters.includes(thisCheckbox.id) == false){
+                completedChapters.push(thisCheckbox.id);
+            }
+            else{//Remove if it's already in the array
+                const index = completedChapters.indexOf(thisCheckbox.id);
+                if (index > -1) {
+                    completedChapters.splice(index, 1);
+                }
+            }
+        }
+        else{
+            var completedChapters = new Array();
+            completedChapters.push(thisCheckbox.id);
+         
+        }
+        localStorage.setItem("checkedChapters", JSON.stringify(completedChapters));
+        console.log('Saved Chapters: ' + completedChapters);
     }
 }
 
@@ -174,7 +208,7 @@ async function updateCSS(forID, isChecked)
         link.rel = 'stylesheet';
         link.id = forID + "CSS";
         link.href = bookURL + '/css/' + forID + '.css';
-        console.log('Updating CSS to ' + link.href);
+        //console.log('Updating CSS to ' + link.href);
         document.head.append(link);
     } 
     else if ((isChecked == false) || (isChecked == null)){
@@ -202,18 +236,33 @@ setTimeout(() => {
 }
 
 function resetStorage(){
-    //console.log('Clearing local storage, including display settings.');
-    localStorage.clear();
+    var completedChapters = JSON.parse(localStorage.getItem("checkedChapters"));
+    if ((completedChapters) && (completedChapters.length > 0)){
+        localStorage.removeItem('checkedChapters');
+    }
+    
+    //localStorage.clear();
     location.reload();
+}
+
+function allStorage() {
+
+    var values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+    while ( i-- ) {
+        values.push( localStorage.getItem(keys[i]) );
+    }
+
+    return keys;
 }
 
 function updateArticleMargin(){
     var articleBody = document.getElementsByClassName('article-body');
-    if (articleBody[0]){
+    if (articleBody[0]) {
         articleBody[0].style.marginRight = '0px';
     }
-    
-
 }
 
 function setSidebarActive(){//this sets it up
@@ -242,7 +291,6 @@ function setSidebarActive(){//this sets it up
         });
     }
     else{
-        console.log('There are no headers here ');
         updateArticleMargin();
     }
 }
@@ -297,12 +345,12 @@ function toggleHidden(el){
        headerbar.classList.remove('disable-css-transitions')
        headerbar.classList.toggle('banner-padding');
        if (leftArrow.classList.contains('hidden')){
-            localStorage.setItem('TOC-hidden', 'YES');
+            localStorage.setItem('TOC-hidden', true);
        }
        else{
-            localStorage.setItem('TOC-hidden', 'NO');  
+            localStorage.setItem('TOC-hidden', false);  
        }
-       console.log('TOC Hidden: ' +localStorage.getItem('TOC-hidden'));
+       console.log('Saving Hidden Status: ' + localStorage.getItem('TOC-hidden'));
  
     } 
 }

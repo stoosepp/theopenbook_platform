@@ -19,7 +19,7 @@ get_header();?>
 			the_custom_logo();
 			if ( is_front_page() && is_home() ) :
 				?>
-				<h1 class="site-title"><!--<a href="<?php /*echo esc_url( home_url( '/' ) );*/ ?>" rel="home">--><?php bloginfo( 'name' ); ?></a></h1>
+				<h1 class="site-title"><!--<a href="<?php /*echo esc_url( home_url( '/' ) );*/ ?>" rel="home">--><?php bloginfo( 'name' ); ?></a></title>
 				<?php
 			else :
 				?>
@@ -35,8 +35,10 @@ get_header();?>
 	</div><!-- #masthead -->
 	<?php
 $topLevelPages = getTopLevelPages();
-echo '<ul class="book-list">';
+
 if ($topLevelPages){
+	echo '<p class="content-type-header">BOOKS</p>';
+	echo '<ul class="book-list">';
 	foreach($topLevelPages as $key=>$topLevelPage){
 	
 		echo '<a href="'.get_permalink($topLevelPage).'">';
@@ -67,9 +69,45 @@ if ($topLevelPages){
 		echo '</div></li>';
 		echo '</a>';
 	}
+	echo '</ul>';
 }
+
+//Get Categories
+
+
+    $args = array(
+        'post_type' => 'menu-item'
+    );
+
+    $categories = get_categories( $args );
+	if ($categories){
+		echo '<p class="content-type-header">DOCUMENTS</p>';
+		echo '<ul class="cat-list">';
+    foreach ( $categories as $category ) {
+		echo '<li>';
+        echo '<h2>' . $category->name . '</h2>';
+		
+        $post_list = get_posts( array(
+			'orderby'    => 'date',
+			'sort_order' => 'desc',
+			'category' => $category->term_id
+		) );
+		?>
+
+        <ul class="doc-list">
+            <?php foreach($post_list as $thisPost) { ?>
+				<a href="<?php echo get_permalink($thisPost); ?>"><li>
+                	<?php echo $thisPost->post_title; ?>
+				</li></a>
+            <?php  } ?>
+		</ul>
+			</li>
+<?php } 
 echo '</ul>';
+	}
+	
 ?>
+
 
 	</main><!-- #main -->
 

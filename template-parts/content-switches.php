@@ -6,28 +6,7 @@
  *
  * 
  */?>
- <?php
- 	$bookRoot = getRootForPage($post);
-	 if ($post != $bookRoot){
-		$voteData = getVoteData($post->ID);
-		consolePrint('Up: '.$voteData[0].' Down: '.$voteData[1]);
-		$totalCount = $voteData[0] + $voteData[1];
-		$percentage = $voteData[0]/$totalCount;
-		 ?>
-		 <div class="post-votes">
-			 <div id="submit-vote">
-			<p>Is this chapter helping you learn?</p>			
-			<!-- <input style="display:none;" type="checkbox" id="votedon<?php echo $post->ID ?>" onclick="saveCheckbox(this)"> -->
-			<a href="<?php echo home_url( $wp->request ) ?>?voteUp=true&value=<?php echo get_the_id() ?>"><i class="far fa-thumbs-up"></i></a>
-			<a href="<?php echo home_url( $wp->request ) ?>?voteDown=true&value=<?php echo get_the_id() ?>"><i class="far fa-thumbs-down"></i></a>
-	 	</div>
-		<div id="did-vote hidden">
-			<p>Thank you for providing feedback</p>
-	 	</div>
-			<p id="vote-results"><?php echo round($percentage,2)*100 ?>% of <?php echo $totalCount ?> voters found this helpful.</p>
-		</div><?php
-	 }
-	?>	
+	
  <div class="toggles">
 				<p>Book Theme
 			<label class="switch">
@@ -61,6 +40,33 @@
 					<span class="checkmark dark"></span>
 				</label>	
 			</div>	 
-			<a id="resetLink" href="#" onclick="resetStorage();">Reset Visuals & Completed Items</a>
-</div>
+			<a id="resetLink" href="#" onclick="resetStorage();">Reset Completed Chapters</a>
 
+<?php
+ 	$bookRoot = getRootForPage($post);
+	 $root = get_post($bookRoot);  
+	 if ($post != $bookRoot){
+		$feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true ); 
+		if($feedbackOn == true)
+		{
+			$voteData = getVoteData($post->ID);
+			consolePrint('Up: '.$voteData[0].' Down: '.$voteData[1]);
+			$totalCount = $voteData[0] + $voteData[1];
+			$percentage = $voteData[0]/$totalCount;
+			 ?>
+			 <div class="post-votes">
+				 <div class="submit-vote">
+				<p>Is this chapter helping you learn?</p>			
+				<!-- <input style="display:none;" type="checkbox" id="votedon<?php echo $post->ID ?>" onclick="saveCheckbox(this)"> -->
+				<a href="<?php echo home_url( $wp->request ) ?>?voteUp=true&value=<?php echo get_the_id() ?>"><i class="far fa-thumbs-up"></i></a>
+				<a href="<?php echo home_url( $wp->request ) ?>?voteDown=true&value=<?php echo get_the_id() ?>"><i class="far fa-thumbs-down"></i></a>
+			 </div>
+			<div class="did-vote hidden">
+				<p>Thank you for providing feedback</p>
+			 </div>
+				<p id="vote-results"><?php echo round($percentage,2)*100 ?>% of <?php echo $totalCount ?> voters found this helpful.</p>
+			</div><?php
+		} 
+	 }
+	?>
+</div>

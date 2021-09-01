@@ -25,12 +25,21 @@ get_header();
 			echo '<img src="'.get_template_directory_uri().'/images/magnify.jpg" rel="lightbox">'; 	
 			
 			echo '</div>';
-			?> <h1 style="color:darkgray; line-height: 1.4em;"><?php
-			printf( esc_html__( 'Search Results for: %s', '_s' ), '<span id="search-title">' . get_search_query() . '</span>' );
-			?> </h1><?php
+			?> <p style="color:darkgray; line-height: 1.4em; text-align:center; margin-bottom:10px;">Search Results for:<?php
+			//printf( esc_html__( 'Search Results for: %s', '_s' ), '<span id="search-title">' . get_search_query() . '</span>' );
+			?> </p>
+			<h2 id="search-title"><?php echo get_search_query(); ?></h2>
+			<form id="search-form" action="/" method="get">
+			<!-- <label for="search">Search in <?php echo home_url( '/' ); ?></label> -->
+			<i class="far fa-search"></i>
+			<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
+			</form><?php
+			
 		get_template_part( 'template-parts/content-switches', get_post_type() );?>
 		 <!-- Rounded switch -->
 	</nav>
+	<div class="article">
+	<?php get_template_part( 'template-parts/content-breadcrumbs', get_post_type() );?>
 	<div class="article-body">
 		<?php if ( have_posts() ) : ?>
 
@@ -39,17 +48,22 @@ get_header();
 			while ( have_posts() ) :
 				the_post();
 				
-				$bookRoot = getRootForPage($post);
-				$root = get_post($bookRoot);
 				?>
 				<div class="search-result">
 
-					<div class="entry-title"><h2><a href="<?php the_permalink() ?>"><?php
+				<div class="entry-title"><h2><a href="<?php the_permalink() ?>"><?php
 				//get_template_part( 'template-parts/content', 'search' );
-				if (the_post() != $root){
-					echo ''.the_title().'';
 				
-					?></a></h2><?php
+					echo ''.the_title().'';
+					?></a></h2>
+					<p class="content-type-p">
+						<?php if(get_post_type() === 'page'){
+							?>BOOK CHAPTER<?php
+						}
+						else{
+							?> DOCUMENT<?php
+						}?>
+					</p><?php
 					echo '<p>'.get_the_excerpt().'</p>';
 					?><div class="site-info"><p>Last Modified on <?php 
 					$u_time = get_the_time('U'); 
@@ -61,24 +75,25 @@ get_header();
 						echo ' by ';
 					$author_id = get_the_author_meta( 'ID' );
 					echo get_the_author_meta('display_name', $author_id);  
-				}
-				
-			
-				
+
 				?></p></div></div> </div><?php
 			endwhile;
 
 			the_posts_navigation();
 
 		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
+			//get_template_part( 'template-parts/content', 'none' );
+		
+				echo '<h2 style="text-align:center;">Sorry, nothing was found <span>&#129402</span></h2>';
+				echo '<img src="'.get_template_directory_uri().'/images/pug.jpg" style="width:100%; height:auto;">';
+				echo '<p style="text-align:center;">Try searching again or exploring the content on this site by <a href="'.get_home_url().'">visiting the  home page</p>';
+			
 		endif;
 		get_footer();
 		?>
 		
 </div>
+	</div>
 	</main><!-- #main -->
 
 

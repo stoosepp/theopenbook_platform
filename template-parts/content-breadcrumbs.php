@@ -38,9 +38,14 @@
         <div id="header-right">
             <div id="header-options">
             <!--<i class="fas fa-comment-smile"></i>-->
-            <?php if (comments_open() == true){
+            <?php if ((comments_open() == true) && ($post != $root)){
+                $feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true ); 
+                if($feedbackOn == true)
+                {
+                  echo ' <a href="#" onclick="toggleHidden(this);"><i class="far fa-comment-alt"></i></a>';
+                } 
                ?>
-                <a href="#" onclick="toggleHidden(this);"><i class="far fa-comment-alt"></i></a>
+               
           <?php  }?> 
             <!--<i class="far fa-download"></i>-->
             <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>

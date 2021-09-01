@@ -3,7 +3,7 @@
   function addPageMetaBox(){
     add_meta_box(//Must be in the below order
   'license_select_box',//ID for the Box
-  'Select a License',//Title:what will show in the top of the box
+  'Book Attributes',//Title:what will show in the top of the box
   'licenseSelectMetaBoxCreator',//Callback: Method called that contains what's inside the box
   'page',//Screen - post types that this appears on
   'side',//where it appears 
@@ -14,18 +14,37 @@
 add_action('add_meta_boxes','addPageMetaBox');
 
 function licenseSelectMetaBoxCreator($post){
+?>
+  <style type="text/css">
+  #pageMetaBox{
+    display:flex;
+    flex-direction: column;
+    align-items: left;
+  }
+  
+  #pageMetaBox > div{
+    padding:5px;
+  }
+  
+  #pageMetaBox > div > p{
+    margin-top:5px;
+    margin-bottom:0px;
+  }
+  #pageMetaBox > div > textarea{
+    width:100%;
+    height: 100px;
+  }
+  </style>
+  <?php
     wp_nonce_field( 'licenseSelectMetaBox', 'licenseSelectMetaBox-nonce' );
-    //wp_nonce_field(basename(__FILE__), "licenseSelectMetaBox-nonce");//nonce fields are required to protect against CSRF attacks
     $allBooks = getTopLevelPages();
     if (in_array($post, $allBooks)) {
         $value = get_post_meta( $post->ID, 'bookLicense', true );
         if ($value == null){
             $value = 'allrightsreserved';
-            consolePrint('License for this book: '.$value);
+            //consolePrint('License for this book: '.$value);
         }
-        else{
-            consolePrint('License for this book: '.$value);
-        }
+       
         //Add metabox for CC Licenses
         $licenseArray = array(
             'allrightsreserved',
@@ -37,33 +56,70 @@ function licenseSelectMetaBoxCreator($post){
             'by-nc-nd',
             'cc-zero',
         );?>
-        <table>
-          <tr>
-            <td>
-            <p>Select a License for this Book: </p>
-            </td>
+        <div id="pageMetaBox">
+          <div>
+            <p>Select a License: </p> 
+            <!-- <label for="licenseSelector">Select a License for this Book: :</label> -->
             <?php
+            
+            echo '<select id="licenseSelector" name="licenseSelector">';
             foreach($licenseArray as $CCLicense){
-            echo '<tr><td>';
+           // echo '<tr><td>';
             //consolePrint('Checking '.$CCLicense.' and '.$value);
+            
             $isChecked = '';
             if(strcmp($CCLicense, $value) == 0)
             {
-                $isChecked = 'checked';
+                $isChecked = 'selected';
             } 
             if ($CCLicense == 'allrightsreserved'){
-                echo '<input type="radio" name="licenseSelector" value="'.$CCLicense.'" '.$isChecked.'>All Rights Reserved</input>';
+                echo '<option value="'.$CCLicense.'" '.$isChecked.'>All Rights Reserved</option>';
+                //echo '<input type="radio" name="licenseSelector" value="'.$CCLicense.'" '.$isChecked.'>All Rights Reserved</input>';
             }
             else{
                 $CCimage = get_template_directory_uri().'/inc/images/'.$CCLicense.'.png';
                 $CCDescription = '<a target="_blank" href="https://creativecommons.org/licenses/'.$CCLicense.'/4.0/">CC '.strtoupper ($CCLicense).'</a>';
                 $CCImageTag = '<img style="width:30%; height:auto;" src="'.$CCimage.'" />';
-                echo '<input style="position: relative; bottom: 0.5em;" type="radio" name="licenseSelector" value="'.$CCLicense.'" '.$isChecked.'>'.$CCImageTag.' '.$CCDescription;
+                //echo '<input style="position: relative; bottom: 0.5em;" type="radio" name="licenseSelector" value="'.$CCLicense.'" '.$isChecked.'>'.$CCImageTag.' '.$CCDescription;
+                echo '<option style="background-image:url('.$CCimage.');" value="'.$CCLicense.'" '.$isChecked.'>'.$CCDescription.'</option>';
             }
-            echo '</td></tr>';
+  
+           
         }?>
-    
-        </table>
+        </select>
+      </div>
+        <!--- ALLOW FEEDBACK --->
+        
+        <div>  
+          <?php $feedbackOn = get_post_meta( $post->ID, 'acceptFeedback', true ); 
+            if($feedbackOn == true)
+            {
+              consolePrint('Feedback Checked');
+                $isChecked = 'checked';
+            } 
+            else{
+              consolePrint('Feedback NOT Checked');
+            }
+          
+          echo '<input type="checkbox" id="acceptFeedback" name="acceptFeedback" '.$isChecked.'> Accept Feedback';
+
+          ?>
+     </div>
+        <!-- FOOTER TEXT -->
+      <div>
+            <p>Custom Footer HTML</p> 
+        
+          <?php $footerText = get_post_meta( $post->ID, 'footerText', true );           
+            if($footerText){
+              echo '<textarea id="footerText" name="footerText" value="">'.$footerText.'</textarea>';
+            }
+            else{
+              echo '<textarea rows="10"  id="footerText" name="footerText" >Embedded videos, credited images / media are not inclusive of this license, so please check with the original creators if you wish to use them.</textarea>';
+            }
+          ?>
+          <p style="font-size:0.8em;">Default Text: Embedded videos, credited images / media are not inclusive of this license, so please check with the original creators if you wish to use them.</p>
+          </div>
+        </div>
       
      <?php 
     }
@@ -76,7 +132,7 @@ function licenseSelectMetaBoxCreator($post){
     wp_reset_postdata();
   }
 
-  function saveLicense( $post_id ) {
+  function saveMeta( $post_id ) {
     // Check if our nonce is set.
     if ( !isset( $_POST['licenseSelectMetaBox-nonce'] ) ) {
             return;
@@ -94,13 +150,24 @@ function licenseSelectMetaBoxCreator($post){
             return;
     }
     // Sanitize user input.
-    $new_meta_value = ( isset( $_POST['licenseSelector'] ) ? sanitize_html_class( $_POST['licenseSelector'] ) : '' );
-    // Update the meta field in the database.
-    consolePrint('Saving '.$new_meta_value);
-    update_post_meta( $post_id, 'bookLicense', $new_meta_value );
+    $newLicense = ( isset( $_POST['licenseSelector'] ) ? sanitize_html_class( $_POST['licenseSelector'] ) : '' );
+    update_post_meta( $post_id, 'bookLicense', $newLicense );
+
+   // Checks for input and saves
+   if( isset( $_POST[ 'acceptFeedback' ]))  {
+      update_post_meta( $post_id, 'acceptFeedback', $_POST['acceptFeedback']);
+  } else{
+    delete_post_meta( $post_id, 'acceptFeedback');
+  }
+  
+  
+  // Checks for input and saves if needed
+  if( isset( $_POST[ 'footerText' ] ) ) {
+      update_post_meta( $post_id, 'footerText', $_POST[ 'footerText' ] );
+  } 
 
 }
-add_action( 'save_post', 'saveLicense' );
+add_action( 'save_post', 'saveMeta' );
 
 
 /* --------------- ADD CUSTOM COLUMNS TO PARTS --------------- */
@@ -153,7 +220,7 @@ function addColumnsToParts($columns) {
             }
     }
 
-    /* --------------- ADD FILTER TO PAGES --------------- */
+/* --------------- ADD FILTER TO PAGES --------------- */
    
 add_action( 'restrict_manage_posts', 'filterPageList' );
 function filterPageList(){
