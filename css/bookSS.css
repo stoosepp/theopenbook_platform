@@ -165,7 +165,14 @@
 
 /* ------------------------------ END OF MEDIA QUERIES ------------------------------ */
 
-
+ul, ol {
+margin:0px;
+}
+figcaption{
+  text-align: center;
+    font-size: 0.8em;
+    margin-top: 0px;
+}
 
 .hidden{
   display:none !important;
