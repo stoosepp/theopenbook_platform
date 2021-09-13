@@ -42,8 +42,9 @@
 	
 	<?php 
 		$chromeless = sanitize_text_field( get_query_var( 'chromeless' ) );
-		if( strtoupper( $chromeless) === 'TRUE' ){
-		//echo "Loading with Chromeless CSS";
+		//if( strtoupper( $chromeless) === 'true' ){
+		if( stripos( $chromeless,'true') !== false ){
+			
 			echo '<style>
 			nav.left-toc{
 				display:none; 
@@ -71,11 +72,18 @@
 			}
 			.new-window-link{
 				display:block;
+			}';
+			if( stripos( $chromeless,'full') !== false ){
+				echo '.article-body{padding:0px;}.new-window-link,.entry-footer,.entry-meta,.site-footer{display:none;}';
 			}
-			</style>';
+			echo '</style>';
 		}
 		else{
 			//echo "Loading with Regular CSS";
+		}
+		$chromeless = sanitize_text_field( get_query_var( 'chromeless' ) );
+		if( strtoupper( $chromeless) === 'TRUE' ){
+
 		}
 	?>
 	<?php wp_head(); ?>

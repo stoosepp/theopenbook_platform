@@ -13,7 +13,7 @@
 
 	<footer id="colophon" class="site-footer">
 		<div class="site-info"><p>
-			<?php if ( is_page() ) {
+			<?php if ( is_page()  || is_single()) {
 				?>
 				
 			Last Modified on <?php 
@@ -42,22 +42,25 @@
 			else{
 				//LOAD THIS FROM BOOK META
 				echo '  |  <a href="'.$themeURI.'" target="_blank">'.$themeName.' Theme</a> developed by '.$themeAuthor.', 2021. </p>';
-				$bookRoot = getRootForPage($post);
-				$root = get_post($bookRoot);
-				$CCLicense = get_post_meta( $root->ID, 'bookLicense', true );
-				//consolePrint('License for '.$root->post_title.' is '.$CCLicense);
-				if (($CCLicense == 'allrightsreserved') || ($CCLicense == null)){?>
-					<p>All original content in this book is All Rights Reserved &copy;<?php the_modified_time('Y'); ?></p>
-				<?php
-				}
-				else{
-					$CCimage = '/inc/images/'.$CCLicense.'.png';
-					$CCDescription = '<a href="https://creativecommons.org/licenses/'.$CCLicense.'/4.0/">CC '.strtoupper ($CCLicense).' 4.0 License</a>';
-					?>
-					<p><img src="<?php echo get_template_directory_uri().$CCimage;?>"></p><p>All original content in this book is licenced under the <?php echo $CCDescription ?> unless otherwise noted. </p>
-					<?php $footerText = get_post_meta( $root->ID, 'footerText', true );
-					echo '<p>'.$footerText.'</p>';
-				}
+				if (is_page()){
+			
+					$bookRoot = getRootForPage($post);
+					$root = get_post($bookRoot);
+					$CCLicense = get_post_meta( $root->ID, 'bookLicense', true );
+					//consolePrint('License for '.$root->post_title.' is '.$CCLicense);
+					if (($CCLicense == 'allrightsreserved') || ($CCLicense == null)){?>
+						<p>All original content in this book is All Rights Reserved &copy;<?php the_modified_time('Y'); ?></p>
+					<?php
+					}
+					else{
+						$CCimage = '/inc/images/'.$CCLicense.'.png';
+						$CCDescription = '<a href="https://creativecommons.org/licenses/'.$CCLicense.'/4.0/">CC '.strtoupper ($CCLicense).' 4.0 License</a>';
+						?>
+						<p><img src="<?php echo get_template_directory_uri().$CCimage;?>"></p><p>All original content in this book is licenced under the <?php echo $CCDescription ?> unless otherwise noted. </p>
+						<?php $footerText = get_post_meta( $root->ID, 'footerText', true );
+						echo '<p>'.$footerText.'</p>';
+					}
+			}
 				
 				
 			}?>

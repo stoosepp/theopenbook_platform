@@ -80,29 +80,33 @@ if ($topLevelPages){
     );
 
     $categories = get_categories( $args );
+	$categories = removeHidden($categories);
+	
 	if ($categories){
 		echo '<p class="content-type-header">DOCUMENTS</p>';
 		echo '<ul class="cat-list">';
     foreach ( $categories as $category ) {
-		echo '<li>';
-        echo '<h2>' . $category->name . '</h2>';
-		
-        $post_list = get_posts( array(
-			'orderby'    => 'date',
-			'sort_order' => 'desc',
-			'category' => $category->term_id
-		) );
-		?>
-
-        <ul class="doc-list">
-            <?php foreach($post_list as $thisPost) { ?>
-				<a href="<?php echo get_permalink($thisPost); ?>"><li>
-                	<?php echo $thisPost->post_title; ?>
-				</li></a>
-            <?php  } ?>
-		</ul>
+		$parentCatName = get_cat_name($category->parent);
+			echo '<li>';
+			echo '<h2>' . $category->name . '</h2>';
+			
+			$post_list = get_posts( array(
+				'orderby'    => 'date',
+				'sort_order' => 'desc',
+				'category' => $category->term_id
+			) );
+			?>
+	
+			<ul class="doc-list">
+				<?php foreach($post_list as $thisPost) { ?>
+					<a href="<?php echo get_permalink($thisPost); ?>"><li>
+						<?php echo $thisPost->post_title; ?>
+					</li></a>
+				<?php  } ?>
+			</ul>
 			</li>
-<?php } 
+			<?php	
+ 		} 
 echo '</ul>';
 	}
 	

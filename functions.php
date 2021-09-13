@@ -266,6 +266,29 @@ function getKids($forPage){
 	);
 	return get_children( $args );
 }
+/* CHECK CATEGORIES FOR HIDDEN */
+function removeHidden($categories){
+	$nonHiddenCategories = array();
+	consolePrint(count($categories));
+	foreach ( $categories as $category ) {
+		$parentCat = get_category($category->parent);
+		if (stripos($category->name, 'hidden') !== false){
+			consolePrint($category->name.' is hidden');
+		}
+		else{
+			consolePrint($category->name.'s parent is '.$parentCat->name);
+			if (($parentCat) && (stripos($parentCat->name, 'hidden') !== false)){
+				consolePrint($category->name.'s parent is hidden');
+			}
+			else{
+				array_push($nonHiddenCategories,$category);
+			}
+			
+		}
+	}
+	return $nonHiddenCategories;
+}
+
 
 /* ADD PARAMETER FOR CHROMELESS */
 function wwp_custom_query_vars_filter($vars) {

@@ -24,8 +24,12 @@ if ( is_page() && $post->post_parent ) {
         //echo 'Getting first childs subpages';
     }
     else{
-        echo '<ul class="toc-section"><li style="font-size:0.75em; color:red;">This is the root page for a book. Add some sub pages, so this Table of Contents is populated.</li></ul>';
         $isRoot = true;
+        if (is_user_logged_in()){
+            echo '<ul class="toc-section"><li style="font-size:0.75em; color:red;">This is the root page for a book. Add some sub pages, so this Table of Contents is populated.</li></ul>';
+
+        }
+        
     }
    
 }
