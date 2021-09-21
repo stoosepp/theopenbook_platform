@@ -43,6 +43,7 @@
 			<a id="resetLink" href="#" onclick="resetStorage();">Reset Completed Chapters</a>
 
 <?php
+/*
  	$bookRoot = getRootForPage($post);
 	 $root = get_post($bookRoot);  
 	 if ($post != $bookRoot){
@@ -68,5 +69,6 @@
 			</div><?php
 		} 
 	 }
+	 */
 	?>
 </div>

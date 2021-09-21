@@ -74,7 +74,7 @@
 				display:block;
 			}';
 			if( stripos( $chromeless,'full') !== false ){
-				echo '.article-body{padding:0px;}.new-window-link,.entry-footer,.entry-meta,.site-footer{display:none;}';
+				echo '.article-body{padding:0px;}.new-window-link,entry-header,.entry-footer,.entry-meta,.site-footer{display:none;}body > hypothesis-sidebar{display:none;}.entry-content{margin:0px;}.wp-block-group{padding:0px;}';
 			}
 			echo '</style>';
 		}

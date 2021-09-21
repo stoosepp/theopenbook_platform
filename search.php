@@ -58,14 +58,34 @@ get_header();
 					?></a></h2>
 					<p class="content-type-p">
 						<?php if(get_post_type() === 'page'){
-							?>BOOK CHAPTER<?php
+							?>BOOK CHAPTER<?php //Is a book chapter
+							$bookRoot = getRootForPage(the_post());
+							$root = get_post($bookRoot);
+							echo ' in ';
+							$string = strtoupper($root->post_title);
+							echo $string;
+
 						}
 						else{
-							?> DOCUMENT<?php
+							?> DOCUMENT<?php //is a document
+							$categories = get_the_category();
+							if ($categories){
+								//point to end of the array
+								$lastElement = end($categories);
+								echo ' in ';
+								foreach($categories as $category){
+									echo $category->name;
+									if($category != $lastElement) {
+										echo ', ';
+									}
+								}
+							}
+							
+							
 						}?>
 					</p><?php
 					echo '<p>'.get_the_excerpt().'</p>';
-					?><div class="site-info"><p>Last Modified on <?php 
+					?><div class="site-info search-info"><p>Last Modified on <?php 
 					$u_time = get_the_time('U'); 
 					$u_modified_time = get_the_modified_time('U'); 
 					//if ($u_modified_time >= $u_time + 86400) { 

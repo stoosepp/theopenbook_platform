@@ -20,7 +20,7 @@
 					if (count($headers) > 0){
 						echo '<p style="padding-left:10px; margin:0px;"><i class="fas fa-list"></i>  Contents</p>
 						<ul class="page-sidebar-list">';
-						foreach($headers as &$header){
+						foreach($headers as $header){
 							$headername = sanitize_title($header);
 							echo '<li class="header-margin-link"><a href="#'.$headername.'">'.$header.'</a></li>';
 						}
