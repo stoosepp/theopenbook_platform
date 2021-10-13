@@ -86,21 +86,23 @@
 				if (direction == 'up'){
 					upVotes++;
 				}
-				$('#percentage').text(Math.round((upVotes/total) * 100));
+				const percentageVal = Math.round((upVotes/total) * 100);
+				$('#percentage').text(percentageVal);
 				$('#totalCount').text(total);
+				$('#vote-chart').css({'background':'rgb(220,112,108)','background': 'linear-gradient(90deg, rgba(103,216,173,1) ' + percentageVal + '%,rgba(220,112,108,1)' + percentageVal + '%)'});
 			}
 			else{
 				if (direction == 'up'){
 					console.log('Voted Up');
-					$("#vote-results").text('100% of 1 voters found this helpful.');
+					$("#vote-results").html('<span id="percentage">100</span>% of <span id="totalCount">1</span> voters found this helpful.');
+					$('#vote-chart').css({'background':'rgb(103,216,173)','height':'10px'});//Green
 				}
 				else{
 					console.log('Voted Down');
-					$("#vote-results").text('0% of 1 voters found this helpful.');
+					$("#vote-results").html('<span id="percentage">0</span>% of <span id="totalCount">1</span> voters found this helpful.');
+					$('#vote-chart').css({'background':'rgb(220,112,108)','height':'10px'});//Red
 				}
-				
 			}
-			
 				console.log(output);
 				jQuery('#postupvote').text(output); //write to correct id - maybe use postid in the id of the vote count on the page e.g. id="vote23" jQuery('#vote'+postid)
 			},
@@ -136,12 +138,18 @@
 				if ($voteData){
 				consolePrint('Up: '.$voteData[0].' Down: '.$voteData[1]);
 				$totalCount = $voteData[0] + $voteData[1];
-				$percentage = $voteData[0]/$totalCount;?>
-								<p id="vote-results"><span id="percentage"><?php echo round($percentage,2)*100 ?></span>% of <span id="totalCount"><?php echo $totalCount ?></span> voters found this helpful.</p>
+				$percentage = $voteData[0]/$totalCount;
+				$percentageValue =  round($percentage,2)*100; ?>
+								<p id="vote-results"><span id="percentage"><?php echo $percentageValue ?></span>% of <span id="totalCount"><?php echo $totalCount ?></span> voters found this helpful.</p>
+								<div id="vote-chart" style="margin-top:5px; width:100%; height:10px; border-radius:5px;
+								background: rgb(220,112,108);
+								background: linear-gradient(90deg, rgba(103,216,173,1) <?php echo $percentageValue ?>%,rgba(220,112,108,1)  <?php echo $percentageValue ?>%);"></div>
 <?php
 				}
 				else{
 					echo '<p id="vote-results">No one has voted on this resource yet.</p>';
+					echo '<div id="vote-chart" style="margin-top:5px; width:100%; height:0px; border-radius:5px;
+					background: clear;"></div>';
 				}
 			 	?>
 				

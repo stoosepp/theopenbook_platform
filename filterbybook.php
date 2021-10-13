@@ -101,7 +101,7 @@ function licenseSelectMetaBoxCreator($post){
               consolePrint('Feedback NOT Checked');
             }
           
-          echo '<input type="checkbox" id="acceptFeedback" name="acceptFeedback" '.$isChecked.'> Accept Feedback';
+          echo '<input type="checkbox" id="acceptFeedback" name="acceptFeedback" '.$isChecked.'> Allow Voting';
 
           ?>
      </div>
