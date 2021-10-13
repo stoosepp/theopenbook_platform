@@ -311,21 +311,16 @@ add_action('wp_ajax_vote', 'vote');
 add_action('wp_ajax_nopriv_vote', 'vote');
 
 function vote() {
-	consolePrint('PHP Voting Function Called');
    $postid= $_POST['id'];
    $direction = $_POST['direction'];
-	
-   if($direction='down') {
-      //$votes--;
-	  //update_post_vote('-',$post_id);
-	  add_post_meta($postid,'updown_votes','-');
+   consolePrint('Voting '.$direction.' on postID:'.$postid);
+   if($direction == 'down') {
+		//consolePrint('Adding Down vote');
+	  	add_post_meta($postid,'updown_votes','-');
    } else {
-      $votes++;
-	  //update_post_vote('+',$post_id);
-	  add_post_meta($postid,'updown_votes','+');
+		//consolePrint('Adding Up vote');
+	  	add_post_meta($postid,'updown_votes','+');
    }
-   //$votes= get_post_meta($postid, 'updown_votes', true);
-   //consolePrint($votes);
    exit();
 }
 
@@ -334,7 +329,7 @@ function getVoteData($post_id){
 	$downvotes = 0;
 	$post_votes = get_post_meta($post_id,'updown_votes',false);
 	if ($post_votes){
-		consolePrint('Vote Count: '.count($post_votes));
+		//consolePrint('Vote Count: '.count($post_votes));
 		foreach($post_votes as $vote){
 			if ($vote == '+'){
 				$upvotes++;
@@ -348,6 +343,10 @@ function getVoteData($post_id){
 	else{
 		return null;
 	}
+}
+
+function deleteAllPostMeta($post_id){
+    delete_post_meta( $post_id, 'updown_votes');
 }
 
 /* CUSTOM SCRIPTS */
