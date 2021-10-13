@@ -51,15 +51,13 @@ get_header();
 				?>
 				<div class="search-result">
 
-				<div class="entry-title"><h2><a href="<?php the_permalink() ?>"><?php
-				//get_template_part( 'template-parts/content', 'search' );
-				
+				<div class="entry-title"><h2><a href="<?php the_permalink() ?>"><?php		
 					echo ''.the_title().'';
 					?></a></h2>
-					<p class="content-type-p">
-						<?php if(get_post_type() === 'page'){
+					<p class="content-type-p" style="letter-spacing:0.2em;">
+						<?php if(get_post_type() == 'page'){
 							?>BOOK CHAPTER<?php //Is a book chapter
-							$bookRoot = getRootForPage(the_post());
+							$bookRoot = getRootForPage($post);
 							$root = get_post($bookRoot);
 							echo ' in ';
 							$string = strtoupper($root->post_title);
