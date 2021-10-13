@@ -36,7 +36,12 @@ get_header();?>
 	<?php
 $topLevelPages = getTopLevelPages();
 
-if ($topLevelPages){
+if ($topLevelPages){?>
+	<form class="search-form home-search" action="/" method="get">
+			<!-- <label for="search">Search in <?php echo home_url( '/' ); ?></label> -->
+			<i class="far fa-search"></i>
+			<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
+			</form><?php
 	echo '<p class="content-type-header">BOOKS</p>';
 	echo '<ul class="book-list">';
 	foreach($topLevelPages as $key=>$topLevelPage){

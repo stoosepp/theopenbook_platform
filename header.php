@@ -32,6 +32,7 @@
 	$translation_array = array( 'templateUrl' => get_stylesheet_directory_uri() );
 	wp_enqueue_style( 'style-switch', getcustomStylesheet('toggleswitch') ); 
 	wp_localize_script( 'bookSS', 'bookSSURL', $translation_array );
+	wp_enqueue_script("jquery");
 	?>
 
 	<link rel="stylesheet" id="print-css" href="<?php echo get_template_directory_uri();?>/css/print.css"  media="print"/>

@@ -1,23 +1,19 @@
 body {
     background-color: rgb(39, 39, 39);
-    color: white;
+    color: darkgray;
+  }
+  body.home{
+    background-color: blue;;
   }
   .header-bar, nav.aside-nav, #toc-list, input#search {
     background-color: rgb(39, 39, 39);
-    color:white;
+    color:darkgray;
   }
-.header-margin-link a {
-    color:white;
-}
-.header-margin-link a:hover {
-  color:gray;
-}
-.active-header {
-  border-left-color: #eee !important;
-}
-.active-header a{
-  color: #eee !important;
-}
+
+  .header-margin-link a, .header-margin-link a:visited {
+    color:darkgray;
+  }
+
 .bt-menu-trigger span:after,
 .bt-menu-trigger span:before,
 .bt-menu-trigger span{
@@ -27,21 +23,30 @@ ul.toc-section li > input[type="checkbox"] {
   opacity:1;
 }
 
+ul.toc-section, form.search-form {
+  border-bottom: 0.5px gray solid;
+}
 
-#toc-list  a{
-  color:gray;
+
+#toc-list{
+  border-right: solid 0.5px gray;
+}
+#toc-list a{
+  color:darkgray;
+}
+.next-prev, nav.aside-nav {
+  border-left: solid 0.5px gray;
 }
 
 #toc-list a:hover{
   color:light-gray !important;
 }
-.current-link {
+/* .current-link {
   color: white !important;
-}
+} */
 
 .book-image{
   background-color: white;;
-  
   }
 
 .book-image img{

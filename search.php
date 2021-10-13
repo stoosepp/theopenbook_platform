@@ -29,7 +29,7 @@ get_header();
 			//printf( esc_html__( 'Search Results for: %s', '_s' ), '<span id="search-title">' . get_search_query() . '</span>' );
 			?> </p>
 			<h2 id="search-title"><?php echo get_search_query(); ?></h2>
-			<form id="search-form" action="/" method="get">
+			<form class="search-form" action="/" method="get">
 			<!-- <label for="search">Search in <?php echo home_url( '/' ); ?></label> -->
 			<i class="far fa-search"></i>
 			<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />

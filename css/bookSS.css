@@ -53,6 +53,11 @@
   #header-left > i{
    display:none;
   }
+  .home-search{
+    width:80%;
+    margin-left:10%;
+    margin-right:10%;
+  }
 
 }
 @media only screen and (max-width: 768px) and (min-width:481px){
@@ -101,6 +106,11 @@
    #header-left > i{
     display:none;
    }
+   .home-search{
+    width:50%;
+    margin-left:25%;
+    margin-right:25%;
+  }
 }
 
 @media only screen and (min-width: 769px){
@@ -141,6 +151,11 @@
     position: absolute;
   
   }
+  .home-search{
+    width:30%;
+    margin-left:35%;
+    margin-right:35%;
+  }
 }
 .article-margin {
   margin-left: 0px !important;
@@ -169,7 +184,7 @@
 /* ------------------------------ END OF MEDIA QUERIES ------------------------------ */
 
 ul, ol {
-margin:0px !important;
+margin-left:0px !important;
 }
 figcaption{
   text-align: center;
@@ -439,9 +454,11 @@ color: gray;
   font-size: 1.2em;
 }
  
-form#search-form{
+form.search-form{
   border-bottom: 0.5px #eee solid; 
 }
+
+
 
 input#search::-webkit-input-placeholder { /* Edge */
   color:#ddd;
@@ -459,7 +476,7 @@ input#search::placeholder {
   color:#ddd;
 }
 
-form#search-form span{
+form.search-form span{
   font-size:1.5em;
   margin-right:2px;
   color:#ddd;
@@ -507,7 +524,7 @@ ul.toc-section li{
 }
 ul.toc-section li > a{
   color:rgb(77,77,77);
-  font-weight:700;
+  font-weight:600;
   
 }
 ul.toc-section li > input[type="checkbox"]{
@@ -753,9 +770,10 @@ li.header-margin-link a:hover {
   margin: 0px;
 }
 
-.is-type-video > iframe{
-  margin-left:auto;
-  margin-right:auto;
+/* Center Centred Video */
+figure.aligncenter.is-type-video > div > div > iframe{
+  margin-left:auto !important;
+  margin-right:auto !important;
 }
 
 /* Toggle TOC button */
@@ -894,7 +912,7 @@ padding:1em;
   margin-bottom:5px;
   margin-top:0px;
 }
-.post-votes a{
+.post-votes i{
   margin-right:0.3em;
   font-size:2em;
 }

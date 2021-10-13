@@ -27,7 +27,7 @@
 		$category = get_the_category()[0];
 		echo '<h1>'.$category->name.'</h1>';
 		?>
-		<form id="search-form" action="/" method="get">
+		<form class="search-form" action="/" method="get">
 		<!-- <label for="search">Search in <?php echo home_url( '/' ); ?></label> -->
 		<i class="far fa-search"></i>
 		<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />

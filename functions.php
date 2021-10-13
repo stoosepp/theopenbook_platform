@@ -300,75 +300,41 @@ add_filter( 'query_vars', 'wwp_custom_query_vars_filter' );
 function consolePrint($string){
 	echo '<script>console.log("'.$string.'");</script>';
 }
-if (isset($_GET['voteUp']) && isset($_GET['value'])){ 
-	return voteUp($_GET['value']); 
-}
-function voteup($post_id) {  
-	update_post_vote('+',$post_id);
-	consolePrint('Vote up!'); 
-}
 
-if (isset($_GET['voteDown']) && isset($_GET['value'])){ 
-	return voteDown($_GET['value']);  
-}
-function voteDown($post_id) {  
-	update_post_vote('-',$post_id);
-	consolePrint('Vote Down!');
- }
+// if (isset($_GET['voteUp']) && isset($_GET['value'])){ 
+// 	return voteUp($_GET['value']); 
+// }
 
+/* VOTING - JQuery added in header */
 
+add_action('wp_ajax_vote', 'vote');
+add_action('wp_ajax_nopriv_vote', 'vote');
 
-function update_post_vote($vote,$post_id){
-    //Save Vote Status?>
-	<script type="text/javascript">
-		var votedPosts = JSON.parse(localStorage.getItem("postVotes"));
-		if ((votedPosts) && (votedPosts.length > 0)){
-			console.log(votedPosts.length + ' posts voted on.')
-			console.log('Stored Posted IDs voted on: ' + votedPosts);
-			if (votedPosts.includes("<?php echo $post_id?>") == false){
-				votedPosts.push("<?php echo $post_id?>");
-			}
-		}
-		else{
-			var votedPosts = new Array();
-			votedPosts.push("<?php echo $post_id?>");
-			console.log('Stored Posted IDs voted on: ' + votedPosts);
-		}
-		localStorage.setItem("postVotes", JSON.stringify(votedPosts));
-	//Hide buttons to register voted	
-	window.addEventListener('load', function (){
-		votingUI = document.getElementsByClassName('submit-vote')[0];
-		votingUI.classList.add('hidden');
-		didVote = document.getElementsByClassName('did-vote')[0];
-		didVote.classList.remove('hidden');
-	})
-	</script>
-<?php
-    add_post_meta($post_id,'updown_votes',$vote);
+function vote() {
+	consolePrint('PHP Voting Function Called');
+   $postid= $_POST['id'];
+   $direction = $_POST['direction'];
+	
+   if($direction='down') {
+      //$votes--;
+	  //update_post_vote('-',$post_id);
+	  add_post_meta($postid,'updown_votes','-');
+   } else {
+      $votes++;
+	  //update_post_vote('+',$post_id);
+	  add_post_meta($postid,'updown_votes','+');
+   }
+   //$votes= get_post_meta($postid, 'updown_votes', true);
+   //consolePrint($votes);
+   exit();
 }
 
 function getVoteData($post_id){
-	?>
-	<script type="text/javascript">
-	window.addEventListener('load', function (){
-		var votedPosts = JSON.parse(localStorage.getItem("postVotes"));
-		if ((votedPosts) && (votedPosts.length > 0)){
-			if (votedPosts.includes("<?php echo $post_id?>") == true){
-			votingUI = document.getElementsByClassName('submit-vote')[0];
-		votingUI.classList.add('hidden');
-		didVote = document.getElementsByClassName('did-vote')[0];
-		didVote.classList.remove('hidden');
-		}
-		}
-	})
-	</script>
-	<?php
-    //document.body.style.opacity = 1;
 	$upvotes = 0;
 	$downvotes = 0;
 	$post_votes = get_post_meta($post_id,'updown_votes',false);
 	if ($post_votes){
-		//consolePrint('Vote Counts:'.count($post_votes));
+		consolePrint('Vote Count: '.count($post_votes));
 		foreach($post_votes as $vote){
 			if ($vote == '+'){
 				$upvotes++;
@@ -383,4 +349,23 @@ function getVoteData($post_id){
 		return null;
 	}
 }
+
+/* CUSTOM SCRIPTS */
+
+if(!function_exists('load_my_script')){
+    function load_my_script() {
+        global $post;
+        $deps = array('jquery');
+        $version= '1.0'; 
+        $in_footer = true;
+        wp_enqueue_script('my-script', get_stylesheet_directory_uri() . '/js/my-script.js', $deps, $version, $in_footer);
+        wp_localize_script('my-script', 'my_script_vars', array(
+                'postID' => $post->ID
+            )
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'load_my_script');
+
+
 ?>

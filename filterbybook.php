@@ -223,14 +223,15 @@ function addColumnsToParts($columns) {
 /* --------------- ADD FILTER TO PAGES --------------- */
    
 add_action( 'restrict_manage_posts', 'filterPageList' );
-function filterPageList(){
+
+function filterPageList($post_type){
     $type = 'page';
     if (isset($_GET['post_type'])) {
         $type = $_GET['post_type'];
     }
 
     //only add filter to post type you want
-    if ('page' == $type){
+    if ('page' == $post_type){
         //get all the books
         $allBooks = get_posts([
           'post_type' => 'books',
@@ -299,8 +300,6 @@ function SearchFilter($query) {
   return $query;
 }
 add_filter('pre_get_posts','SearchFilter');
-
-
 //Adds text above title
 add_action( 'load-edit.php', function(){
     $screen = get_current_screen(); 

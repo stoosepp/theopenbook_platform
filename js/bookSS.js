@@ -127,7 +127,8 @@ function changeColorScheme(thisRadioButton){
     });
     localStorage.setItem('colorScheme',  thisRadioButton.value);
 }
-
+/* UPDATE DARK MODE WHEN DEVICE IS IN DARK MODE */
+/*
 window.matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', event => {
         if (event.matches) {//Change to Dark Mode
@@ -145,7 +146,41 @@ window.matchMedia('(prefers-color-scheme: dark)')
             changeColorScheme(lightmode);
         }
         
-})
+})*/
+
+function setVoteStatus(postID){
+    var votedPosts = JSON.parse(localStorage.getItem("postVotes"));
+    if ((votedPosts) && (votedPosts.length > 0)){
+        console.log(votedPosts.length + ' posts voted on.')
+        console.log('Stored Posted IDs voted on: ' + votedPosts);
+        if (votedPosts.includes(postID) == false){
+            votedPosts.push(postID);
+        }
+    }
+    else{
+        var votedPosts = new Array();
+        votedPosts.push(postID);
+        console.log('Stored Posted IDs voted on: ' + votedPosts);
+    }
+    localStorage.setItem("postVotes", JSON.stringify(votedPosts));
+}
+
+function checkVoteStatus(postID){
+    console.log('Checking Vote Status for Post: ' + postID);
+    var votedOnThis = false;
+    var votedPosts = JSON.parse(localStorage.getItem("postVotes"));
+    if ((votedPosts) && (votedPosts.length > 0)){
+        if (votedPosts.includes(postID) == true){
+            votedOnThis = true;
+        }
+    }
+    const votingButtons = document.getElementsByClassName('submit-vote')[0];
+    const thankYou = document.getElementsByClassName('did-vote')[0];
+    if (votedOnThis ==true){
+        votingButtons.classList.toggle('hidden');
+        thankYou.classList.toggle('hidden');
+    }
+}
 
 function saveCheckbox(thisCheckbox){
     //Save regular checkbox 
