@@ -308,7 +308,7 @@ add_action( 'load-edit.php', function(){
     {
          // Before:
          add_action( 'all_admin_notices', function(){
-             echo '<p>To make re-ordering pages easier, feel free to use a plugin like <a href="https://wordpress.org/plugins/simple-page-ordering/" target="_blank">Simple Page Ordering</a></strong>!</p>';
+             echo '<p>Recommended Plugins to make life easier: <a href="https://wordpress.org/plugins/simple-page-ordering/" target="_blank">Simple Page Ordering</a>  |  <a href="https://wordpress.org/plugins/broken-link-checker/" target="_blank">Broken Link Checker</a></p>';
          });
  
          // After:
