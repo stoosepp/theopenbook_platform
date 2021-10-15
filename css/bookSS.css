@@ -1,5 +1,5 @@
 @media only screen and (max-width: 480px){
-  
+ 
   .article {
     margin-left:0em;
     transition: margin 0.5s;
@@ -118,6 +118,8 @@
     left:10%;
     right:10%;
   }
+
+
 }
 
 @media only screen and (min-width: 769px){
@@ -167,6 +169,11 @@
     width: 50%;
     left:25%;
     right:25%;
+  }
+  .post-votes {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 .article-margin {
@@ -914,10 +921,10 @@ padding:1em;
 
 .post-votes {
   text-align:center;
-  margin-top:3em;
   padding:0.5em;
   background-color:#eee;
   border-radius:10px;
+  margin-bottom:1em;
 }
 .post-votes p{
   font-size:0.8em;

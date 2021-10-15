@@ -179,6 +179,7 @@ function addColumnsToParts($columns) {
   foreach($columns as $key => $title) {
     if ($key=='date') {// Put the Thumbnail column before the Author column
       $new['order'] = 'Order';
+      $new['votes'] = 'Votes';
       $new['license'] = 'License';
     }
     $new[$key] = $title;
@@ -186,39 +187,71 @@ function addColumnsToParts($columns) {
   return $new;
 }
 
-
-
-// Add the data to the custom columns for the book post type:
-    add_action( 'manage_page_posts_custom_column' , 'custom_page_column', 10, 2 );
-    function custom_page_column( $column, $post_id ) {
-        $allBooks = getTopLevelPages();
-        $thePage = get_post($post_id);
-            switch ( $column ) {
-                 case 'order' :
-                    $thisOrder = get_post($post_id);
-                    echo $thisOrder->menu_order;
-                    break;
-                case 'license' :
-                    if (in_array($thePage, $allBooks)) {
-                        $CCLicense = get_post_meta( $post_id, 'bookLicense', true );
-                        if ($CCLicense == 'allrightsreserved'){
-                            echo 'All Rights Reserved &copy; '.the_modified_time('Y').'</p>';
-                        }
-                        else if (!$CCLicense){
-                          echo 'No License Chosen';
-                        }
-                        else{
-                            $CCLink = 'https://creativecommons.org/licenses/'.$CCLicense.'/4.0/';
-                            $CCimage = '/inc/images/'.$CCLicense.'.png';
-                            echo '<a target="_blank" href="'.$CCLink.'"><img style="height:30px; width:auto; padding-top:5px;" src="'.get_template_directory_uri().$CCimage.'"/></a>';
-                        }
-                        
-                    }
-                    break;
+// Add the data to the custom columns for book type:
+  add_action( 'manage_page_posts_custom_column' , 'custom_page_column', 10, 2 );
+  function custom_page_column( $column, $post_id ) {
+      $allBooks = getTopLevelPages();
+      $thePage = get_post($post_id);
+          switch ( $column ) {
+              case 'order' :
+                $thisOrder = get_post($post_id);
+                echo $thisOrder->menu_order;
+                break;
+              case 'votes' :
+                $bookRoot = getRootForPage($post);
+	              $root = get_post($bookRoot);
+                $feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true ); 
+                if($feedbackOn == true){
+                  $voteData = getVoteData($post_id);
+                  if ($voteData){
+                    $fontAwesome = get_template_directory_uri().'/css/all.css';
                
+      ?>
+                  <link rel="stylesheet" href="<?php echo $fontAwesome; ?>">
+                  <?php
+                  //consolePrint('Up: '.$voteData[0].' Down: '.$voteData[1]);
+                  $totalCount = $voteData[0] + $voteData[1];
+                  $percentage = $voteData[0]/$totalCount;
+                  $percentageValue =  round($percentage,2)*100; 
+                   echo '<p style="text-align:center;  margin-bottom:2px;">'.$voteData[0].' <i class="far fa-thumbs-up"></i> - '.$voteData[1].' <i class="far fa-thumbs-down"></i> - ('.$totalCount.')';
+                   
+                    echo '<div id="vote-chart" style="padding-left:10px; width:100%; height:10px; border-radius:20px;background: rgb(220,112,108);
+                    background: linear-gradient(90deg, rgba(103,216,173,1)'.$percentageValue.'%,rgba(220,112,108,1)'.$percentageValue.'%);">';
+                   ?>
+                        </div>
+                          <?php
+                  }
+                  else{
+                    echo 'No vote data yet.';
+                  }
+                }
+                else{
+                  echo 'Voting not enabled. Edit main book page to enable.';
+                }
         
-            }
-    }
+                break;
+              case 'license' :
+                  if (in_array($thePage, $allBooks)) {
+                      $CCLicense = get_post_meta( $post_id, 'bookLicense', true );
+                      if ($CCLicense == 'allrightsreserved'){
+                          echo 'All Rights Reserved &copy; ';
+                          echo the_modified_time('Y').'</p>';
+                      }
+                      else if (!$CCLicense){
+                        echo 'No License Chosen';
+                      }
+                      else{
+                          $CCLink = 'https://creativecommons.org/licenses/'.$CCLicense.'/4.0/';
+                          $CCimage = '/inc/images/'.$CCLicense.'.png';
+                          echo '<a target="_blank" href="'.$CCLink.'"><img style="height:30px; width:auto; padding-top:5px;" src="'.get_template_directory_uri().$CCimage.'"/></a>';
+                      }
+                      
+                  }
+                  break;
+              
+      
+          }
+  }
 
 /* --------------- ADD FILTER TO PAGES --------------- */
    

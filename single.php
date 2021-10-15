@@ -56,9 +56,9 @@
 				/* Start the Loop */
 				while ( have_posts() ) :
 					?><a class="new-window-link" href="<?php echo the_permalink(); ?>" target="_blank">Open in New Window</a><?php
-
+					
 					the_post();
-				
+					
 					get_template_part( 'template-parts/content', get_post_type() );
 				
 				endwhile;
