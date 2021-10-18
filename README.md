@@ -26,7 +26,7 @@ Enter BookSS, a theme for Wordpress which packs in meany of the same design lang
 ## In Practice
 *Wanna see what it looks like for real?*
 
-Visit [Readings on Learning Technology](learn.stoosepp.com), a site I'm current piloting for university courses on learning technology.
+Visit [Readings on Learning Technology](http://learn.stoosepp.com), a site I'm current piloting for university courses on learning technology.
 
 ## How to use the thing
 1. Create a Page. This is your book
