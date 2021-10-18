@@ -42,3 +42,8 @@ I am an entirely self-taught coder, so I admit my code is NOT GOOD.
 
 If you want to support my work feel free to [BUY ME A COFFEE](https://buymeacoffee.com/stooatwork).
 Also, feel free to yell at me at [@stoosepp](https://twitter.com/stoosepp) on the bird place.
+
+(---)
+This Theme incorporates the following work:
+[Tufte CSS](https://github.com/edwardtufte/tufte-css) led by Dave Liepmann
+License: MIT License
