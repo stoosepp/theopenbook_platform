@@ -21,7 +21,12 @@ Enter BookSS, a theme for Wordpress which packs in meany of the same design lang
 * Gutenberg friendly
 
 *IN PROGRESS:*
-*ePub & PDF Download options (probably ready in early 2022)
+* ePub & PDF Download options (probably ready in early 2022)
+
+## In Practice
+*Wanna see what it looks like for real?*
+
+Visit [Readings on Learning Technology](learn.stoosepp.com), a site I'm current piloting for university courses on learning technology.
 
 ## How to use the thing
 1. Create a Page. This is your book
