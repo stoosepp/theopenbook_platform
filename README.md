@@ -5,8 +5,8 @@ An Open Textbook theme for Wordpress
 ## But Why?
 For teachers who want to write their own learning materials / books, there's not many options out there, but this is a growing space.
 * There's [Pressbooks](www.pressbooks.org), which is a great solution for writing more formal books with editorial features and great layouts and export options. Unfortunately, Pressbooks requires a wordpress multisite so isn't that easy to set up on a simple single site wordpress instance.
-* There's [Jupyter Notebooks] (https://jupyter.org/) that have an awesome layout and ability to embed interactive elements. Unfortunately, most of these elements are written in either Python or Markdown, so they may not be accessible to those without a programming background
-* [Docsify.js](https://docsify.js.org/) is another option written in Markdown, but again MD may not be the easiest or most accessible way to write learnign materials for teachers.
+* There's [Jupyter Notebooks] (jupyter.org/) that have an awesome layout and ability to embed interactive elements. Unfortunately, most of these elements are written in either Python or Markdown, so they may not be accessible to those without a programming background
+* [Docsify.js](docsify.js.org/) is another option written in Markdown, but again MD may not be the easiest or most accessible way to write learnign materials for teachers.
 
 Enter BookSS, a theme for Wordpress which packs in meany of the same design language and features that thees other platforms do, well *except for ePub and PDF export, but I'm working on that.*
 
