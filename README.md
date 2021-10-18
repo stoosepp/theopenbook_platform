@@ -35,16 +35,10 @@ If you want to create posts, these will show up on your home page as document-ba
 
 Each root-level Page (your book) has settings on it so you can enable a specific license, change footer text, allow for voting on each chapter and
 
-## Contribute and Support
 
-Feel free to fork and submit issues / pull requests.
-I am an entirely self-taught coder, so I admit my code is NOT GOOD.
 
-If you want to support my work feel free to [BUY ME A COFFEE](https://buymeacoffee.com/stooatwork).
-Also, feel free to yell at me at [@stoosepp](https://twitter.com/stoosepp) on the bird place.
+## Credits and Acknowledgements
 
-(---)
-*CREDITS & ACKNOWLEGEMENTS*
 Primary Developer: [Stoo Sepp](www.stoosepp.com)
 
 Thank you to [@hibbittsdesign](https://twitter.com/hibbittsdesign), [@FirasM](https://twitter.com/FirasM), and [@RichAsInRichard](https://twitter.com/RichAsInRichard) for their patience in answering my questions and helping me to learn more about Wordpress and Open Textbook platforms.
@@ -52,3 +46,11 @@ Thank you to [@hibbittsdesign](https://twitter.com/hibbittsdesign), [@FirasM](ht
 This Theme incorporates the following work:
 [Tufte CSS](https://github.com/edwardtufte/tufte-css) led by Dave Liepmann
 License: MIT License
+
+## Contribute and Support
+
+Feel free to fork and submit issues / pull requests.
+I am an entirely self-taught coder, so I admit my code is NOT GOOD.
+
+If you want to support my work feel free to [BUY ME A COFFEE](https://buymeacoffee.com/stooatwork).
+Also, feel free to yell at me at [@stoosepp](https://twitter.com/stoosepp) on the bird place.
