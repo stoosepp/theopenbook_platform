@@ -1,4 +1,5 @@
 /node_modules
+/webfonts
 /vendor
 package-lock.json
 composer.lock
