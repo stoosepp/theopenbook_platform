@@ -44,6 +44,11 @@ If you want to support my work feel free to [BUY ME A COFFEE](https://buymeacoff
 Also, feel free to yell at me at [@stoosepp](https://twitter.com/stoosepp) on the bird place.
 
 (---)
+*CREDITS & ACKNOWLEGEMENTS*
+Primary Developer: [Stoo Sepp](www.stoosepp.com)
+
+Thank you to [@hibbittsdesign](https://twitter.com/hibbittsdesign), [@FirasM](https://twitter.com/FirasM), and [@RichAsInRichard](https://twitter.com/RichAsInRichard) for their patience in answering my questions and helping me to learn more about Wordpress and Open Textbook platforms.
+
 This Theme incorporates the following work:
 [Tufte CSS](https://github.com/edwardtufte/tufte-css) led by Dave Liepmann
 License: MIT License
