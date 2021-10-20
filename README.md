@@ -37,7 +37,7 @@ Visit [Readings on Learning Technology](http://learn.stoosepp.com), a site I'm c
 4. Edit your chapter (page) content by using H2 headings to structure your work. These headings will auto-generate a quick-jump menu on the right hand side of the page.
 
 **Want to embed a chapter in your Learning Management System (LMS) like Moodle, Canvas or D2L?**
-Just add '?chromeless=true' at the end of the url for the page you want to embed (e.g., http://yoursite.com/yourbook/yourchapter/?chromeless=true) - add this as a src to your iframe and it'll add a link, directing readers back to the original site. You can also use '?chromeless=truefull' to remove all margins
+Just add '?chromeless=true' at the end of the url for the page you want to embed (e.g., http://yoursite.com/yourbook/yourchapter/?chromeless=true) - add this as a src to your iframe and it'll add a link, directing readers back to the original site. You can also use '?chromeless=truefull' to remove all margins and footer.
 
 ### Posts too!
 If you want to create posts, these will show up on your home page as document-based pages based on category, so make a category (e.g., "General Academic Support") and put all your posts in that category in there
