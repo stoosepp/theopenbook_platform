@@ -22,6 +22,9 @@ Enter bookSS (just pronounced "books" - don't overcomplicate it), a theme for Wo
 * 'Chromeless' embeds that strip out extraneous design elements
 * Gutenberg friendly
 
+Recommended Plugins to make life easier: [Simple Page Ordering](https://wordpress.org/plugins/simple-page-ordering/) | [Broken Link Checker](https://wordpress.org/plugins/broken-link-checker/)
+
+
 *IN PROGRESS:*
 * ePub & PDF Download options (probably ready in early 2022)
 
