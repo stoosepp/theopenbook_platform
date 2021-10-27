@@ -427,7 +427,7 @@ function toggleFullscreen(el) {
     }
   }
 
-  function tappeprintbutton(){
+  function tappedprintbutton(){
       console.log('Print Tapped');
       window.print();
   }
