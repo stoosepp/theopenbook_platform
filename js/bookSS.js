@@ -429,6 +429,10 @@ function toggleFullscreen(el) {
 
   function tappedprintbutton(){
       console.log('Print Tapped');
-      window.print();
-      setTimeout(function(){window.close();}, 10000);
+      setTimeout(function() { // wait until all resources loaded
+        window.document.close(); // necessary for IE >= 10
+        window.focus(); // necessary for IE >= 10
+        window.print(); // change window to winPrint
+        window.close(); // change window to winPrint
+     }, 500);
   }
