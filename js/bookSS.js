@@ -433,6 +433,6 @@ function toggleFullscreen(el) {
         window.document.close(); // necessary for IE >= 10
         window.focus(); // necessary for IE >= 10
         window.print(); // change window to winPrint
-        window.close(); // change window to winPrint
+        //window.close(); // change window to winPrint
      }, 500);
   }
