@@ -426,3 +426,14 @@ function toggleFullscreen(el) {
     el.classList.add('hidden');
     }
   }
+
+  function tappedprintbutton(){
+      console.log('Print Tapped');
+      if (navigator.userAgent.includes('Chrome')) {
+        // the user is  running Chrome
+        alert("Hi there!\nFor some reason, the Chrome browser doesn't like in-page print buttons right now.\nIf you're using Chrome, just use CMD-P (Mac) or CTRL-P (Windows).");
+      }
+      else{
+          window.print();
+      }
+  }
