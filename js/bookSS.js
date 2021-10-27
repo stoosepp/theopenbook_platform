@@ -426,3 +426,8 @@ function toggleFullscreen(el) {
     el.classList.add('hidden');
     }
   }
+
+  function tappedPrintButton(){
+      console.log('Print Tapped');
+      window.print();
+  }
