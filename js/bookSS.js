@@ -103,7 +103,7 @@ function loadTOCstatus(){
 function loadColorScheme(){
     var colorScheme = localStorage.getItem('colorScheme');
     if (colorScheme){
-        console.log('Loaded Color Scheme: ' + colorScheme);
+        //console.log('Loaded Color Scheme: ' + colorScheme);
         var radiobtn = document.getElementById(colorScheme + 'Check');
         radiobtn.checked = true;
         updateCSS(colorScheme,true);
@@ -115,7 +115,7 @@ function loadColorScheme(){
 }
 
 function changeColorScheme(thisRadioButton){
-    console.log('This is checked ' + thisRadioButton.value);
+    //console.log('This is checked ' + thisRadioButton.value);
     const colorList = ['white','sepia','darkmode'];
     colorList.forEach(thisColor =>{
         if (thisColor == thisRadioButton.value){
@@ -147,10 +147,7 @@ window.matchMedia('(prefers-color-scheme: dark)')
         }
 
 })*/
-function printButtonTapped(){
-    console.log('Printing');
-    window.print();
-}
+
 
 function setVoteStatus(postID){
     var votedPosts = JSON.parse(localStorage.getItem("postVotes"));
@@ -251,7 +248,7 @@ async function updateCSS(forID, isChecked)
         document.head.append(link);
     }
     else if ((isChecked == false) || (isChecked == null)){
-        console.log('Removing ' + forID);
+        //console.log('Removing ' + forID);
         var link = document.getElementById(forID + "CSS");
         if (link) {
             document.head.removeChild(link);

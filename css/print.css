@@ -5,9 +5,6 @@
     width:14em;
 }
 
-.is-type-video {
-    display:none;
-}
-.site-footer{
+.is-type-video,.post-votes, .site-footer {
     display:none;
 }

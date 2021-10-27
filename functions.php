@@ -229,7 +229,7 @@ function auto_id_headings( $content ) {
     }, $content );
     return $content;
     }
-	
+
 
 function getTopLevelPages(){
 	$query_args = array('parent' => 0, // required
@@ -243,7 +243,7 @@ function getTopLevelPages(){
 
 function getRootForPage($post){//gets book for the current page.
 	$bookRoot = new stdClass();
-	$thisPage = get_post($post->ID);	
+	$thisPage = get_post($post->ID);
 	if ($thisPage->post_parent)	{
 		$ancestors=get_post_ancestors($post->ID);
 		$root=count($ancestors)-1;
@@ -283,7 +283,7 @@ function removeHidden($categories){
 			else{
 				array_push($nonHiddenCategories,$category);
 			}
-			
+
 		}
 	}
 	return $nonHiddenCategories;
@@ -301,8 +301,8 @@ function consolePrint($string){
 	echo '<script>console.log("'.$string.'");</script>';
 }
 
-// if (isset($_GET['voteUp']) && isset($_GET['value'])){ 
-// 	return voteUp($_GET['value']); 
+// if (isset($_GET['voteUp']) && isset($_GET['value'])){
+// 	return voteUp($_GET['value']);
 // }
 
 /* VOTING - JQuery added in header */
@@ -355,9 +355,9 @@ if(!function_exists('load_my_script')){
     function load_my_script() {
         global $post;
         $deps = array('jquery');
-        $version= '1.0'; 
+        $version= '1.0';
         $in_footer = true;
-        wp_enqueue_script('my-script', get_stylesheet_directory_uri() . '/js/my-script.js', $deps, $version, $in_footer);
+       	wp_enqueue_script('my-script', get_stylesheet_directory_uri() . '/js/bookSS.js', $deps, $version, $in_footer);
         wp_localize_script('my-script', 'my_script_vars', array(
                 'postID' => $post->ID
             )
@@ -365,6 +365,5 @@ if(!function_exists('load_my_script')){
     }
 }
 add_action('wp_enqueue_scripts', 'load_my_script');
-
 
 ?>

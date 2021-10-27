@@ -1,31 +1,31 @@
 <?php
 /**
  * Template part for displaying voting mechanism
- * 
+ *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * 
+ *
  */?>
  		<script>
 				jQuery(document).ready(function($){
-					const thisPostID = my_script_vars.postID;	
-				checkVoteStatus(thisPostID);
-				$('.votebutton').css('cursor', 'pointer'); 
-   				$('.votebutton').click(function(){ //if your upvote has class arrow?
-				var direction = 'up';
-				var classList = $(this).attr('class').split(/\s+/);
-				$.each(classList, function(index, item) {
-					if (item === 'fa-thumbs-up') {
-						//console.log('Voting Up');
-					}
-					else if (item === 'fa-thumbs-down'){
-						//console.log('Voting Down');
-						direction = 'down';
-					}
+					const thisPostID = my_script_vars.postID;
+					checkVoteStatus(thisPostID);
+					$('.votebutton').css('cursor', 'pointer');
+					$('.votebutton').click(function(){ //if your upvote has class arrow?
+					var direction = 'up';
+					var classList = $(this).attr('class').split(/\s+/);
+					$.each(classList, function(index, item) {
+						if (item === 'fa-thumbs-up') {
+							//console.log('Voting Up');
+						}
+						else if (item === 'fa-thumbs-down'){
+							//console.log('Voting Down');
+							direction = 'down';
+						}
 				});
 				var ajaxscript = { ajax_url : '<?= get_bloginfo("wpurl"); ?>' + "/wp-admin/admin-ajax.php" }
 				var templateUrl = '<?= get_bloginfo("wpurl"); ?>' + "/wp-admin/admin-ajax.php";
-			
+
 				$.ajax({
 				type: "POST",
 					url: ajaxscript.ajax_url,
@@ -68,7 +68,7 @@
 						console.log(output);
 						jQuery('#postupvote').text(output); //write to correct id - maybe use postid in the id of the vote count on the page e.g. id="vote23" jQuery('#vote'+postid)
 					},
-					error : function(error){ console.log(error) 
+					error : function(error){ console.log(error)
 					}
 
 
@@ -81,21 +81,21 @@
 /* Voting */
 //deleteAllPostMeta($post->ID);//For Testing
  	$bookRoot = getRootForPage($post);
-	 $root = get_post($bookRoot);  
+	 $root = get_post($bookRoot);
 	 if (($post != $bookRoot) && is_page()) {
-		$feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true ); 
+		$feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true );
 		if($feedbackOn == true)
 		{
 			 ?>
 			 <div class="post-votes">
 			<div class="submit-vote">
-				<p>Did this chapter help you learn?</p>			
+				<p>Did this chapter help you learn?</p>
 				<i class="votebutton far fa-thumbs-up"></i>
 				<i class="votebutton far fa-thumbs-down"></i>
 			 </div>
 			<div class="did-vote hidden">
 				<p>Thank you for providing feedback.</p>
-		</div><?php 
+		</div><?php
 		$voteData = getVoteData($post->ID);
 				if ($voteData){
 				consolePrint('Up: '.$voteData[0].' Down: '.$voteData[1]);
@@ -114,9 +114,9 @@
 					background: clear;"></div>';
 				}
 			 	?>
-				
+
 			</div><?php
-		} 
+		}
 	 }
-	 
+
 	?>
