@@ -426,13 +426,3 @@ function toggleFullscreen(el) {
     el.classList.add('hidden');
     }
   }
-
-  function tappedprintbutton(){
-      console.log('Print Tapped');
-      setTimeout(function() { // wait until all resources loaded
-        window.document.close(); // necessary for IE >= 10
-        window.focus(); // necessary for IE >= 10
-        window.print(); // change window to winPrint
-        //window.close(); // change window to winPrint
-     }, 500);
-  }

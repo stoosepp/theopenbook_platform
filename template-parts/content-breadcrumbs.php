@@ -51,6 +51,9 @@
             <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>
             <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-expand"></i></a>
             <a  href="#" onclick="tappedprintbutton();"><i class="fas fa-print"></i></a>
+            <button class="print-button" type="submit" onClick="window.print()" style="background-color:transparent; border-color:transparent;">
+            <i style="font-size:1.5em; cursor:pointer;" class="fas fa-print"></i>
+            </button>
              </div>
 
         <?php
