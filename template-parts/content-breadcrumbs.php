@@ -5,7 +5,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * 
+ *
  */
 ?>
   <?php get_template_part( 'template-parts/content-feedbackform', 'none' ); ?>
@@ -14,11 +14,11 @@
         <div id="header-left">
             <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-arrow-left"></i></a>
             <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-bars hidden"></i></a>
-            
+
             <!--NEXT PREVIOUS BUTTONS -->
-                <?php 
+                <?php
                 $bookRoot = getRootForPage($post);
-                $root = get_post($bookRoot);     
+                $root = get_post($bookRoot);
                 if ( is_page() && ($post != $root)) {
                     //Not root
                     $postParentID = wp_get_post_parent_id($post);
@@ -28,9 +28,9 @@
                         echo '<i class="fas fa-chevron-right"></i>';
                     }
                     echo '<a href='.get_permalink($post).'>'.$post->post_title.'</a>';
-                } 
+                }
             else if ($post == $bookRoot){
-            //echo 'Welcome!'; 
+            //echo 'Welcome!';
             }
 
             ?>
@@ -39,18 +39,18 @@
             <div id="header-options">
             <!--<i class="fas fa-comment-smile"></i>-->
             <?php if ((comments_open() == true) && ($post != $root)){
-                $feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true ); 
+                $feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true );
                 if($feedbackOn == true)
                 {
                   echo ' <a href="#" onclick="toggleHidden(this);"><i class="far fa-comment-alt"></i></a>';
-                } 
+                }
                ?>
-               
-          <?php  }?> 
+
+          <?php  }?>
             <!--<i class="far fa-download"></i>-->
             <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>
             <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-expand"></i></a>
-            <a id="print" href="#" onclick="window.print();"><i class="fas fa-print"></i></a>
+            <a  href="#" onclick="printButtonTapped();" id="print"><i class="fas fa-print"></i></a>
              </div>
 
         <?php
@@ -76,7 +76,7 @@
                         if ($first_page == $child){
                             array_push($allPages,$grandChild);
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -105,6 +105,6 @@
     </div>
     <div class="progress-container">
         <div class="progress" id="progress"></div>
-    </div> 
+    </div>
 </div>
 

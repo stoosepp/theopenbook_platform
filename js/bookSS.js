@@ -1,5 +1,5 @@
 // window.addEventListener("DOMContentLoaded", () => {
-    
+
 //   });
 
 
@@ -34,7 +34,7 @@ window.onload = function() {
         }
         //updateArticleMargin();
     }
- 
+
 
 }
 window.mobileAndTabletCheck = function() {
@@ -49,7 +49,7 @@ function loadLocalStorage(){
     var list = document.querySelectorAll(`[type*="checkbox"]`);
     var completedChapters = JSON.parse(localStorage.getItem("checkedChapters"));
     list.forEach( el => {
-        
+
         if ((el.id == 'tufte') || (el.id == 'opendyslexic')){
             var checked = JSON.parse(localStorage.getItem(el.id));
             var checkBox = document.getElementById(el.id);
@@ -60,8 +60,8 @@ function loadLocalStorage(){
             else if (el.id == 'opendyslexic'){
                 updateCSS(el.id,checked);
             }
-           
-        }  
+
+        }
         else if ((completedChapters) && (completedChapters.length > 0)){
             console.log('Completed Chapters: ' + completedChapters + ', and thisID: ' + el.id);
             if (completedChapters.includes(el.id)){
@@ -73,7 +73,7 @@ function loadLocalStorage(){
     });
     document.body.style.visibility = 'visible';
     //document.body.style.opacity = 1;
-} 
+}
 
 function loadTOCstatus(){
     var TOCStatus = JSON.parse(localStorage.getItem('TOC-hidden'));
@@ -111,7 +111,7 @@ function loadColorScheme(){
     else{
         updateCSS('white',true);
     }
-    
+
 }
 
 function changeColorScheme(thisRadioButton){
@@ -137,7 +137,7 @@ window.matchMedia('(prefers-color-scheme: dark)')
             var darkmode = document.getElementById('darkmodeCheck');
             darkmode.checked = true;
            changeColorScheme(darkmode);
-   
+
         } else {//Change to Saved Color
             //light mode
             console.log('Entering Light Mode');
@@ -145,8 +145,12 @@ window.matchMedia('(prefers-color-scheme: dark)')
             lightmode.checked = true;
             changeColorScheme(lightmode);
         }
-        
+
 })*/
+function printButtonTapped(){
+    console.log('Printing');
+    window.print();
+}
 
 function setVoteStatus(postID){
     var votedPosts = JSON.parse(localStorage.getItem("postVotes"));
@@ -183,18 +187,18 @@ function checkVoteStatus(postID){
 }
 
 function saveCheckbox(thisCheckbox){
-    //Save regular checkbox 
+    //Save regular checkbox
     console.log('Saving Checkbox with ID: ' + thisCheckbox.id);
     if ((thisCheckbox.id == 'opendyslexic') || (thisCheckbox.id == 'tufte')){
         const dyslexicCheck = document.getElementById('opendyslexic');
         const tufteCheck = document.getElementById('tufte');
         if (thisCheckbox.checked){
             localStorage.setItem(thisCheckbox.id, true);
-        } 
+        }
         else{
             localStorage.setItem(thisCheckbox.id, false);
         }
-        updateCSS(thisCheckbox.id, thisCheckbox.checked);  
+        updateCSS(thisCheckbox.id, thisCheckbox.checked);
         if ((tufteCheck.checked) && (thisCheckbox == dyslexicCheck)){
             tufteCheck.checked = false;
             updateCSS(tufteCheck.id, false);
@@ -226,7 +230,7 @@ function saveCheckbox(thisCheckbox){
         else{
             var completedChapters = new Array();
             completedChapters.push(thisCheckbox.id);
-         
+
         }
         localStorage.setItem("checkedChapters", JSON.stringify(completedChapters));
         console.log('Saved Chapters: ' + completedChapters);
@@ -245,7 +249,7 @@ async function updateCSS(forID, isChecked)
         link.href = bookURL + '/css/' + forID + '.css';
         //console.log('Updating CSS to ' + link.href);
         document.head.append(link);
-    } 
+    }
     else if ((isChecked == false) || (isChecked == null)){
         console.log('Removing ' + forID);
         var link = document.getElementById(forID + "CSS");
@@ -259,7 +263,7 @@ async function updateCSS(forID, isChecked)
         link.href = bookURL + '/css/default.css';
         document.head.append(link);
     }
-}		
+}
 
 
 function delay(delayInms) {
@@ -275,7 +279,7 @@ function resetStorage(){
     if ((completedChapters) && (completedChapters.length > 0)){
         localStorage.removeItem('checkedChapters');
     }
-    
+
     //localStorage.clear();
     location.reload();
 }
@@ -302,9 +306,9 @@ function updateArticleMargin(){
 
 function setSidebarActive(){//this sets it up
     var sections = document.querySelectorAll('.page-sidebar-list li a');//get all links to headings
-    const scrollPosArray = [0];	
+    const scrollPosArray = [0];
     for( var i = 0; i < sections.length; i++ ){//iterate through headings
-        var currentSection = sections[i]; 
+        var currentSection = sections[i];
         var val = currentSection.getAttribute('href');//get the target for the link
         var refElement = document.querySelector(val);
         scrollPosArray.push(refElement.offsetTop-45);
@@ -386,18 +390,18 @@ function toggleHidden(el){
             localStorage.setItem('TOC-hidden', true);
        }
        else{
-            localStorage.setItem('TOC-hidden', false);  
+            localStorage.setItem('TOC-hidden', false);
        }
        console.log('Saving Hidden Status: ' + localStorage.getItem('TOC-hidden'));
- 
-    } 
+
+    }
 }
 
 var elem = document.documentElement;
 function toggleFullscreen(el) {
-    console.log(el);
+    //console.log(el);
     if (el.firstChild.classList.contains('fa-expand') == true){
-        
+
         //Open
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
