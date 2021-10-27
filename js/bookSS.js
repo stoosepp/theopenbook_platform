@@ -430,4 +430,5 @@ function toggleFullscreen(el) {
   function tappedprintbutton(){
       console.log('Print Tapped');
       window.print();
+      setTimeout(function(){window.close();}, 10000);
   }
