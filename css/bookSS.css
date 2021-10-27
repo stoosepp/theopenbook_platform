@@ -354,15 +354,6 @@ text-decoration: none;
 color: gray;
 }
 
-.print-button{
-  padding:0px;
-}
-.print-button > i{
-  color: gray;
-}
-.print-button > i:hover{
-  color: #0071bc;
-}
 
 .new-window-link{
   display:none;
