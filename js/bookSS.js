@@ -45,7 +45,7 @@ window.mobileAndTabletCheck = function() {
 
 function loadLocalStorage(){
     //Load Switches for font and layout
-    console.log(allStorage());
+    //console.log(allStorage());
     var list = document.querySelectorAll(`[type*="checkbox"]`);
     var completedChapters = JSON.parse(localStorage.getItem("checkedChapters"));
     list.forEach( el => {
@@ -401,7 +401,6 @@ var elem = document.documentElement;
 function toggleFullscreen(el) {
     //console.log(el);
     if (el.firstChild.classList.contains('fa-expand') == true){
-
         //Open
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
