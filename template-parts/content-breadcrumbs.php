@@ -8,6 +8,12 @@
  *
  */
 ?>
+<script>
+    function printButtonTapped(){
+
+        window.print();
+    }
+    </script>
   <?php get_template_part( 'template-parts/content-feedbackform', 'none' ); ?>
 <div class="header-bar">
     <div class="article-header">
@@ -50,7 +56,7 @@
             <!--<i class="far fa-download"></i>-->
             <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>
             <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-expand"></i></a>
-            <a  href="#" onclick="print();" id="print"><i class="fas fa-print"></i></a>
+            <a  href="#" onclick="printButtonTapped();" id="print"><i class="fas fa-print"></i></a>
              </div>
 
         <?php
