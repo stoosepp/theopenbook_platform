@@ -9,6 +9,7 @@
     margin-right:0px;
     margin-top:50px;
     padding-bottom: 0px !important;
+    width:100% !important;
 
   }
 
@@ -72,6 +73,7 @@
   .article-body{
     margin-right:12em;
     padding-bottom: 0px !important;
+    width:100% !important;
   }
   .left-toc {
     transition: margin 0.5s;
