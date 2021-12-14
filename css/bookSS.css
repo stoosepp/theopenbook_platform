@@ -10,6 +10,7 @@
     margin-right:0px;
     margin-top:50px;
     padding-bottom: 0px !important;
+    width:100%;
 
   }
 
@@ -22,6 +23,7 @@
     padding-right: 0px !important;
     height:100%;
     position:absolute;
+    width: 100%;
   }
 
   aside{
