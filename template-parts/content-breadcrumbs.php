@@ -14,8 +14,6 @@
         <div id="header-left">
             <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-arrow-left"></i></a>
             <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-bars hidden"></i></a>
-
-            <!--NEXT PREVIOUS BUTTONS -->
                 <?php
                 $bookRoot = getRootForPage($post);
                 $root = get_post($bookRoot);
@@ -24,13 +22,16 @@
                     $postParentID = wp_get_post_parent_id($post);
                     $postParent = get_post($postParentID);
                     if ($postParent->post_title != $root->post_title){
-                        echo '<a href='.get_permalink($postParent).'>'.$postParent->post_title.'</a>';
+                        $subChapterTitle = $postParent->post_title;
+                        $truncatedTitle = wp_trim_words( $subChapterTitle, 5, '...');
+                        echo '<a href='.get_permalink($postParent).'>'.$truncatedTitle.'</a>';
                         echo '<i class="fas fa-chevron-right"></i>';
                     }
-                    echo '<a href='.get_permalink($post).'>'.$post->post_title.'</a>';
+                    $chapterTitle = $post->post_title;
+                    $truncatedTitle = wp_trim_words( $chapterTitle, 5, '...');
+                    echo '<a href='.get_permalink($post).'>'.$truncatedTitle.'</a>';
                 }
             else if ($post == $bookRoot){
-            //echo 'Welcome!';
             }
 
             ?>
@@ -50,7 +51,7 @@
             <!--<i class="far fa-download"></i>-->
             <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>
             <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-expand"></i></a>
-            <a  href="#" onclick="tappedprintbutton();"><i class="fas fa-print"></i></a>
+            <!--<a  href="#" onclick="tappedprintbutton();"><i class="fas fa-print"></i></a>-->
              </div>
 
         <?php

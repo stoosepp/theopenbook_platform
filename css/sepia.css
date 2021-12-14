@@ -1,4 +1,29 @@
-body, .header-bar, .header-toc, nav.aside-nav, #toc-list, input#search  {
-    background-color: #fffff8;
-    color: #111;
+body, .header-bar, .header-toc, nav.aside-nav, #toc-list, input#search, .custom-feedbackform   {
+    /* background-color: #fffff8;
+    color: #111; */
+    background-color: #F4ECD8;
+    color: #5F4B32;
 }
+
+ul.toc-section, form.search-form {
+    border-bottom: 0.5px lightgray solid;
+  }
+
+
+  #toc-list{
+    border-right: solid 0.5px lightgray;
+  }
+  input#search:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:darkgray;
+  }
+
+  input#search::placeholder {
+    color:darkgray;
+  }
+
+  .custom-feedbackform{
+    -webkit-box-shadow: 5px 5px 10px 0px rgb(189 189 189 / 75%);
+    -moz-box-shadow: 5px 5px 10px 0px rgba(189,189,189,75%);
+    box-shadow: 5px 5px 10px 0px rgb(189 189 189 / 75%);
+    border: 1px solid darkgray;
+   }

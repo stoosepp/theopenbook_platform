@@ -11,14 +11,11 @@ window.onload = function() {
         loadLocalStorage();
         setCurrentPageLink();
         setSidebarActive();
-       if (mobileAndTabletCheck == true){
-            $expand = document.getElementsByClassName('fa-expand')[0];
-            $expand.parentElement.classList.add('hidden');
-       }
+
     }
     else{
         document.body.style.visibility = 'visible';
-        //document.body.style.opacity = 1;
+        loadColorScheme();
     }
     if ((window.location.href.includes('voteUp')) || (window.location.href.includes('voteDown')) ){//remove URL parameters when voting
         window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
@@ -32,7 +29,6 @@ window.onload = function() {
             articleBody[0].style.marginTop = '0px';
             //articleBody[0].style.display = 'none';
         }
-        //updateArticleMargin();
     }
 
 
@@ -72,7 +68,6 @@ function loadLocalStorage(){
         }
     });
     document.body.style.visibility = 'visible';
-    //document.body.style.opacity = 1;
 }
 
 function loadTOCstatus(){
@@ -101,11 +96,15 @@ function loadTOCstatus(){
 
 
 function loadColorScheme(){
+    var isAtRoot = location.pathname == "/"; //Equals true if we're at the root
+
     var colorScheme = localStorage.getItem('colorScheme');
     if (colorScheme){
-        //console.log('Loaded Color Scheme: ' + colorScheme);
-        var radiobtn = document.getElementById(colorScheme + 'Check');
-        radiobtn.checked = true;
+        console.log('Loaded Color Scheme: ' + colorScheme);
+        if (isAtRoot != true){
+            var radiobtn = document.getElementById(colorScheme + 'Check');
+            radiobtn.checked = true;
+        }
         updateCSS(colorScheme,true);
     }
     else{

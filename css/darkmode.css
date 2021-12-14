@@ -1,10 +1,8 @@
-body {
+body, .custom-feedbackform  {
     background-color: rgb(39, 39, 39);
     color: darkgray;
   }
-  body.home{
-    background-color: blue;;
-  }
+
   .header-bar, nav.aside-nav, #toc-list, input#search {
     background-color: rgb(39, 39, 39);
     color:darkgray;
@@ -14,14 +12,17 @@ body {
     color:darkgray;
   }
 
+  .has-background {
+    color:black;
+  }
 .bt-menu-trigger span:after,
 .bt-menu-trigger span:before,
 .bt-menu-trigger span{
   background-color: white;
 }
-ul.toc-section li > input[type="checkbox"] {
+/* ul.toc-section li > input[type="checkbox"] {
   opacity:1;
-}
+} */
 
 ul.toc-section, form.search-form {
   border-bottom: 0.5px gray solid;
@@ -63,15 +64,26 @@ ul.toc-section, form.search-form {
 }
 
 #search-title{
-  color:white; 
+  color:white;
  }
 #search-results a{
   color:gray;
-
  }
  .post-votes{
-    background-color: black;
+    background-color:#1a1a1a;
  }
- .post-votes a{
-   color:#cecece !important;
+ .post-votes >.submit-vote i{
+   color:white !important;
+ }
+
+ .site-info a{
+  color: darkgray;
+  text-decoration: underline;
+ }
+
+ .custom-feedbackform{
+  -webkit-box-shadow: 5px 5px 10px 0px black;
+  -moz-box-shadow: 5px 5px 10px 0px black;
+  box-shadow: 5px 5px 10px 0px black;
+  border: 1px solid black;
  }
