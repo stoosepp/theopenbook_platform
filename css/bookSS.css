@@ -3,7 +3,8 @@
   .article {
     margin-left:0em;
     transition: margin 0.5s;
-    position:absolute;
+    width:100%;
+    /* position:absolute; */
   }
   .article-body{
     margin-right:0px;
