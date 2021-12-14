@@ -10,7 +10,6 @@
     margin-right:0px;
     margin-top:50px;
     padding-bottom: 0px !important;
-    width:100% !important;
 
   }
 
@@ -22,7 +21,6 @@
     align-items: stretch;
     padding-right: 0px !important;
     height:100%;
-    width:100%;
     position:absolute;
   }
 
@@ -74,7 +72,6 @@
   .article-body{
     margin-right:12em;
     padding-bottom: 0px !important;
-    width:100% !important;
   }
   .left-toc {
     transition: margin 0.5s;
