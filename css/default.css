@@ -17,16 +17,13 @@
   b, strong {
     font-weight: 600 !important;
 }
-  #search{
-    /* font-family: public sans, helvetica neue, sans-serif; */
-  }
-  
+
   h1, h2, h3,h4,h5,h6 {
     font-family: Metropolis, helvetica neue, sans-serif;
     transition: font-family .2s ease-in-out;
   }
-  
-  
+
+
   .header-bar, nav.aside-nav, input#search {
     color:black;
   }
@@ -37,7 +34,4 @@
 .bt-menu-trigger span:before {
 
   background-color: black;
-}
-.article-body{
-  padding: 2em;
 }
