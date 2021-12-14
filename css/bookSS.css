@@ -35,6 +35,9 @@
     border-right: none;
     z-index:1;
   }
+  .alignright{
+    width:100%;
+  }
 
   .hidden-toc {
     margin-left: -100% !important;
