@@ -51,7 +51,7 @@
             <!--<i class="far fa-download"></i>-->
             <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>
             <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-expand"></i></a>
-            <!--<a  href="#" onclick="tappedprintbutton();"><i class="fas fa-print"></i></a>-->
+            <a  href="javascript:window.print()"><i class="fas fa-print"></i></a>
              </div>
 
         <?php
