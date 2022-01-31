@@ -112,6 +112,50 @@ function loadColorScheme(){
     }
 
 }
+function copyPodcastURL(thisText) {
+    console.log('URL is ' + thisText);
+     /* Copy the text inside the text field */
+    //navigator.clipboard.writeText(thisText);
+    /* Alert the copied text */
+
+
+    if (!navigator.clipboard) {
+        fallbackCopyTextToClipboard(thisText);
+        return;
+      }
+      navigator.clipboard.writeText(thisText).then(function() {
+        console.log('Async: Copying to clipboard was successful!');
+        alert('Podcast URL has been copied to your clipboard.\nUse your favorite Podcasting app using a SUBSCRIBE WITH URL feature (CMD/CTRL-V or Edit>Paste).');
+    }, function(err) {
+        console.error('Async: Could not copy text: ', err);
+      });
+  }
+
+  function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      var successful = document.execCommand('copy');
+      var msg = successful ? 'successful' : 'unsuccessful';
+      console.log('Fallback: Copying text command was ' + msg);
+      alert('Podcast URL has been copied to your clipboard.\nUse your favorite Podcasting app using a SUBSCRIBE WITH URL feature (CMD/CTRL-V or Edit>Paste).');
+    } catch (err) {
+      console.error('Fallback: Oops, unable to copy', err);
+    }
+
+    document.body.removeChild(textArea);
+  }
+
 
 function changeColorScheme(thisRadioButton){
     //console.log('This is checked ' + thisRadioButton.value);

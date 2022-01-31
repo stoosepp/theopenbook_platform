@@ -318,11 +318,20 @@ h1.entry-title{
   align-content: flex-start;
   align-items: center;
   height:50px;
-
-    white-space: nowrap; /* forces text to single line */
-    overflow: hidden;
+  white-space: nowrap; /* forces text to single line */
+  overflow: hidden;
    margin-right:5px;
 }
+/*
+#header-left::after {
+  content:'';
+  width:20px;
+  height:100%;
+  position:absolute;
+  left:0;
+  top:0;
+  background: linear-gradient(90deg, transparent 90%, blue);
+}*/
 
 #header-left a{
   text-decoration:none;
@@ -351,8 +360,9 @@ h1.entry-title{
   height:50px;
   align-items: center;
   align-content: flex-end;
-
+  margin-left:20px;
 }
+
 
 #header-options{
   font-size:1.5em;

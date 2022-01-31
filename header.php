@@ -14,7 +14,17 @@
 <html <?php language_attributes(); ?>>
 <head>
 
-<title>Readings in Learning Technology: <?php /*wp_title();*/ echo $post->post_title; ?>   |   Printed on <?php echo date('F jS, Y');  ?></title>
+<title><?php
+$bookRoot = getRootForPage($post);
+$bookTitle = get_the_title($bookRoot);
+$pageTitle = $post->post_title;
+if ($pageBookTitle == $pageTitle){
+	echo $pageTitle;
+}
+else{
+	echo strtoupper($bookTitle).': '.$pageTitle;
+}
+ ?></title>
 
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">

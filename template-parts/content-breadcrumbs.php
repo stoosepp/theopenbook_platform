@@ -23,13 +23,15 @@
                     $postParent = get_post($postParentID);
                     if ($postParent->post_title != $root->post_title){
                         $subChapterTitle = $postParent->post_title;
-                        $truncatedTitle = wp_trim_words( $subChapterTitle, 5, '...');
-                        echo '<a href='.get_permalink($postParent).'>'.$truncatedTitle.'</a>';
+                        // $truncatedTitle = wp_trim_words( $subChapterTitle, 5, '...');
+                        // echo '<a href='.get_permalink($postParent).'>'.$truncatedTitle.'</a>';
+                        echo '<a href='.get_permalink($postParent).'>'.$subChapterTitle.'</a>';
                         echo '<i class="fas fa-chevron-right"></i>';
                     }
                     $chapterTitle = $post->post_title;
-                    $truncatedTitle = wp_trim_words( $chapterTitle, 5, '...');
-                    echo '<a href='.get_permalink($post).'>'.$truncatedTitle.'</a>';
+                    // $truncatedTitle = wp_trim_words( $chapterTitle, 5, '...');
+                    // echo '<a href='.get_permalink($post).'>'.$truncatedTitle.'</a>';
+                    echo '<a href='.get_permalink($post).'>'.$chapterTitle.'</a>';
                 }
             else if ($post == $bookRoot){
             }
@@ -38,16 +40,37 @@
         </div>
         <div id="header-right">
             <div id="header-options">
+
             <!--<i class="fas fa-comment-smile"></i>-->
             <?php if ((comments_open() == true) && ($post != $root)){
                 $feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true );
                 if($feedbackOn == true)
                 {
-                  echo ' <a href="#" onclick="toggleHidden(this);"><i class="far fa-comment-alt"></i></a>';
+                  echo '<a href="#" onclick="toggleHidden(this);"><i class="far fa-comment-alt"></i></a>';
                 }
-               ?>
+               }
 
-          <?php  }?>
+               if ( in_array( 'amazon-polly/amazonpolly.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+                // do stuff only if Yoast is installed and active
+                $subURL = get_home_url().'/feed/amazon-pollycast/';
+                $file = $subURL;
+                $file_headers = @get_headers($file);
+                if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+                    $exists = false;
+                }
+                else {
+                    $exists = true;
+                    echo '<a href="#" onclick="copyPodcastURL(`'.$subURL.'`);"><i class="far fa-podcast"></i></a>';
+                }
+
+
+
+                //
+                //
+
+            }
+             ?>
+
             <!--<i class="far fa-download"></i>-->
             <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>
             <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-expand"></i></a>
