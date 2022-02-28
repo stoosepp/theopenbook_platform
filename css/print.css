@@ -4,7 +4,16 @@
     margin-left: 10px;
     width:14em;
 }
+body{
+    background-color:red;
+}
 
 .is-type-video,.post-votes, .site-footer {
     display:none;
 }
+/* HIDE HYPOTHES.IS SIDEBAR */
+@media only print {
+    hypothesis-sidebar {
+      display: none !important;
+    }
+  }

@@ -15,15 +15,21 @@
 <head>
 
 <title><?php
-$bookRoot = getRootForPage($post);
-$bookTitle = get_the_title($bookRoot);
-$pageTitle = $post->post_title;
-if ($pageBookTitle == $pageTitle){
-	echo $pageTitle;
-}
-else{
-	echo strtoupper($bookTitle).': '.$pageTitle;
-}
+	if ( is_front_page() && is_home() ){
+		echo bloginfo( 'name' );
+	}
+	else{
+		$bookRoot = getRootForPage($post);
+		$bookTitle = get_the_title($bookRoot);
+		$pageTitle = $post->post_title;
+		if ($pageBookTitle == $pageTitle){
+			echo $pageTitle;
+		}
+		else{
+			echo strtoupper($bookTitle).': '.$pageTitle;
+		}
+	}
+
  ?></title>
 
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
