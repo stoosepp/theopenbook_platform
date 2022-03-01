@@ -26,7 +26,7 @@
 			echo $pageTitle;
 		}
 		else{
-			echo strtoupper($bookTitle).': '.$pageTitle;
+			echo $pageTitle.' in '.strtoupper($bookTitle);
 		}
 	}
 
