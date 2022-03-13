@@ -8,7 +8,7 @@ body{
     background-color:red;
 }
 
-.is-type-video,.post-votes, .site-footer {
+.post-votes, .site-footer {
     display:none;
 }
 /* HIDE HYPOTHES.IS SIDEBAR */
