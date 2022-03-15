@@ -241,11 +241,11 @@ function getTopLevelPages(){
 }
 
 
-function getRootForPage($post){//gets book for the current page.
+function getRootForPage($thisPost){//gets book for the current page.
 	$bookRoot = new stdClass();
-	$thisPage = get_post($post->ID);
+	$thisPage = get_post($thisPost->ID);
 	if ($thisPage->post_parent)	{
-		$ancestors=get_post_ancestors($post->ID);
+		$ancestors=get_post_ancestors($thisPost->ID);
 		$root=count($ancestors)-1;
 		$bookRoot = $ancestors[$root];
 	} else {
