@@ -4,19 +4,20 @@
 
 
 window.onload = function() {
+    console.log('Window Onload');
     //var isAtRoot = location.pathname == "/"; //Equals true if we're at the root
-    if (( $('body.home').length ) || (window.location.href.indexOf("/?s=") > -1)){
+    if (document.body.classList.contains('home') == false) {
         loadTOCstatus();
-        loadColorScheme();
         loadLocalStorage();
         setCurrentPageLink();
         setSidebarActive();
-
+        console.log('This is the home page');
     }
     else{ //is home
         document.body.style.visibility = 'visible';
-        loadColorScheme();
+        console.log('This is NOT the home page');
     }
+    loadColorScheme();
     if ((window.location.href.includes('voteUp')) || (window.location.href.includes('voteDown')) ){//remove URL parameters when voting
         window.history.replaceState({}, document.title, location.protocol + '//' + location.host + location.pathname);
     }
