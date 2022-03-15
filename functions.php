@@ -249,7 +249,7 @@ function getRootForPage($thisPost){//gets book for the current page.
 		$root=count($ancestors)-1;
 		$bookRoot = $ancestors[$root];
 	} else {
-		$bookRoot = $post;
+		$bookRoot = $thisPost;
 	}
 	return $bookRoot;
 }
