@@ -4,8 +4,8 @@
 
 
 window.onload = function() {
-    var isAtRoot = location.pathname == "/"; //Equals true if we're at the root
-    if ((isAtRoot != true) || (window.location.href.indexOf("/?s=") > -1)){
+    //var isAtRoot = location.pathname == "/"; //Equals true if we're at the root
+    if (( $('body.home').length ) || (window.location.href.indexOf("/?s=") > -1)){
         loadTOCstatus();
         loadColorScheme();
         loadLocalStorage();
@@ -13,7 +13,7 @@ window.onload = function() {
         setSidebarActive();
 
     }
-    else{
+    else{ //is home
         document.body.style.visibility = 'visible';
         loadColorScheme();
     }
