@@ -272,12 +272,13 @@ function removeHidden($categories){
 	consolePrint(count($categories));
 	foreach ( $categories as $category ) {
 		$parentCat = get_category($category->parent);
+		$parentName = get_cat_name($parentCat);
 		if (stripos($category->cat_name, 'hidden') !== false){
 			consolePrint($category->cat_name.' is hidden');
 		}
 		else{
-			consolePrint($category->cat_name.'s parent is '.$parentCat->cat_name);
-			if (($parentCat) && (stripos($parentCat->cat_name, 'hidden') !== false)){
+			consolePrint($category->cat_name.'s parent is '.$parentName);
+			if (($parentCat) && (stripos($parentName, 'hidden') !== false)){
 				consolePrint($category->cat_name.'s parent is hidden');
 			}
 			else{

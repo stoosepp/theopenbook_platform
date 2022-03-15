@@ -11,11 +11,9 @@ window.onload = function() {
         loadLocalStorage();
         setCurrentPageLink();
         setSidebarActive();
-        console.log('This is the home page');
     }
     else{ //is home
         document.body.style.visibility = 'visible';
-        console.log('This is NOT the home page');
     }
     loadColorScheme();
     if ((window.location.href.includes('voteUp')) || (window.location.href.includes('voteDown')) ){//remove URL parameters when voting
