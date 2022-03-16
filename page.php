@@ -16,22 +16,31 @@
 <main id="primary" class="site-main">
 	<!--SIDEBAR -->
 	 <nav class="left-toc">
-		 <?php 
+		 <?php
 		 if ( is_page() ) {
 			echo '<div id="toc-list">';
-			echo '<a id="home-icon" href="'.get_home_url().'"><i class="fas fa-home"></i></a>'; 
-			
+			echo '<a id="home-icon" href="'.get_home_url().'"><i class="fas fa-home"></i></a>';
+
 			$bookRoot = getRootForPage($post);
 			//PUT PHOTO HERE
 			$featured_img_url = get_the_post_thumbnail_url($bookRoot);
 			echo '<div class="book-image">';
 			if ($featured_img_url){
-				echo '<img  src="'.esc_url($featured_img_url).'" rel="lightbox">'; 
+				echo '<img  src="'.esc_url($featured_img_url).'" rel="lightbox">';
 			}
 			else{
 				$topLevelPages = getTopLevelPages();
-					$hueRotate = $key/count($topLevelPages);
-					echo '<img  style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">'; 	
+				consolePrint('There are '.count($topLevelPages).' Books total');
+				$index = 0;
+				foreach($topLevelPages as $book){
+					if ($book == $bookRoot){
+						break;
+					}
+					$index++;
+				}
+				consolePrint('This book is at index '.$index);
+				$hueRotate = $index/count($topLevelPages);
+				echo '<img  style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">';
 			}
 			echo '</div>';
 			//BOOK TITLE
@@ -72,7 +81,7 @@
 					* If you want to override this in a child theme, then include a file
 					* called content-___.php (where ___ is the Post Type name) and that will be used instead.
 					*/
-					
+
 					get_template_part( 'template-parts/content', get_post_type() );
 					get_template_part( 'template-parts/content-voting', get_post_type() );
 
@@ -80,16 +89,16 @@
 				the_posts_navigation();
 			else :
 				get_template_part( 'template-parts/content', 'none' );
-				
+
 
 			endif;
-			
+
 			get_footer();
 			?>
-		</div>	
+		</div>
 		<!--HEADING TOC AND SIDENOTES -->
 		<?php get_template_part( 'template-parts/content-headernav', get_post_type() ); ?>
-	
+
 	</div>
 </main><!-- #main -->
 
