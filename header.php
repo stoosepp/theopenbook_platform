@@ -22,7 +22,7 @@
 		$bookRoot = getRootForPage($post);
 		$bookTitle = get_the_title($bookRoot);
 		$pageTitle = $post->post_title;
-		if ($pageBookTitle == $pageTitle){
+		if ($bookTitle == $pageTitle){
 			echo $pageTitle;
 		}
 		else{
