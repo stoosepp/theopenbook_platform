@@ -269,25 +269,36 @@ function getKids($forPage){
 /* CHECK CATEGORIES FOR HIDDEN */
 function removeHidden($categories){
 	$nonHiddenCategories = array();
-	consolePrint(count($categories));
+	//consolePrint(count($categories));
 	foreach ( $categories as $category ) {
-		$parentCat = get_category($category->parent);
-		$parentName = get_cat_name($parentCat);
-		if (stripos($category->cat_name, 'hidden') !== false){
-			consolePrint($category->cat_name.' is hidden');
-		}
-		else{
-			consolePrint($category->cat_name.'s parent is '.$parentName);
-			if (($parentCat) && (stripos($parentName, 'hidden') !== false)){
-				consolePrint($category->cat_name.'s parent is hidden');
+
+		if (stripos($category->name, 'hidden') === false){//if category name doesn't contains hidden
+			//check to see if it has a parent.
+			if (category_has_parent($category)){
+				consolePrint($category->name.' has a parent');
+				$parentCat = get_category($category->parent);
+				$parentName = $parentCat->cat_name;
+				consolePrint($category->name.'s parent is '.$parentName);
+				if (($category->name) && (stripos($parentName, 'hidden') === false)){
+					array_push($nonHiddenCategories,$category);
+				}
 			}
 			else{
 				array_push($nonHiddenCategories,$category);
 			}
-
+		}
+		else{
+			consolePrint($category->name.' is hidden');
 		}
 	}
 	return $nonHiddenCategories;
+}
+function category_has_parent($catid){
+    $category = get_category($catid);
+    if ($category->category_parent > 0){
+        return true;
+    }
+    return false;
 }
 
 
