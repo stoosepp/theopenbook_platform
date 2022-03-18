@@ -82,7 +82,8 @@
 //deleteAllPostMeta($post->ID);//For Testing
  	$bookRoot = getRootForPage($post);
 	 $root = get_post($bookRoot);
-	 if (($post != $bookRoot) && is_page()) {
+	 consolePrint('Root ID is '.$root->ID.' THis page ID is '.$post->ID);
+	 if (($post->ID != $root->ID) && is_page()) {
 		$feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true );
 		if($feedbackOn == true)
 		{
