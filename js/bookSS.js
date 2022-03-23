@@ -350,7 +350,8 @@ function setSidebarActive(){//this sets it up
         var currentSection = sections[i];
         var val = currentSection.getAttribute('href');//get the target for the link
         var refElement = document.querySelector(val);
-        scrollPosArray.push(refElement.offsetTop-45);
+        var newOffset = refElement.offsetTop-45;
+        scrollPosArray.push(newOffset);
         //console.log(val + " is at " + refElement.offsetTop);
     }
     if (sections.length > 0) {
