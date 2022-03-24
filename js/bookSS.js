@@ -347,7 +347,7 @@ function setSidebarActive(){//this sets it up
     var sections = document.querySelectorAll('.page-sidebar-list li a');//get all links to headings
     const scrollPosArray = [0];
     var headerHeight = document.getElementsByClassName('article-header')[0].clientHeight;
-       console.log('Height:'+headerHeight);
+      // console.log('Height:'+headerHeight);
     for( var i = 0; i < sections.length; i++ ){//iterate through headings
         var currentSection = sections[i];
         var val = currentSection.getAttribute('href');//get the target for the link

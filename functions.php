@@ -227,11 +227,9 @@ function auto_id_headings( $content ) {
 	//consolePrint('0:'.$matches[0].', 1:'.$matches[1].', 2:'.$matches[2].', 3:'.$matches[3]);
     $matches[0] = $heading_link.$matches[1].$matches[2].' id="">'.$matches[3] . $matches[4];// . $matches[1] ./* $matches[2] . */' id="' . sanitize_title( $matches[3] ) . '"><!--<i class="fas fa-link"></i>-->' . $matches[3] . $matches[4];
     //endif;
-	consolePrint('Returning Matches');
     return $matches[0];
     }, $content );
     return $content;
-	consolePrint('Returning Content');
     }
 
 
