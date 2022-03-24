@@ -346,13 +346,14 @@ function updateArticleMargin(){
 function setSidebarActive(){//this sets it up
     var sections = document.querySelectorAll('.page-sidebar-list li a');//get all links to headings
     const scrollPosArray = [0];
+    var headerHeight = document.getElementsByClassName('article-header')[0].clientHeight;
+       console.log('Height:'+headerHeight);
     for( var i = 0; i < sections.length; i++ ){//iterate through headings
         var currentSection = sections[i];
         var val = currentSection.getAttribute('href');//get the target for the link
-        var refElement = document.querySelector(val);
-        var newOffset = refElement.offsetTop-45;
+        var linkInDocument = document.querySelector(val);
+         var newOffset = linkInDocument.offsetTop - headerHeight;
         scrollPosArray.push(newOffset);
-        //console.log(val + " is at " + refElement.offsetTop);
     }
     if (sections.length > 0) {
         var currentLink = sections[0];

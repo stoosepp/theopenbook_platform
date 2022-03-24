@@ -220,14 +220,18 @@ function getTextBetweenTags($pageHTML, $tagname){
 }
 
 function auto_id_headings( $content ) {
-    $content = preg_replace_callback( '/(\<h[1-6](.*?))\>(.*)(<\/h[1-6]>)/i', function( $matches ) {
-    if ( ! stripos( $matches[0], 'id=' ) ) :
-    $heading_link = '<a href="#' . sanitize_title( $matches[3] ) . '" class="heading-anchor-link"></a>';
-    $matches[0] = $heading_link . $matches[1] . $matches[2] . ' id="' . sanitize_title( $matches[3] ) . '"><!--<i class="fas fa-link"></i>-->' . $matches[3] . $matches[4];
-    endif;
+    $content = preg_replace_callback( '/(\<h[1-6](.*?))\>(.*)(<\/h[1-6]>)/i', function( $matches) {
+   // if ( ! stripos( $matches[0], 'id=' ) ) :
+	$cleaned_title = sanitize_title( $matches[3]);
+    $heading_link = '<a id="'.$cleaned_title.'" href="#' . 	$cleaned_title. '" class="heading-anchor-link"></a>';
+	//consolePrint('0:'.$matches[0].', 1:'.$matches[1].', 2:'.$matches[2].', 3:'.$matches[3]);
+    $matches[0] = $heading_link.$matches[1].$matches[2].' id="">'.$matches[3] . $matches[4];// . $matches[1] ./* $matches[2] . */' id="' . sanitize_title( $matches[3] ) . '"><!--<i class="fas fa-link"></i>-->' . $matches[3] . $matches[4];
+    //endif;
+	consolePrint('Returning Matches');
     return $matches[0];
     }, $content );
     return $content;
+	consolePrint('Returning Content');
     }
 
 
