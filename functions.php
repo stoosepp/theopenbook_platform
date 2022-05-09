@@ -372,7 +372,7 @@ function deleteAllPostMeta($post_id){
 }
 
 /* CUSTOM SCRIPTS */
-
+/*
 if(!function_exists('load_my_script')){
     function load_my_script() {
         global $post;
@@ -381,11 +381,11 @@ if(!function_exists('load_my_script')){
         $in_footer = true;
        	wp_enqueue_script('my-script', get_stylesheet_directory_uri() . '/js/bookSS.js', $deps, $version, $in_footer);
         wp_localize_script('my-script', 'my_script_vars', array(
-                'post' => $post->ID
+                'postID' => $post->ID
             )
         );
     }
 }
 add_action('wp_enqueue_scripts', 'load_my_script');
-
+*/
 ?>
