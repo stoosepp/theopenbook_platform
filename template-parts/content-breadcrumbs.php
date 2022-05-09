@@ -35,6 +35,9 @@
                 }
             else if ($post == $bookRoot){
             }
+            else if (is_search()){
+                echo 'Search Results for:&nbsp;<strong> '.get_search_query().'</strong>';
+            }
 
             ?>
         </div>
