@@ -46,7 +46,7 @@
 			//BOOK TITLE
 			echo '<h1> <a href='.get_permalink($bookRoot).'>'.get_the_title($bookRoot).'</a></h1>';//Book Title
 			?>
-			<form class="search-form" action="/" method="get">
+			<form class="search-form" action="<?php bloginfo( 'url' ); ?>/" method="get">
 			<i class="far fa-search"></i>
 			<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
 			</form><?php

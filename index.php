@@ -37,7 +37,7 @@ get_header();?>
 $topLevelPages = getTopLevelPages();
 
 if ($topLevelPages){?>
-	<form class="search-form home-search" action="/" method="get">
+	<form class="search-form home-search" action="<?php bloginfo( 'url' ); ?>/" method="get">
 			<i class="far fa-search"></i>
 			<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
 			</form><?php
