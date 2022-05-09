@@ -100,10 +100,10 @@ function loadColorScheme(){
     var colorScheme = localStorage.getItem('colorScheme');
     if (colorScheme){
         console.log('Loaded Color Scheme: ' + colorScheme);
-        if (isAtRoot != true){
+       // if (isAtRoot != true){
             var radiobtn = document.getElementById(colorScheme + 'Check');
             radiobtn.checked = true;
-        }
+        //}
         updateCSS(colorScheme,true);
     }
     else{

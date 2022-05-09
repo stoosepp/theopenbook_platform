@@ -15,29 +15,32 @@
             <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-arrow-left"></i></a>
             <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-bars hidden"></i></a>
                 <?php
-                $bookRoot = getRootForPage($post);
-                $root = get_post($bookRoot);
-                if ( is_page() && ($post != $root)) {
-                    //Not root
-                    $postParentID = wp_get_post_parent_id($post);
-                    $postParent = get_post($postParentID);
-                    if ($postParent->post_title != $root->post_title){
-                        $subChapterTitle = $postParent->post_title;
-                        // $truncatedTitle = wp_trim_words( $subChapterTitle, 5, '...');
-                        // echo '<a href='.get_permalink($postParent).'>'.$truncatedTitle.'</a>';
-                        echo '<a href='.get_permalink($postParent).'>'.$subChapterTitle.'</a>';
-                        echo '<i class="fas fa-chevron-right"></i>';
-                    }
-                    $chapterTitle = $post->post_title;
-                    // $truncatedTitle = wp_trim_words( $chapterTitle, 5, '...');
-                    // echo '<a href='.get_permalink($post).'>'.$truncatedTitle.'</a>';
-                    echo '<a href='.get_permalink($post).'>'.$chapterTitle.'</a>';
+                if (is_search()){
+                    echo 'Search Results for:&nbsp;<strong> '.get_search_query().'</strong>';
                 }
-            else if ($post == $bookRoot){
-            }
-            else if (is_search()){
-                echo 'Search Results for:&nbsp;<strong> '.get_search_query().'</strong>';
-            }
+                else{
+                    $bookRoot = getRootForPage($post);
+                    $root = get_post($bookRoot);
+                    if ( is_page() && ($post != $root)) {
+                        //Not root
+                        $postParentID = wp_get_post_parent_id($post);
+                        $postParent = get_post($postParentID);
+                        if ($postParent->post_title != $root->post_title){
+                            $subChapterTitle = $postParent->post_title;
+                            // $truncatedTitle = wp_trim_words( $subChapterTitle, 5, '...');
+                            // echo '<a href='.get_permalink($postParent).'>'.$truncatedTitle.'</a>';
+                            echo '<a href='.get_permalink($postParent).'>'.$subChapterTitle.'</a>';
+                            echo '<i class="fas fa-chevron-right"></i>';
+                        }
+                        $chapterTitle = $post->post_title;
+                        // $truncatedTitle = wp_trim_words( $chapterTitle, 5, '...');
+                        // echo '<a href='.get_permalink($post).'>'.$truncatedTitle.'</a>';
+                        echo '<a href='.get_permalink($post).'>'.$chapterTitle.'</a>';
+                    }
+                }
+
+
+
 
             ?>
         </div>
