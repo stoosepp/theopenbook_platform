@@ -42,10 +42,10 @@
             ?>
         </div>
         <div id="header-right">
+        <?php if (!is_search()){ ?>
             <div id="header-options">
 
-            <!--<i class="fas fa-comment-smile"></i>-->
-            <?php if ((comments_open() == true) && ($post != $root)){
+           <?php if ((comments_open() == true) && ($post != $root)){
                 $feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true );
                 if($feedbackOn == true)
                 {
@@ -67,13 +67,8 @@
                 }
 
 
-
-                //
-                //
-
             }
              ?>
-
             <!--<i class="far fa-download"></i>-->
             <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>
             <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-expand"></i></a>
@@ -127,6 +122,7 @@
             }
 
         }
+    }
         ?>
         </div>
     </div>
