@@ -381,7 +381,7 @@ if(!function_exists('load_my_script')){
         $in_footer = true;
        	wp_enqueue_script('my-script', get_stylesheet_directory_uri() . '/js/bookSS.js', $deps, $version, $in_footer);
         wp_localize_script('my-script', 'my_script_vars', array(
-                'postID' => $post->ID
+                'post' => $post->ID
             )
         );
     }
