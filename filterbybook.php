@@ -342,7 +342,7 @@ add_action( 'load-edit.php', function(){
     {
          // Before:
          add_action( 'all_admin_notices', function(){
-             echo '<p>Recommended Plugins to make life easier: <a href="https://wordpress.org/plugins/simple-page-ordering/" target="_blank">Simple Page Ordering</a>  |  <a href="https://wordpress.org/plugins/broken-link-checker/" target="_blank">Broken Link Checker</a></p>';
+             echo '<p>Recommended Plugins to make life easier: <a href="https://wordpress.org/plugins/simple-page-ordering/" target="_blank">Simple Page Ordering</a>  |  <a href="https://wordpress.org/plugins/broken-link-checker/" target="_blank">Broken Link Checker</a></p>';// |  <a href="https://wordpress.org/plugins/publishpress-authors/" target="_blank">Publish Press for multiple authors</a></p>';
          });
 
          // After:
