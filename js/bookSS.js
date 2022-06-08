@@ -86,7 +86,7 @@ function loadTOCstatus(){
     }
     if (TOCStatus == true){
         article.classList.add('article-margin');
-        headerbar.classList.add('banner-padding');
+        //headerbar.classList.add('banner-padding');
         TOC.classList.add('hidden-toc');
         leftArrow.classList.add('hidden');
         hamburger.classList.remove('hidden');
@@ -413,11 +413,11 @@ function toggleHidden(el){
     }
     else if ((el.firstChild.classList.contains('fa-arrow-left') == true)|| (el.firstChild.classList.contains('fa-bars') == true)){
 
-        console.log('Toggle TOC');
-        hamburger = document.getElementsByClassName('fa-bars')[0];
-        hamburger.classList.toggle('hidden');
-        leftArrow = document.getElementsByClassName('fa-arrow-left')[0];
-        leftArrow.classList.toggle('hidden');
+       // console.log('Toggle TOC');
+       // hamburger = document.getElementsByClassName('fa-bars')[0];
+       // hamburger.classList.toggle('hidden');
+       // leftArrow = document.getElementsByClassName('fa-arrow-left')[0];
+        //leftArrow.classList.toggle('hidden');
         TOC = document.getElementsByClassName('left-toc')[0];
         TOC.classList.remove('disable-css-transitions')
        TOC.classList.toggle('hidden-toc');
@@ -426,7 +426,7 @@ function toggleHidden(el){
        article.classList.toggle('article-margin');
        headerbar = document.getElementsByClassName('header-bar')[0];
        headerbar.classList.remove('disable-css-transitions')
-       headerbar.classList.toggle('banner-padding');
+       //headerbar.classList.toggle('banner-padding');
        if (leftArrow.classList.contains('hidden')){
             localStorage.setItem('TOC-hidden', true);
        }

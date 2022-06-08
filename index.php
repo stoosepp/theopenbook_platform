@@ -34,14 +34,35 @@ get_header();?>
 		</div><!-- .site-branding -->
 	</div><!-- #masthead -->
 	<?php
+
+
+//Get All Pages
 $topLevelPages = getTopLevelPages();
+
+
+//Get Categories
+$args = array(
+	'post_type' => 'menu-item'
+);
+$categories = get_categories( $args );
+$categories = removeHidden($categories);
+
+// Show Books and Documents
+$showContentTypeTitle = false;
+if (($topLevelPages) && ($categories)){
+	$showContentTypeTitle = true;
+}
+
 
 if ($topLevelPages){?>
 	<form class="search-form home-search" action="<?php bloginfo( 'url' ); ?>/" method="get">
 			<i class="far fa-search"></i>
 			<input type="text" name="s" id="search" placeholder="Search" value="<?php the_search_query(); ?>" />
 			</form><?php
-	echo '<p class="content-type-header">BOOKS</p>';
+	if ($showContentTypeTitle == true){
+		echo '<p class="content-type-header">BOOKS</p>';
+	}
+
 	echo '<ul class="book-list">';
 	foreach($topLevelPages as $key=>$topLevelPage){
 
@@ -53,18 +74,9 @@ if ($topLevelPages){?>
 		echo '<div class="book-authorexcerpt"><h3>'.get_the_author_meta('display_name', $post_author_id).'</h3>';
 		echo '<h4>'.$topLevelPage->post_excerpt.'</h4></div>';
 		$featured_img_url = get_the_post_thumbnail_url($topLevelPage);
-		/*if ($featured_img_url){
-			echo '<img src="'.esc_url($featured_img_url).'" rel="lightbox">';
-            //the_post_thumbnail('thumbnail');
-		}
-		else{
-				$hueRotate = $key/count($topLevelPages);
-				echo '<img style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">';
-		}*/
+
 		if ($featured_img_url){
 			echo '<img id="cover-image"src="'.esc_url($featured_img_url).'" rel="lightbox">';
-
-            //the_post_thumbnail('thumbnail');
 		}
 		else{
 				$hueRotate = $key/count($topLevelPages);
@@ -76,18 +88,12 @@ if ($topLevelPages){?>
 	echo '</ul>';
 }
 
-//Get Categories
 
-
-    $args = array(
-        'post_type' => 'menu-item'
-    );
-
-    $categories = get_categories( $args );
-	$categories = removeHidden($categories);
 
 	if ($categories){
+		if ($showContentTypeTitle == true){
 		echo '<p class="content-type-header">DOCUMENTS</p>';
+		}
 		echo '<ul class="cat-list">';
     foreach ( $categories as $category ) {
 		$parentCatName = get_cat_name($category->parent);

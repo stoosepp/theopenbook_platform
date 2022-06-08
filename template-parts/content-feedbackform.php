@@ -38,6 +38,6 @@ function custom_comment_field( $fields ) {
     return $fields;
 }?>
 <div class="custom-feedbackform hidden">
-    <a href="#" class = "" onclick="toggleHidden(this);"><i class="far fa-times"></i></a>
+    <a class = "" onclick="toggleHidden(this);" style="cursor: pointer;" ><i class="far fa-times"></i></a>
     <?php  echo comment_form(); ?>
 </div>

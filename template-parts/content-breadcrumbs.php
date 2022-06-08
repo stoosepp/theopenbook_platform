@@ -12,8 +12,8 @@
 <div class="header-bar">
     <div class="article-header">
         <div id="header-left">
-            <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-arrow-left"></i></a>
-            <a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-bars hidden"></i></a>
+            <!--<a href="#" class="TOCToggle" onclick="toggleHidden(this)"><i class="fas fa-arrow-left"></i></a>-->
+            <a class="TOCToggle" onmouseover="" style="cursor: pointer;" onclick="toggleHidden(this)"><i class="fas fa-bars"></i></a>
                 <?php
                 if (is_search()){
                     echo 'Search Results for:&nbsp;<strong> '.get_search_query().'</strong>';
@@ -38,10 +38,6 @@
                         echo '<a href='.get_permalink($post).'>'.$chapterTitle.'</a>';
                     }
                 }
-
-
-
-
             ?>
         </div>
         <div id="header-right">
@@ -52,7 +48,7 @@
                 $feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true );
                 if($feedbackOn == true)
                 {
-                  echo '<a href="#" onclick="toggleHidden(this);"><i class="far fa-comment-alt"></i></a>';
+                  echo '<a onclick="toggleHidden(this);" style="cursor: pointer;" ><i class="far fa-comment-alt"></i></a>';
                 }
                }
 

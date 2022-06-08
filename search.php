@@ -11,7 +11,7 @@ get_header();
 ?>
 
 	<main id="search-results" class="site-main">
-
+	<?php get_template_part( 'template-parts/content-breadcrumbs', get_post_type() );?>
 	<nav class="left-toc">
 		 <?php
 			echo '<div id="toc-list">';
@@ -36,7 +36,7 @@ get_header();
 		 <!-- Rounded switch -->
 	</nav>
 	<div class="article">
-	<?php get_template_part( 'template-parts/content-breadcrumbs', get_post_type() );?>
+
 	<div class="article-body">
 		<?php if ( have_posts() ) : ?>
 
@@ -46,9 +46,9 @@ get_header();
 				the_post();
 
 				?>
-				<div class="search-result">
+				<div class="search-result-box">
 
-				<div class="entry-title"><h2><a href="<?php the_permalink() ?>"><?php
+				<div class="entry-title"><h2 id="search-result-title"><a href="<?php the_permalink() ?>"><?php
 					echo ''.the_title().'';
 					?></a></h2>
 					<p class="content-type-p" style="letter-spacing:0.2em;">
