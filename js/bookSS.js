@@ -72,24 +72,24 @@ function loadLocalStorage(){
 function loadTOCstatus(){
     var TOCStatus = JSON.parse(localStorage.getItem('TOC-hidden'));
     //console.log('Loading TOC. Hidden: ' + TOCStatus);
-    hamburger = document.getElementsByClassName('fa-bars')[0];
-    leftArrow = document.getElementsByClassName('fa-arrow-left')[0];
+   // hamburger = document.getElementsByClassName('fa-bars')[0];
+    //leftArrow = document.getElementsByClassName('fa-arrow-left')[0];
     headerbar = document.getElementsByClassName('header-bar')[0];
-    if (headerbar){
-        headerbar.classList.add('disable-css-transitions');
-    }
+    // if (headerbar){
+    //     headerbar.classList.add('disable-css-transitions');
+    // }
     TOC = document.getElementsByClassName('left-toc')[0];
-    TOC.classList.add('disable-css-transitions');
+   // TOC.classList.add('disable-css-transitions');
     article = document.getElementsByClassName('article')[0];
     if (article){
-        article.classList.add('disable-css-transitions');
+       // article.classList.add('disable-css-transitions');
     }
     if (TOCStatus == true){
         article.classList.add('article-margin');
         //headerbar.classList.add('banner-padding');
         TOC.classList.add('hidden-toc');
-        leftArrow.classList.add('hidden');
-        hamburger.classList.remove('hidden');
+        //leftArrow.classList.add('hidden');
+        //hamburger.classList.remove('hidden');
     }
 }
 
@@ -413,15 +413,15 @@ function toggleHidden(el){
     }
     else if (el.firstChild.classList.contains('fa-bars') == true){
         TOC = document.getElementsByClassName('left-toc')[0];
-        TOC.classList.remove('disable-css-transitions')
+        //TOC.classList.remove('disable-css-transitions')
        TOC.classList.toggle('hidden-toc');
        article = document.getElementsByClassName('article')[0];
-       article.classList.remove('disable-css-transitions')
+       //article.classList.remove('disable-css-transitions')
        article.classList.toggle('article-margin');
        headerbar = document.getElementsByClassName('header-bar')[0];
-       headerbar.classList.remove('disable-css-transitions')
+      //headerbar.classList.remove('disable-css-transitions')
        //headerbar.classList.toggle('banner-padding');
-       if (leftArrow.classList.contains('hidden')){
+       if (article.classList.contains('article-margin')){
             localStorage.setItem('TOC-hidden', true);
        }
        else{
