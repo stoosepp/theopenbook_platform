@@ -41,38 +41,39 @@
             ?>
         </div>
         <div id="header-right">
-        <?php if (!is_search()){ ?>
+        <?php if (!is_search()){
+            // OPTIONS BUTTONS
+            ?>
             <div id="header-options">
-
-           <?php if ((comments_open() == true) && ($post != $root)){
+           <?php
+           //COMMENTS
+           if ((comments_open() == true) && ($post != $root)){
                 $feedbackOn = get_post_meta( $root->ID, 'acceptFeedback', true );
-                if($feedbackOn == true)
-                {
-                  echo '<a onclick="toggleHidden(this);" style="cursor: pointer;" ><i class="far fa-comment-alt"></i></a>';
-                }
-               }
-
-               if ( in_array( 'amazon-polly/amazonpolly.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-                // do stuff only if Yoast is installed and active
-                $subURL = get_home_url().'/feed/amazon-pollycast/';
-                $file = $subURL;
-                $file_headers = @get_headers($file);
-                if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
-                    $exists = false;
-                }
-                else {
-                    $exists = true;
-                    echo '<a href="#" onclick="copyPodcastURL(`'.$subURL.'`);"><i class="far fa-podcast"></i></a>';
-                }
-
-
+                    if($feedbackOn == true)
+                    {
+                    echo '<a class="far fa-comment-alt tooltip" onclick="toggleHidden(this);" style="cursor: pointer;" ><span class="tooltiptext">Comment</span></a>';
+                    }
             }
-             ?>
-            <!--<i class="far fa-download"></i>-->
-            <a class="hidden" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-compress"></i></a>
-            <a class ="" href="#" onclick="window.toggleFullscreen(this);"><i class="fas fa-expand"></i></a>
-            <!--<a  href="javascript:window.print()"><i class="fas fa-print"></i></a>-->
-             </div>
+            //AMAZON POLLY PODCAST
+            if ( in_array( 'amazon-polly/amazonpolly.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+            $subURL = get_home_url().'/feed/amazon-pollycast/';
+            $file = $subURL;
+            $file_headers = @get_headers($file);
+            if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+                $exists = false;
+            }
+            else {
+                $exists = true;
+                echo '<a style="cursor: pointer;" class="far fa-podcast tooltip" onclick="copyPodcastURL(`'.$subURL.'`);"><span class="tooltiptext">Subscribe</span></a>';
+            }
+            }
+            //FULL SCREEN
+            echo '<a class="fas fa-compress hidden tooltip" onclick="window.toggleFullscreen(this);" style="cursor: pointer;"><span class="tooltiptext">Window</span></a>';
+            echo '<a class="fas fa-expand tooltip" onclick="window.toggleFullscreen(this);" style="cursor:pointer;"><span class="tooltiptext">Full Screen</span></a>';
+            //PRINT
+            echo '<!--<a class="fas fa-print tooltip" href="javascript:window.print()" style="cursor: pointer;><span class="tooltiptext">Print</span></a>-->';
+            ?>
+            </div>
 
         <?php
         //GET ALL LINKS IN LEFT HAND MENU

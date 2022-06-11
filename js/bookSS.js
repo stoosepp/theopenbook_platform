@@ -407,17 +407,11 @@ window.addEventListener('scroll', function(){
 
 
 function toggleHidden(el){
-    if ((el.firstChild.classList.contains('fa-comment-alt') == true) || (el.firstChild.classList.contains('fa-times') == true)){
+    if ((el.classList.contains('fa-comment-alt') == true) || (el.classList.contains('fa-times') == true)){
         $feedbackForm = document.getElementsByClassName('custom-feedbackform')[0];
         $feedbackForm.classList.toggle('hidden');
     }
-    else if ((el.firstChild.classList.contains('fa-arrow-left') == true)|| (el.firstChild.classList.contains('fa-bars') == true)){
-
-       // console.log('Toggle TOC');
-       // hamburger = document.getElementsByClassName('fa-bars')[0];
-       // hamburger.classList.toggle('hidden');
-       // leftArrow = document.getElementsByClassName('fa-arrow-left')[0];
-        //leftArrow.classList.toggle('hidden');
+    else if (el.firstChild.classList.contains('fa-bars') == true){
         TOC = document.getElementsByClassName('left-toc')[0];
         TOC.classList.remove('disable-css-transitions')
        TOC.classList.toggle('hidden-toc');
@@ -441,7 +435,7 @@ function toggleHidden(el){
 var elem = document.documentElement;
 function toggleFullscreen(el) {
     //console.log(el);
-    if (el.firstChild.classList.contains('fa-expand') == true){
+    if (el.classList.contains('fa-expand') == true){
         //Open
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
@@ -452,7 +446,7 @@ function toggleFullscreen(el) {
         }
         //console.log('Opening Full Screen');
         $collapse = document.getElementsByClassName('fa-compress')[0];
-        $collapse.parentElement.classList.remove('hidden');
+        $collapse.classList.remove('hidden');
         el.classList.add('hidden');
     }
     else{
@@ -466,7 +460,7 @@ function toggleFullscreen(el) {
       }
      // console.log('Closing Full Screen');
     $expand = document.getElementsByClassName('fa-expand')[0];
-    $expand.parentElement.classList.remove('hidden');
+    $expand.classList.remove('hidden');
     el.classList.add('hidden');
     }
   }
