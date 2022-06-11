@@ -13,7 +13,9 @@
     padding:1em;
     max-width:100%;
   }
-
+  #header-options > a.fas.fa-expand.tooltip,#header-options > a.fas.fa-compress.tooltip{
+    display:none;
+  }
   .next-prev{
     width:2em !important;
   }
@@ -147,6 +149,9 @@
   }
   .hidden-toc {
     margin-left: -17em !important;
+  }
+  #header-options > a.fas.fa-expand.tooltip,#header-options > a.fas.fa-compress.tooltip{
+    display:none;
   }
   .sidenote {
     width: 14em;

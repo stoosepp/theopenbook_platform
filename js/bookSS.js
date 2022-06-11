@@ -209,7 +209,7 @@ function setVoteStatus(postID){
 }
 
 function checkVoteStatus(postID){
-    console.log('Checking Vote Status for Post: ' + postID);
+    //console.log('Checking Vote Status for Post: ' + postID);
     var votedOnThis = false;
     var votedPosts = JSON.parse(localStorage.getItem("postVotes"));
     if ((votedPosts) && (votedPosts.length > 0)){
