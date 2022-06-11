@@ -26,10 +26,19 @@
     width: 100%;
     margin-left: -100% !important;
   }
+
+  #home-icon > i{
+    color:#0071bc !important;
+    float:left;
+    top: 16px !important;
+    left: 4px !important;
+  }
   .hidden-toc {
     margin-left: 0% !important;
   }
-
+  form.search-form{
+    margin-top:10px !important;
+  }
   .book-image{
     display:none;
   }
@@ -43,6 +52,10 @@
     margin-top:53px;
     border-right: none;
     z-index:1;
+  }
+  #toc-list > h1 {
+    width:80% !important;
+    margin-left:10%;
   }
   .alignright{
     width:100%;
