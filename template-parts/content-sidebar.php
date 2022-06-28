@@ -14,15 +14,9 @@
 			else{
 				$topLevelPages = getTopLevelPages();
 				consolePrint('There are '.count($topLevelPages).' Books total');
-				$index = 0;
-				foreach($topLevelPages as $book){
-					if ($book == $bookRoot){
-						break;
-					}
-					$index++;
-				}
-				consolePrint('This book is at index '.$index);
-				$hueRotate = $index/count($topLevelPages);
+				$order = $post->menu_order;
+				consolePrint('This book is at index '.$order);
+				$hueRotate = $order/count($topLevelPages);
 				echo '<img  style="filter:hue-rotate('.$hueRotate.'turn);" src="'.get_template_directory_uri().'/images/book-cover.jpg" rel="lightbox">';
 			}
 			echo '</div>';
