@@ -373,6 +373,7 @@ function deleteAllPostMeta($post_id){
 
 /* CUSTOM SCRIPTS */
 
+/*
 if(!function_exists('load_my_script')){
     function load_my_script() {
         global $post;
@@ -387,5 +388,5 @@ if(!function_exists('load_my_script')){
     }
 }
 add_action('wp_enqueue_scripts', 'load_my_script');
-
+*/
 ?>
